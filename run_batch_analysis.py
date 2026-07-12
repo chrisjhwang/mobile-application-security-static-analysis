@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-analyze.py — Run RQ checks across all APKs in the apks/ folder.
+run_batch_analysis.py — Run RQ checks across all APKs in the apks/ folder.
 
 Usage:
-    python analyze.py
-    python analyze.py --limit 5
+    python run_batch_analysis.py
+    python run_batch_analysis.py --limit 5
 
 To change which RQs run, edit the ACTIVE_RQS list below.
 
@@ -34,7 +34,9 @@ except ImportError:
 _HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE))
 
-import rq4, rq5, rq7
+import internet_pii_permissions as rq4
+import unused_permissions as rq5
+import exported_components as rq7
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIGURE HERE — comment out any RQs you don't want to run

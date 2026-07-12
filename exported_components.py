@@ -7,7 +7,7 @@ Recognises legitimate exported-without-permission-guard patterns so they
 are reported as safe rather than vulnerable.
 
 Run standalone on one APK:
-    python rq7.py path/to/app.apk
+    python exported_components.py path/to/app.apk
 """
 
 import sys
@@ -355,7 +355,7 @@ def check(apk, dex_list, dx=None):
 # ── Standalone mode ───────────────────────────────────────────────────────────
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python rq7.py <path/to/app.apk>")
+        print("Usage: python exported_components.py <path/to/app.apk>")
         sys.exit(1)
     from androguard.misc import AnalyzeAPK
     apk_path = Path(sys.argv[1])

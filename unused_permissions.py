@@ -3,7 +3,7 @@
 RQ5: Do apps declare permissions they never actually use?
 
 Run standalone on one APK:
-    python rq5.py path/to/app.apk
+    python unused_permissions.py path/to/app.apk
 """
 
 import sys
@@ -350,7 +350,7 @@ def check(apk, dex_list, dx=None):
 # ── Standalone mode ───────────────────────────────────────────────────────────
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python rq5.py <path/to/app.apk>")
+        print("Usage: python unused_permissions.py <path/to/app.apk>")
         sys.exit(1)
     from androguard.misc import AnalyzeAPK
     apk_path = Path(sys.argv[1])
