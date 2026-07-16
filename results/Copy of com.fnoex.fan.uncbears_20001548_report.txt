@@ -1,0 +1,183 @@
+================================================================================
+APP    : Copy of com.fnoex.fan.uncbears_20001548
+FILE   : Copy of com.fnoex.fan.uncbears_20001548.apk
+DATE   : 2026-04-28 04:33:18
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 8 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (8):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CAMERA
+    android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.RECORD_AUDIO
+        @ Lccue/b1; -> startRecording
+        @ Lccue/k2$a; -> startRecording
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 15 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (11) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/gimbal/internal/protocol/ClientStateInfo; -> getWifiState
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lcom/facebook/imagepipeline/backends/okhttp3/BuildConfig; -> <init>
+        @ Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpImagePipelineConfigFactory; -> <init>
+    + android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.RECORD_AUDIO
+        @ Lccue/b1; -> startRecording
+        @ Lccue/k2$a; -> startRecording
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 115 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiver" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiverAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiverAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.paciolan.mobileSDK.MobileSDKActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1502D2" android:name="com.paciolan.mobileSDK.MobileSDKActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000005A0" android:windowSoftInputMode="0x00000010" />
+    [UNPROTECTED SERVICE] com.fnoex.fan.app.service.MediaPlayerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fnoex.fan.app.service.MediaPlayerService" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+            <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            <action android:name="android.media.browse.MediaBrowserService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] androidx.media.session.MediaButtonReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="androidx.media.session.MediaButtonReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+            <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.onesignal.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.gimbal.internal.service.GimbalServiceStartStopReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.gimbal.internal.service.GimbalServiceStartStopReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (8):
+      [ACTIVITY] com.fnoex.fan.app.activity.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.fnoex.fan.app.activity.SchemaHandlingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.ticketmaster.presencesdk.login.ModernAccountsLoginActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.onesignal.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

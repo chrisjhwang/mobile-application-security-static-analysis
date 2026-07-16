@@ -1,0 +1,130 @@
+================================================================================
+APP    : SoundSeeder - Synced Music_2.6.1_Apkpure
+FILE   : SoundSeeder - Synced Music_2.6.1_Apkpure.apk
+DATE   : 2026-04-28 08:05:07
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_AUDIO
+        @ Lcom/google/android/exoplayer2/util/Util; -> isMediaStoreExternalContentUri
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lio/bidmachine/core/Utils; -> getActiveNetworkInfo
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/bytedance/sdk/openadsdk/core/u$1; -> getConnectionInfo
+        @ Lcom/pgl/sys/ces/out/ISdkInfo; -> getConnectionInfo
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lorg/fourthline/cling/android/AndroidRouter; -> setWiFiMulticastLock
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.POST_NOTIFICATIONS
+        @ LS/L; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_AUDIO
+        @ Lcom/google/android/exoplayer2/util/Util; -> isMediaStoreExternalContentUri
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 component(s) exported without meaningful protection (of 98 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.kattwinkel.android.soundseeder.player.ui.SoundSeederDevicesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1201F4" android:name="com.kattwinkel.android.soundseeder.player.ui.SoundSeederDevicesActivity" android:exported="true" android:launchMode="2" android:windowSoftInputMode="0x00000030" />
+    [UNPROTECTED SERVICE] com.kattwinkel.android.soundseeder.player.PlayerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.kattwinkel.android.soundseeder.player.PlayerService" android:exported="true" android:foregroundServiceType="0x00000082">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_MOUNTED" />
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] androidx.media.session.MediaButtonReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="androidx.media.session.MediaButtonReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.kattwinkel.android.soundseeder.player.RemoteControlReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.kattwinkel.android.soundseeder.player.RemoteControlReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.NEXT_TRACK" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.PREV_TRACK" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.PAUSE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.PLAY" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.SHOW_LOCALPLAYLISTS" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.soundseeder.intent.action.SHOW_FAV_STATIONS" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.kattwinkel.android.soundseeder.player.ui.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.kattwinkel.android.soundseeder.player.ui.PlayerMainActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.VIEW
+      [RECEIVER] com.kattwinkel.android.soundseeder.player.MusicIntentReceiver
+        Receives only system-protected broadcast(s): android.intent.action.HEADSET_PLUG, android.media.AUDIO_BECOMING_NOISY
+      [RECEIVER] com.kattwinkel.android.soundseeder.player.BootUpReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.appodeal.ads.AppodealPackageAddedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_ADDED

@@ -1,0 +1,98 @@
+================================================================================
+APP    : AIO Remote_3.5.9.14_Apkpure
+FILE   : AIO Remote_3.5.9.14_Apkpure.apk
+DATE   : 2026-04-27 15:08:54
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Lcom/google/android/gms/internal/ads/zztl; -> enable
+        @ Lcom/google/android/gms/safetynet/SafetyNetApi; -> enableVerifyApps
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 64 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.aioremote.plugin.EditActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F10017A" android:icon="@7F08005B" android:name="com.aioremote.plugin.EditActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.google.android.gms.appinvite.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11021C" android:name="com.google.android.gms.appinvite.PreviewActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.appinvite.ACTION_PREVIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED RECEIVER] com.aioremote.plugin.FireReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.aioremote.plugin.FireReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.aioremote.ui.activity.MainDashboardActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.mixpanel.android.mpmetrics.InstallReferrerReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

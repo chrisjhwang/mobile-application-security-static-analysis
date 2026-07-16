@@ -1,0 +1,261 @@
+================================================================================
+APP    : Copy of com.beki.live_50
+FILE   : Copy of com.beki.live_50.apk
+DATE   : 2026-04-27 22:59:09
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 11 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (11):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (5):
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.RECORD_AUDIO
+        @ Lcom/hyphenate/helpdesk/easeui/ui/RecorderVideoActivity; -> startRecording
+        @ Lcom/beki/live/module/im/voice/VoiceRecorderView; -> startRecording
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 17 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lti3; -> getActiveNetworkInfo
+        @ Lcom/common/architecture/utils/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/core/view/ViewCompat; -> enableAccessibleClickableSpanSupport
+        @ Landroidx/fragment/app/FragmentManager; -> enableDebugLogging
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImplApi21; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/media/session/MediaButtonReceiver; -> startForegroundService
+        @ Landroidx/work/impl/foreground/ForegroundProcessor; -> startForeground
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    + android.permission.INTERNET
+        @ Lcom/safedk/android/internal/partials/FyberNetworkBridge; -> okhttp3CallExecute
+        @ Lcom/safedk/android/internal/partials/FyberNetworkBridge; -> okhttp3Response_body
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroidx/appcompat/view/menu/MenuAdapter; -> notifyDataSetChanged
+        @ Landroidx/core/view/ViewCompat; -> notifyViewAccessibilityStateChangedIfNeeded
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.RECORD_AUDIO
+        @ Lcom/hyphenate/helpdesk/easeui/ui/RecorderVideoActivity; -> startRecording
+        @ Lcom/beki/live/module/im/voice/VoiceRecorderView; -> startRecording
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 18 component(s) exported without meaningful protection (of 155 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.beki.live.module.main.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13001B" android:name="com.beki.live.module.main.MainActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="com.beki.live.action.notification.ENTER" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.beki.live.module.main.MainWithOpenAnimatorActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13001B" android:name="com.beki.live.module.main.MainWithOpenAnimatorActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="com.beki.live.action.notification.ENTER" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.beki.live.module.splash.BackgroundNotificationActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130017" android:name="com.beki.live.module.splash.BackgroundNotificationActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.module.common.photocrop.ui.SelectPhotoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.module.common.photocrop.ui.SelectPhotoActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.module.common.photocrop.internal.ui.AlbumPreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.module.common.photocrop.internal.ui.AlbumPreviewActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.module.common.photocrop.internal.ui.SelectedPreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.module.common.photocrop.internal.ui.SelectedPreviewActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.module.common.photocrop.ui.CropImageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130101" android:name="com.module.common.photocrop.ui.CropImageActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000CA0">
+          <intent-filter>
+            <action android:name="com.android.camera.action.CROP" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="image/*" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.common.debugmodule.ui.DebugActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.common.debugmodule.ui.DebugActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.beki.live.push.firebase.AppFirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.beki.live.push.firebase.AppFirebaseMessagingService" android:exported="true" android:stopWithTask="false" android:directBootAware="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.chat.device.permanent.service.PermanentService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.chat.device.permanent.service.PermanentService" android:exported="true" android:stopWithTask="false">
+          <intent-filter>
+            <action android:name="com.chat.device.permanent.StartPermanentService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.chat.device.permanent.ext.syncaccount.AuthenticationService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.chat.device.permanent.ext.syncaccount.AuthenticationService" android:exported="true">
+          <intent-filter>
+            <action android:name="android.accounts.AccountAuthenticator" />
+          </intent-filter>
+          <meta-data android:name="android.accounts.AccountAuthenticator" android:resource="@7F150002" />
+        </service>
+    [UNPROTECTED SERVICE] com.chat.device.permanent.ext.syncaccount.SyncService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.chat.device.permanent.ext.syncaccount.SyncService" android:exported="true">
+          <intent-filter>
+            <action android:name="android.content.SyncAdapter" />
+          </intent-filter>
+          <meta-data android:name="android.content.SyncAdapter" android:value="true" android:resource="@7F15000E" />
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.beki.live.module.lrpush.notification.PushTaskIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.beki.live.module.lrpush.notification.PushTaskIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="ACTION_DISMISS_NOTIFICATION" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.chat.device.permanent.service.PermanentService$PermanentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.chat.device.permanent.service.PermanentService$PermanentReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.chat.device.permanent.receiver.PermanentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.chat.device.permanent.receiver.PermanentReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_RESTARTED" />
+            <action android:name="android.intent.action.PACKAGE_REPLACED" />
+            <action android:name="android.intent.action.PACKAGE_REMOVED" />
+            <data android:scheme="package" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+            <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+          </intent-filter>
+          <intent-filter android:priority="999">
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_MOUNTED" />
+            <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+            <data android:scheme="file" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="chat.device.permanent.GUARD_PERMANENT" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.facebook.FacebookContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.facebook.FacebookContentProvider" android:exported="true" android:authorities="com.facebook.app.FacebookContentProvider250116330195024" />
+    [UNPROTECTED PROVIDER] com.chat.device.permanent.ext.syncaccount.SyncContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:label="@7F120631" android:name="com.chat.device.permanent.ext.syncaccount.SyncContentProvider" android:enabled="true" android:exported="true" android:authorities="@7F120632" android:syncable="true" />
+    Safe-by-design exports (7):
+      [ACTIVITY] com.beki.live.module.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.beki.live.module.deeplink.DeepLinkHandlerActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.beki.live.module.deeplink.WebViewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.common.blockcanary.ui.DisplayActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.appsflyer.SingleInstallBroadcastReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] com.android.im.receiver.NetStatusReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

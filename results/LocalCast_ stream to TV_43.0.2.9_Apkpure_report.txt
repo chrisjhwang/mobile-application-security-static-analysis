@@ -1,0 +1,33 @@
+================================================================================
+APP    : LocalCast_ stream to TV_43.0.2.9_Apkpure
+FILE   : LocalCast_ stream to TV_43.0.2.9_Apkpure.apk
+DATE   : 2026-04-28 05:27:22
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET permission not declared.
+  Internet  : NO
+  Normal permissions found with INTERNET (0):
+    (none)
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: NONE
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No checkable permissions found in mapping database.
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : Manifest parse error: 'NoneType' object has no attribute 'iter'

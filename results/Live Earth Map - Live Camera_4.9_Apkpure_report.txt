@@ -1,0 +1,66 @@
+================================================================================
+APP    : Live Earth Map - Live Camera_4.9_Apkpure
+FILE   : Live Earth Map - Live Camera_4.9_Apkpure.apk
+DATE   : 2026-04-28 05:27:22
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzau; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzau; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Landroid/net/ConnectivityManager$NetworkCallback; -> <clinit>
+        @ Landroid/net/ConnectivityManager$NetworkCallback; -> <init>
+    + android.permission.INTERNET
+        @ Landroid/webkit/WebViewRenderProcessClient; -> <clinit>
+        @ Landroid/webkit/WebViewRenderProcessClient; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 69 component(s). 4 component(s) are safely exported by design.
+    Safe-by-design exports (4):
+      [ACTIVITY] com.liveearthmap.streetviewmap.activities.ActivitySplash
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN

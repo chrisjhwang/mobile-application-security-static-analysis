@@ -1,0 +1,118 @@
+================================================================================
+APP    : CetusPlay - TV Remote Server R_4.8.0-For TV_Apkpure
+FILE   : CetusPlay - TV Remote Server R_4.8.0-For TV_Apkpure.apk
+DATE   : 2026-04-27 19:27:39
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.KILL_BACKGROUND_PROCESSES
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ La/a/a/a/d; -> getExternalFilesDir
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ La/a/a/a/d; -> getExternalFilesDir
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.KILL_BACKGROUND_PROCESSES
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ La/a/a/a/d; -> getExternalFilesDir
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ La/a/a/a/d; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 component(s) exported without meaningful protection (of 37 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.ProxyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010D" android:name="com.wukongtv.wkhelper.ProxyActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.ProxyActivity1
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010D" android:name="com.wukongtv.wkhelper.ProxyActivity1" android:exported="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.childlock.ChildLockActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010C" android:name="com.wukongtv.wkhelper.childlock.ChildLockActivity" android:exported="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.pushscreen.PushScreenImageNewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010C" android:name="com.wukongtv.wkhelper.pushscreen.PushScreenImageNewActivity" android:exported="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.pushscreen.PushScreenNewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010C" android:name="com.wukongtv.wkhelper.pushscreen.PushScreenNewActivity" android:exported="true" android:launchMode="3" android:screenOrientation="0" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.pushscreen.PushScreenVideoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010C" android:name="com.wukongtv.wkhelper.pushscreen.PushScreenVideoActivity" android:exported="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.pushscreen.PushScreenVideoNewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F08010C" android:name="com.wukongtv.wkhelper.pushscreen.PushScreenVideoNewActivity" android:exported="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkhelper.DebugInfoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030007" android:name="com.wukongtv.wkhelper.DebugInfoActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.wukongtv.wkhelper.RemoteService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.wukongtv.wkhelper.RemoteService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.wukongtv.wkhelper.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [SERVICE] com.wukongtv.wkhelper.ime.PinyinIME
+        Bound only by system via signature permission: android.permission.BIND_INPUT_METHOD
+      [RECEIVER] com.wukongtv.wkhelper.receiver.BootReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED, android.intent.action.MY_PACKAGE_REPLACED, android.net.conn.CONNECTIVITY_CHANGE
+      [RECEIVER] com.wukongtv.wkhelper.receiver.SystemEventReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_ADDED, android.intent.action.PACKAGE_REMOVED, android.intent.action.PACKAGE_REPLACED
+      [RECEIVER] com.wukongtv.wkhelper.receiver.ImeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.INPUT_METHOD_CHANGED

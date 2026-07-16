@@ -1,0 +1,91 @@
+================================================================================
+APP    : Bose Music_6.1.2_Apkpure
+FILE   : Bose Music_6.1.2_Apkpure.apk
+DATE   : 2026-04-27 16:36:44
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (3):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+        @ Landroidx/work/ListenableWorker$a; -> a
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lcom/facebook/internal/Utility; -> disconnectQuietly
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 185 component(s). 13 component(s) are safely exported by design.
+    Safe-by-design exports (13):
+      [ACTIVITY] com.bose.madrid.SplashScreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.settings.EulaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.settings.UserSettingsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.discovery.MyBoseActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.musicservices.AddMusicServicesActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.settings.ManageMusicServicesActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.voiceservices.gva.GvaBoseAccountLinkingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.voiceservices.avs.AvsOneVoiceActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.voiceservices.gva.GvaOneVoiceActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.settings.BoseUsbLinkSettingsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bose.madrid.settings.cast.ChromecastSettingsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.gigya.android.sdk.ui.WebLoginActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW

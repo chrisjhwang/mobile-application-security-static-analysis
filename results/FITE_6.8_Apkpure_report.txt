@@ -1,0 +1,156 @@
+================================================================================
+APP    : FITE_6.8_Apkpure
+FILE   : FITE_6.8_Apkpure.apk
+DATE   : 2026-04-28 04:55:09
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (4):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Lcom/adjust/sdk/Reflection; -> getImeiParameters
+        @ Lcom/amazon/identity/auth/device/utils/MAPUtils; -> getDeviceId
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo2
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> acquireMulticastLock
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> releaseMulticastLock
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lc7/g; -> disconnect
+        @ Lcom/zopim/android/sdk/api/ChatApiCommands; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/a; -> startForegroundService
+        @ Lcom/zopim/android/sdk/api/ServiceUtils; -> startForegroundIfNeeded
+    + android.permission.INTERNET
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpGlideModule; -> <init>
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpGlideModule; -> a
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/adjust/sdk/Reflection; -> getImeiParameters
+        @ Lcom/amazon/identity/auth/device/utils/MAPUtils; -> getDeviceId
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 component(s) exported without meaningful protection (of 108 total). 13 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.zopim.android.sdk.prechat.ZopimChatActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F140554" android:label="@7F130084" android:name="com.zopim.android.sdk.prechat.ZopimChatActivity" android:windowSoftInputMode="0x00000011">
+          <intent-filter android:priority="-1000">
+            <action android:name="zopim.action.RESUME_CHAT" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.bianor.ams.service.FCMService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bianor.ams.service.FCMService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11002" />
+        </service>
+    [UNPROTECTED RECEIVER] com.bianor.ams.receiver.BootReceiver
+      export : explicit (android:exported=true)  [permission: android.permission.RECEIVE_BOOT_COMPLETED]
+      reason : Exported (declared permission 'android.permission.RECEIVE_BOOT_COMPLETED' is normal-level, offers no real guard) without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bianor.ams.receiver.BootReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.bianor.ams.androidtv.utils.LauncherNotificationReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bianor.ams.androidtv.utils.LauncherNotificationReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.media.tv.action.PREVIEW_PROGRAM_BROWSABLE_DISABLED" />
+            <action android:name="android.media.tv.action.WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED" />
+            <action android:name="android.media.tv.action.PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.bianor.ams.androidtv.search.SearchProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.bianor.ams.androidtv.search.SearchProvider" android:exported="true" android:authorities="com.bianor.ams">
+          <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search" />
+        </provider>
+    Safe-by-design exports (13):
+      [ACTIVITY] com.google.android.gms.tagmanager.TagManagerPreviewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bianor.ams.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.bianor.ams.androidtv.activity.TvMainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.bianor.ams.androidtv.activity.IntentForwardingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bianor.ams.androidtv.activity.VideoDetailsActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.bianor.ams.ui.activity.VideoListActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.bianor.ams.ui.activity.PurchaseActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.bianor.ams.ui.activity.xlarge.VideoListActivityXLarge
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.bianor.ams.ui.activity.xlarge.PurchaseDialog
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.amazon.identity.auth.device.workflow.WorkflowActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

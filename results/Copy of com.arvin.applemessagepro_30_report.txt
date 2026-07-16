@@ -1,0 +1,80 @@
+================================================================================
+APP    : Copy of com.arvin.applemessagepro_30
+FILE   : Copy of com.arvin.applemessagepro_30.apk
+DATE   : 2026-04-27 22:31:58
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 9 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (9):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CALL_PHONE
+    android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.READ_SMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_MMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.SEND_SMS  [HARD RESTRICTED]
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.INTERNET
+    - android.permission.READ_SMS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_MMS
+    - android.permission.RECEIVE_SMS
+    - android.permission.SEND_SMS
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 28 component(s). 3 component(s) are safely exported by design.
+    Safe-by-design exports (3):
+      [ACTIVITY] com.arvin.applemessagepro.HomeActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.arvin.applemessagepro.ComposeSmsActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.SENDTO
+      [RECEIVER] com.startapp.sdk.adsbase.remoteconfig.BootCompleteListener
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

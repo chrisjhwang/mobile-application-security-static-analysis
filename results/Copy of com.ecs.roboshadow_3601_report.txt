@@ -1,0 +1,82 @@
+================================================================================
+APP    : Copy of com.ecs.roboshadow_3601
+FILE   : Copy of com.ecs.roboshadow_3601.apk
+DATE   : 2026-04-28 04:14:06
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 10 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (10):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+    android.permission.FOREGROUND_SERVICE_DATA_SYNC
+    android.permission.KILL_BACKGROUND_PROCESSES
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.KILL_BACKGROUND_PROCESSES
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.CHANGE_WIFI_STATE
+        @ LO8/c; -> disconnect
+        @ LO8/d; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+        @ Lh1/j; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+        @ Lh1/j; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_DATA_SYNC
+        @ Lh1/j; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ LK0/i; -> notifyDataSetChanged
+        @ LK0/k; -> notifyDataSetChanged
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 77 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED PROVIDER] com.facebook.FacebookContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.facebook.FacebookContentProvider" android:exported="true" android:authorities="com.facebook.app.FacebookContentProvider1632628224332541" />
+    Safe-by-design exports (6):
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.ecs.roboshadow.core.activities.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.smartlook.sdk.smartlook.core.referrer.ReferrerReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] com.ecs.roboshadow.core.receivers.BootCompleteReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED, android.intent.action.LOCKED_BOOT_COMPLETED

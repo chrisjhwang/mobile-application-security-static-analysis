@@ -1,0 +1,349 @@
+================================================================================
+APP    : Lovense Remote_5.7.4_Apkpure
+FILE   : Lovense Remote_5.7.4_Apkpure.apk
+DATE   : 2026-04-28 05:30:33
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 12 normal permission(s) and 10 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (12):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.HIGH_SAMPLING_RATE_SENSORS
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (10):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_ADVERTISE
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/broadcom/bt/gatt/BluetoothGatt; -> startScan
+        @ Lcom/broadcom/bt/gatt/BluetoothGattServer; -> startScan
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Lorg/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 11 of 23 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_BACKGROUND_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADVERTISE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.HIGH_SAMPLING_RATE_SENSORS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (12) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/broadcom/bt/gatt/BluetoothGatt; -> startScan
+        @ Lcom/broadcom/bt/gatt/BluetoothGattServer; -> startScan
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/connection/RouteException; -> <init>
+        @ Lokhttp3/internal/connection/RouteException; -> a
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Lorg/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 40 component(s) exported without meaningful protection (of 226 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.wear.main.account.ChatSettingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.account.ChatSettingActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.account.ChatBackGroudActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.account.ChatBackGroudActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.account.ChatBackGroudSysActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.account.ChatBackGroudSysActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.account.ChatThemeSettingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.account.ChatThemeSettingActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatPicturesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatPicturesActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000030" android:parentActivityName="com.wear.main.MainActivity" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatRoomActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatRoomActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000030" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatMemberActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatMemberActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.JoinGroupChatActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.JoinGroupChatActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatRoomInfoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatRoomInfoActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.CreateChatRoomActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.CreateChatRoomActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.alarm.ChatAlarmActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.alarm.ChatAlarmActivity" android:exported="true" android:launchMode="0" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000010" android:parentActivityName="com.wear.main.longDistance.ChatActivity" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.alarm.AlarmMessageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.alarm.AlarmMessageActivity" android:exported="true" android:launchMode="0" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000010" android:parentActivityName="com.wear.main.longDistance.alarm.ChatAlarmActivity" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.alarm.SetAlarmActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.alarm.SetAlarmActivity" android:exported="true" android:launchMode="0" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000010" android:parentActivityName="com.wear.main.longDistance.alarm.ChatAlarmActivity" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.RecordSendPatternActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.RecordSendPatternActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" android:parentActivityName="com.wear.main.longDistance.ChatActivity" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatHistoryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatHistoryActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatCalendarActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatCalendarActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatAudioActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatAudioActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatUserActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatUserActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatUserMessageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatUserMessageActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatMediaActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatMediaActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SearchChatMediaPreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SearchChatMediaPreviewActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.SelectChatActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.SelectChatActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatHistorySelectActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.longDistance.ChatHistorySelectActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigrateReceiveActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigrateReceiveActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigrateConnectActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigrateConnectActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigratePtoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigratePtoActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigrateSelectActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigrateSelectActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigrateSendActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigrateSendActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.ChatMigrateQrcodeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.ChatMigrateQrcodeActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.migrate.ui.MigrateChatHistoryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wear.main.migrate.ui.MigrateChatHistoryActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.wear.main.longDistance.ChatMsgDetailActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110088" android:name="com.wear.main.longDistance.ChatMsgDetailActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000002A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED SERVICE] com.wear.broadcast.AlarmMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.wear.broadcast.AlarmMessagingService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.wear.alarm.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.wear.broadcast.WearFirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.wear.broadcast.WearFirebaseMessagingService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.wear.broadcast.WearFirebaseInstanceIDService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.wear.broadcast.WearFirebaseInstanceIDService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.wear.main.toy.dfu.DfuService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:label="@7F110088" android:name="com.wear.main.toy.dfu.DfuService" android:exported="true">
+          <intent-filter>
+            <action android:name="no.nordicsemi.android.action.DFU_UPLOAD" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.wear.broadcast.NotificationSyncService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.wear.broadcast.NotificationSyncService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.wear.chat.NOTIFICATION_SYNC" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="10901" />
+        </service>
+    [UNPROTECTED RECEIVER] no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.wear.provider.LovenseContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.wear.provider.LovenseContentProvider" android:enabled="true" android:exported="true" android:authorities="com.lovense.vibemate.LovenseContentProvider" />
+    Safe-by-design exports (3):
+      [ACTIVITY] com.wear.main.FlashActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

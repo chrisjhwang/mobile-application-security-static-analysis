@@ -1,0 +1,86 @@
+================================================================================
+APP    : TP-Link Tapo_2.11.23_Apkpure
+FILE   : TP-Link Tapo_2.11.23_Apkpure.apk
+DATE   : 2026-04-28 08:30:57
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 8 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (8):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 of 16 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_SCAN
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (7) — call-site evidence for manual review:
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/tplink/libtpmediastatistics/StatisticsManager; -> getConnectionInfoCacheKey
+        @ Lcom/tplink/libtpmediastatistics/StatisticsManager; -> getConnectionInfoVO
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 468 component(s). 3 component(s) are safely exported by design.
+    Safe-by-design exports (3):
+      [ACTIVITY] com.tplink.iot.view.welcome.StartupActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.tplink.iot.view.wss.WssAlexaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.tplink.iot.view.authflip.AppFlipAuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW

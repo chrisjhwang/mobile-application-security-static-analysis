@@ -1,0 +1,62 @@
+================================================================================
+APP    : Cast to TV - Chromecast, Roku_2.3.1.1_Apkpure
+FILE   : Cast to TV - Chromecast, Roku_2.3.1.1_Apkpure.apk
+DATE   : 2026-04-27 18:54:56
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo2
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> acquireMulticastLock
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> releaseMulticastLock
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lcom/inshot/cast/core/service/webos/WebOSTVMouseSocketConnection; -> disconnect
+        @ Lcom/inshot/cast/core/device/ConnectableDevice; -> disconnect
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 50 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] com.inshot.cast.xcast.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.SEND, android.intent.action.VIEW

@@ -1,0 +1,226 @@
+================================================================================
+APP    : Yulu - EVs for Rides & Rentals_4.4.1.4_Apkpure
+FILE   : Yulu - EVs for Rides & Rentals_4.4.1.4_Apkpure.apk
+DATE   : 2026-04-28 11:23:27
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 11 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (11):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACTIVITY_RECOGNITION
+        @ Lcom/google/android/gms/location/ActivityRecognitionApi; -> requestActivityUpdates
+        @ Lcom/google/android/gms/internal/location/zzg; -> requestActivityUpdates
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageServiceConnection; -> onPostMessageServiceDisconnected
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/facebook/places/internal/BleScanner; -> startScanning
+        @ Lcom/facebook/places/internal/BleScannerImpl; -> startScanning
+    android.permission.BODY_SENSORS
+    android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> a
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 19 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BODY_SENSORS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (13) — call-site evidence for manual review:
+    + android.permission.ACCESS_BACKGROUND_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACTIVITY_RECOGNITION
+        @ Lcom/google/android/gms/location/ActivityRecognitionApi; -> requestActivityUpdates
+        @ Lcom/google/android/gms/internal/location/zzg; -> requestActivityUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageServiceConnection; -> onPostMessageServiceDisconnected
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/facebook/places/internal/BleScanner; -> startScanning
+        @ Lcom/facebook/places/internal/BleScannerImpl; -> startScanning
+    + android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> a
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 13 component(s) exported without meaningful protection (of 148 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] app.yulu.bike.eventMonitoring.EventMonitorActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="app.yulu.bike.eventMonitoring.EventMonitorActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.freshchat.consumer.sdk.activity.ChannelListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13013E" android:name="com.freshchat.consumer.sdk.activity.ChannelListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.freshchat.consumer.sdk.activity.ConversationDetailActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13013E" android:name="com.freshchat.consumer.sdk.activity.ConversationDetailActivity" android:exported="true" android:configChanges="0x00000480" android:windowSoftInputMode="0x00000002" />
+    [UNPROTECTED ACTIVITY] com.moe.pushlibrary.activities.MoEActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Notification" android:name="com.moe.pushlibrary.activities.MoEActivity" android:exported="true" android:parentActivityName="app.yulu.bike.ui.dashboard.MapWithJourneyActivity">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.dashboard.MapWithJourneyActivity" />
+        </activity>
+    [UNPROTECTED SERVICE] app.yulu.bike.services.FireBaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="app.yulu.bike.services.FireBaseMessagingService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.xiaomi.push.service.XMPushService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.xiaomi.push.service.XMPushService" android:enabled="true" android:exported="true" android:process=":pushservice" />
+    [UNPROTECTED SERVICE] com.xiaomi.mipush.sdk.MessageHandleService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.xiaomi.mipush.sdk.MessageHandleService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.paytm.pgsdk.easypay.utils.EasypayLoaderService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.paytm.pgsdk.easypay.utils.EasypayLoaderService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.paytm.pgsdk.easypay.utils.AnalyticsService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.paytm.pgsdk.easypay.utils.AnalyticsService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] app.yulu.bike.bluetooth.BluetoothReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="app.yulu.bike.bluetooth.BluetoothReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.moengage.mi.MoEMiPushReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.moengage.mi.MoEMiPushReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.ERROR" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mapmyindia.sdk.safety.internal.NetworkChangeReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mapmyindia.sdk.safety.internal.NetworkChangeReceiver" android:enabled="true" android:exported="true">
+          <intent-filter android:priority="1000">
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.mmi.beacon.LOGGER" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (8):
+      [ACTIVITY] com.payu.custombrowser.PreLollipopPaymentsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] app.yulu.bike.ui.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.moengage.integrationverifier.internal.IntegrationVerificationActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] app.yulu.bike.network.NetworkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE, android.net.wifi.WIFI_STATE_CHANGED
+      [RECEIVER] com.xiaomi.push.service.receivers.NetworkStatusReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

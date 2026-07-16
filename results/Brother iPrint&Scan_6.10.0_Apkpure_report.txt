@@ -1,0 +1,86 @@
+================================================================================
+APP    : Brother iPrint&Scan_6.10.0_Apkpure
+FILE   : Brother iPrint&Scan_6.10.0_Apkpure.apk
+DATE   : 2026-04-27 16:43:39
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+  Dangerous permissions found with INTERNET (6):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CONTACTS
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.READ_CONTACTS
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroid/support/v4/app/FragmentManager; -> enableDebugLogging
+        @ Landroid/support/v4/view/ViewPager; -> enableLayers
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lcom/brother/mfc/handover/WifiP2PForegroundControl; -> disconnectPeer
+        @ Lcom/google/android/gms/common/internal/BaseGmsClient; -> disconnect
+    + android.permission.INTERNET
+        @ Lretrofit2/http/DELETE; -> value
+        @ Lretrofit2/http/Field; -> encoded
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 79 component(s). 9 component(s) are safely exported by design.
+    Safe-by-design exports (9):
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.print.PluginPrintIntentActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.print.PdfIntentActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.print.OfficeIntentActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.scan.PluginScanIntentActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.ImageIntentActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.SEND_MULTIPLE, android.intent.action.VIEW
+      [ACTIVITY] com.dropbox.core.android.AuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.top.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.webprint.IntentActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.brother.mfc.brprint.v2.ui.cloudservice.utils.googledrive.GoogleRedirectUriReceiverActivity
+        Has expected public intent action(s): android.intent.action.VIEW

@@ -1,0 +1,81 @@
+================================================================================
+APP    : Cast to Chromecast - Screen mi_2.2_Apkpure
+FILE   : Cast to Chromecast - Screen mi_2.2_Apkpure.apk
+DATE   : 2026-04-27 18:51:34
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.CAMERA
+        @ Lorg/jetbrains/anko/Sdk27ServicesKt; -> getCameraManager
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+  Used permissions (7) — call-site evidence for manual review:
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo2
+    + android.permission.CAMERA
+        @ Lorg/jetbrains/anko/Sdk27ServicesKt; -> getCameraManager
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> acquireMulticastLock
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> releaseMulticastLock
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lretrofit2/http/DELETE; -> value
+        @ Lretrofit2/http/Field; -> encoded
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 52 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11002" />
+        </service>
+    Safe-by-design exports (1):
+      [ACTIVITY] chromecast.tv.cast.caster.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN

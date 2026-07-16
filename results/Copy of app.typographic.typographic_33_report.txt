@@ -1,0 +1,80 @@
+================================================================================
+APP    : Copy of app.typographic.typographic_33
+FILE   : Copy of app.typographic.typographic_33.apk
+DATE   : 2026-04-27 20:23:51
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_AUDIO
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35251a
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35252b
+    android.permission.READ_MEDIA_IMAGES
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35251a
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35252b
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (7) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lretrofit2/Call; -> cancel
+        @ Lretrofit2/Call; -> clone
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_AUDIO
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35251a
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35252b
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35251a
+        @ Lapp/typographic/typographic/helpers/p166q1/MediaStoreHelper; -> mo35252b
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 87 component(s). 3 component(s) are safely exported by design.
+    Safe-by-design exports (3):
+      [ACTIVITY] app.typographic.typographic.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] app.typographic.typographic.ui.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.SEND
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW

@@ -1,0 +1,151 @@
+================================================================================
+APP    : Lexmark Print Plugin_2.12.0.5_Apkpure
+FILE   : Lexmark Print Plugin_2.12.0.5_Apkpure.apk
+DATE   : 2026-04-28 05:26:10
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+  Dangerous permissions found with INTERNET (3):
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.CHANGE_WIFI_STATE
+    - android.permission.INTERNET
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.WRITE_EXTERNAL_STORAGE
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 component(s) exported without meaningful protection (of 64 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.lexmark.print.plugin.activity.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F100118" android:name="com.lexmark.print.plugin.activity.SettingsActivity" android:enabled="true" android:exported="true" android:excludeFromRecents="true" />
+    [UNPROTECTED ACTIVITY] com.lexmark.print.plugin.activity.AdvancedPrintOptionsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1101A5" android:name="com.lexmark.print.plugin.activity.AdvancedPrintOptionsActivity" android:enabled="true" android:exported="true" android:excludeFromRecents="true" />
+    [UNPROTECTED ACTIVITY] com.lexmark.print.plugin.activity.LoginStatusActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030055" android:name="com.lexmark.print.plugin.activity.LoginStatusActivity" android:enabled="true">
+          <intent-filter>
+            <action android:name="com.lexmark.mobile.print.plugin.CHECK_LOGIN_STATUS" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.lexmark.imaging.mobile.activities.FinalizeActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:label="com.lexmark.imaging.mobile.activities.FinalizeActivity" android:name="com.lexmark.imaging.mobile.activities.FinalizeActivity">
+          <intent-filter>
+            <action android:name="com.lexmark.imaging.mobile.activities.FinalizeActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="image/*" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.lexmark.imaging.mobile.activities.BackgroundProcessActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:label="com.lexmark.imaging.mobile.activities.BackgroundProcessActivity" android:name="com.lexmark.imaging.mobile.activities.BackgroundProcessActivity">
+          <intent-filter>
+            <action android:name="com.lexmark.imaging.mobile.activities.BackgroundProcessActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="image/*" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.lexmark.imaging.mobile.capture.CaptureActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110192" android:label="com.lexmark.imaging.mobile.capture.CaptureActivity" android:name="com.lexmark.imaging.mobile.capture.CaptureActivity" android:screenOrientation="0">
+          <intent-filter>
+            <action android:name="com.lexmark.imaging.mobile.capture.CaptureActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.lexmark.imaging.mobile.crop.CropActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110192" android:label="com.lexmark.imaging.mobile.crop.CropActivity" android:name="com.lexmark.imaging.mobile.crop.CropActivity">
+          <intent-filter>
+            <action android:name="com.lexmark.imaging.mobile.crop.CropActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="image/*" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.lexmark.imaging.mobile.whitebalance.WhiteBalanceActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110192" android:label="com.lexmark.imaging.mobile.whitebalance.WhiteBalanceActivity" android:name="com.lexmark.imaging.mobile.whitebalance.WhiteBalanceActivity" android:screenOrientation="0">
+          <intent-filter>
+            <action android:name="com.lexmark.imaging.mobile.whitebalance.WhiteBalanceActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="image/*" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED RECEIVER] com.lexmark.mobile.print.mobileprintcore.core.wifidirect.WifiDirectTimerBroadcastReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.lexmark.mobile.print.mobileprintcore.core.wifidirect.WifiDirectTimerBroadcastReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.lexmark.mobile.print.mobileprintcore.a4work.AndroidForWorkReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.lexmark.mobile.print.mobileprintcore.a4work.AndroidForWorkReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.GET_RESTRICTION_ENTRIES" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.lexmark.print.plugin.activity.PluginInitActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.lexmark.mobile.print.mobileprintcore.sso.SsoRedirectActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.lexmark.print.plugin.activity.login.CustomTabsRedirectActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.lexmark.mobile.print.mobileprintcore.activity.login.CustomTabsRedirectActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.lexmark.print.plugin.ctrl.LexmarkPrintService
+        Bound only by system via signature permission: android.permission.BIND_PRINT_SERVICE

@@ -1,0 +1,65 @@
+================================================================================
+APP    : Copy of com.app.sefamerve_172
+FILE   : Copy of com.app.sefamerve_172.apk
+DATE   : 2026-04-27 21:57:47
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.CAMERA
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (3) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+    + android.permission.INTERNET
+        @ Lokhttp3/f; -> b
+        @ Lokhttp3/f; -> e
+    + android.permission.POST_NOTIFICATIONS
+        @ Lcom/app/sefamerve/api/response/LinksResponse; -> getRegister_text_campaign_ad_notify
+        @ Lcom/app/sefamerve/api/response/LinksResponse; -> getRegister_text_register_ad_notify
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 44 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.app.sefamerve.ui.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.sefamerve.ui.MainActivity" android:exported="true" android:windowSoftInputMode="0x00000010" />
+    [UNPROTECTED ACTIVITY] com.app.sefamerve.ui.TestActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.sefamerve.ui.TestActivity" android:exported="true" android:windowSoftInputMode="0x00000010" />
+    Safe-by-design exports (2):
+      [ACTIVITY] com.app.sefamerve.ui.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW

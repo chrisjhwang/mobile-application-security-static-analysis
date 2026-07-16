@@ -1,0 +1,91 @@
+================================================================================
+APP    : Copy of com.apptegy.palmyra_24
+FILE   : Copy of com.apptegy.palmyra_24.apk
+DATE   : 2026-04-27 22:16:56
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.CALL_PHONE
+    android.permission.READ_PHONE_STATE
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (3) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+    + android.permission.INTERNET
+        @ Lcom/facebook/stetho/okhttp3/BuildConfig; -> <init>
+        @ Lcom/facebook/stetho/okhttp3/R$anim; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Lp/f; -> notifyDataSetChanged
+        @ Lp/h; -> notifyDataSetChanged
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 47 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.canhub.cropper.CropImageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.canhub.cropper.CropImageActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivity" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.apptegy.app.main.activity.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.onesignal.notifications.receivers.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

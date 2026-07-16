@@ -1,0 +1,56 @@
+================================================================================
+APP    : Copy of chat.amor_110
+FILE   : Copy of chat.amor_110.apk
+DATE   : 2026-04-27 20:54:28
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Used permissions (3) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <clinit>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Lcom/google/android/gms/internal/ads/vv; -> notify
+        @ Lk/j; -> notifyDataSetChanged
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 34 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] chat.amor.login.SplashScreen
+        Has expected public intent action(s): android.intent.action.MAIN

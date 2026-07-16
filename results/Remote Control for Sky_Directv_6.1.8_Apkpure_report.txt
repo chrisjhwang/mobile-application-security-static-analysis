@@ -1,0 +1,48 @@
+================================================================================
+APP    : Remote Control for Sky_Directv_6.1.8_Apkpure
+FILE   : Remote Control for Sky_Directv_6.1.8_Apkpure.apk
+DATE   : 2026-04-28 07:06:03
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 4 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 30 component(s). 4 component(s) are safely exported by design.
+    Safe-by-design exports (4):
+      [ACTIVITY] com.bragasil.josemauricio.controleremotoskyhdtv.Principal
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.bragasil.josemauricio.controleremotoskyhdtv.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

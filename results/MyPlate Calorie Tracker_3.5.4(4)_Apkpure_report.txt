@@ -1,0 +1,95 @@
+================================================================================
+APP    : MyPlate Calorie Tracker_3.5.4(4)_Apkpure
+FILE   : MyPlate Calorie Tracker_3.5.4(4)_Apkpure.apk
+DATE   : 2026-04-28 05:45:42
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 2 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (2):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACTIVITY_RECOGNITION
+    android.permission.CAMERA
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACTIVITY_RECOGNITION
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 92 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.livestrong.tracker.services.DataLayerListenerService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.livestrong.tracker.services.DataLayerListenerService">
+          <intent-filter>
+            <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+            <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+            <data android:scheme="wear" android:host="*" android:pathPrefix="/data-item-received" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.livestrong.tracker.firebase.MyplateFirebaseInstanceIDService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.livestrong.tracker.firebase.MyplateFirebaseInstanceIDService">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.livestrong.tracker.firebase.MyPlateFirebaseMessagingService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.livestrong.tracker.firebase.MyPlateFirebaseMessagingService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (8):
+      [ACTIVITY] com.livestrong.tracker.activities.WelcomeActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.livestrong.tracker.home.view.MainActivity
+        Has expected public intent action(s): android.intent.action.SEARCH, android.intent.action.VIEW
+      [ACTIVITY] com.livestrong.tracker.activities.ComboSearchResultsActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.livestrong.tracker.activities.TrackFoodActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.livestrong.tracker.activities.TrackExerciseActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.livestrong.tracker.activities.FoodSearchResultsActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.livestrong.tracker.activities.ExerciseSearchResultActivity
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW

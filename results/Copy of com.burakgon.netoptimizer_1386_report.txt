@@ -1,0 +1,112 @@
+================================================================================
+APP    : Copy of com.burakgon.netoptimizer_1386
+FILE   : Copy of com.burakgon.netoptimizer_1386.apk
+DATE   : 2026-04-27 23:36:44
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lio/bidmachine/core/Utils; -> getActiveNetworkInfo
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+        @ Lcom/google/android/exoplayer2/offline/DownloadService; -> startForeground
+    + android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED
+        @ Lcom/google/android/exoplayer2/offline/DownloadService; -> startForeground
+        @ Lcom/google/android/exoplayer2/util/Util; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/HttpUrl$a; -> <init>
+        @ Lokhttp3/HttpUrl$a; -> d
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/c$a; -> notifyDataSetChanged
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 141 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.burakgon.netoptimizer.activities.privatebrowser.PrivateBrowserActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13002B" android:label="@7F12008E" android:icon="@7F0F0005" android:name="com.burakgon.netoptimizer.activities.privatebrowser.PrivateBrowserActivity" android:exported="true" android:taskAffinity="com.burakgon.netoptimizer.activities.privatebrowser" android:excludeFromRecents="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000480" android:windowSoftInputMode="0x00000020" android:noHistory="false" android:supportsRtl="true" android:autoRemoveFromRecents="true" android:roundIcon="@7F0F0005">
+          <meta-data android:name="android.app.lib_name" android:value="" />
+        </activity>
+    [UNPROTECTED ACTIVITY] com.amazon.aps.ads.activity.ApsInterstitialActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13018A" android:name="com.amazon.aps.ads.activity.ApsInterstitialActivity" android:exported="true" android:configChanges="0x00000480" />
+    [UNPROTECTED ACTIVITY] com.amazon.device.ads.DTBInterstitialActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.amazon.device.ads.DTBInterstitialActivity" android:exported="true" android:configChanges="0x00000480" />
+    [UNPROTECTED RECEIVER] com.bgnmobi.manifest.BGNBroadcastProcessor
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bgnmobi.manifest.BGNBroadcastProcessor" android:exported="true">
+          <intent-filter>
+            <action android:name="android.provider.Telephony.SECRET_CODE" />
+            <data android:scheme="android_secret_code" android:host="246362253" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.provider.Telephony.SECRET_CODE" />
+            <data android:scheme="android_secret_code" android:host="2463472253" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.provider.Telephony.SECRET_CODE" />
+            <data android:scheme="android_secret_code" android:host="246446673" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.provider.Telephony.SECRET_CODE" />
+            <data android:scheme="android_secret_code" android:host="24686446673" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.bgnmobi.core.provider.CPProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.bgnmobi.core.provider.CPProvider" android:exported="true" android:authorities="com.burakgon.netoptimizer.CPProvider" android:syncable="true" />
+    Safe-by-design exports (6):
+      [ACTIVITY] com.burakgon.netoptimizer.activities.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.burakgon.netoptimizer.receivers.OnBootReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.burakgon.netoptimizer.receivers.PackageChangedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED
+      [RECEIVER] com.burakgon.netoptimizer.receivers.ConnectionChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE
+      [RECEIVER] com.google.android.gms.analytics.CampaignTrackingReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

@@ -1,0 +1,38 @@
+================================================================================
+APP    : Copy of andreasagap.ktelmakedonia_38
+FILE   : Copy of andreasagap.ktelmakedonia_38.apk
+DATE   : 2026-04-27 20:14:27
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 1 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (1):
+    android.permission.ACCESS_NETWORK_STATE
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 2 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.INTERNET
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 12 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] andreasagap.ktelmakedonia.presentation.home.HomeActivity
+        Has expected public intent action(s): android.intent.action.MAIN

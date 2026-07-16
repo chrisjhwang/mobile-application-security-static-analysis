@@ -1,0 +1,154 @@
+================================================================================
+APP    : Bird — Ride Electric_4.214.0.7_Apkpure
+FILE   : Bird — Ride Electric_4.214.0.7_Apkpure.apk
+DATE   : 2026-04-27 16:25:00
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 8 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (8):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ LQC8; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.BLUETOOTH_CONNECT
+        @ LD20$g; -> onDisconnected
+        @ LK70$a; -> onDisconnected
+    android.permission.BLUETOOTH_SCAN
+        @ LEi5$b; -> startScanning$default
+        @ LAG; -> startScanBle$bluetooth_release$default
+    android.permission.CAMERA
+        @ Landroid/hardware/camera2/params/SessionConfiguration; -> <clinit>
+        @ Landroid/hardware/camera2/params/SessionConfiguration; -> <init>
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+    android.permission.READ_PHONE_STATE
+        @ Lbo/app/c2; -> getDeviceId
+        @ Lbo/app/d2; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 16 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (12) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ LQC8; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lzendesk/core/NetworkUtils; -> getActiveNetworkInfo
+        @ Lzendesk/support/guide/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroid/app/NotificationChannel; -> enableLights
+        @ Landroid/app/NotificationChannel; -> enableVibration
+    + android.permission.BLUETOOTH_CONNECT
+        @ LD20$g; -> onDisconnected
+        @ LK70$a; -> onDisconnected
+    + android.permission.BLUETOOTH_SCAN
+        @ LEi5$b; -> startScanning$default
+        @ LAG; -> startScanBle$bluetooth_release$default
+    + android.permission.CAMERA
+        @ Landroid/hardware/camera2/params/SessionConfiguration; -> <clinit>
+        @ Landroid/hardware/camera2/params/SessionConfiguration; -> <init>
+    + android.permission.INTERNET
+        @ Lcom/facebook/stetho/okhttp3/BuildConfig; -> <init>
+        @ Lcom/facebook/stetho/okhttp3/R$anim; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/app/NotificationChannel; -> <clinit>
+        @ Landroid/app/NotificationChannel; -> <init>
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+    + android.permission.READ_PHONE_STATE
+        @ Lbo/app/c2; -> getDeviceId
+        @ Lbo/app/d2; -> getDeviceId
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 component(s) exported without meaningful protection (of 373 total). 9 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] co.bird.android.feature.savemoney.SaveMoneyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F11107F" android:name="co.bird.android.feature.savemoney.SaveMoneyActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000" />
+        </service>
+    [UNPROTECTED RECEIVER] co.bird.android.app.feature.bluetooth.BluetoothDiscoveryReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="co.bird.android.app.feature.bluetooth.BluetoothDiscoveryReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.FOUND" />
+            <action android:name="android.bluetooth.adapter.action.DISCOVERY_STARTED" />
+            <action android:name="android.bluetooth.adapter.action.DISCOVERY_FINISHED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (9):
+      [ACTIVITY] co.bird.android.app.feature.main.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] co.bird.android.app.feature.settings.settings.SettingsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] co.bird.android.app.feature.magiclink.LoginActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] co.bird.android.app.feature.dropfeedback.DropFeedbackHistoryActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.braintreepayments.api.BraintreeBrowserSwitchActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.stripe.android.payments.StripeBrowserLauncherActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] co.bird.android.app.feature.charger.receiver.UserTrackerUpgradeSyncReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED
+      [RECEIVER] co.bird.android.app.feature.locale.LocaleChangedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.LOCALE_CHANGED

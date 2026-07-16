@@ -1,0 +1,75 @@
+================================================================================
+APP    : Copy of com.appg.ebridge_209411
+FILE   : Copy of com.appg.ebridge_209411.apk
+DATE   : 2026-04-27 22:01:30
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (3):
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> onPreviewFrame
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> onPreviewFrame
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 28 component(s). 5 component(s) are safely exported by design.
+    Safe-by-design exports (5):
+      [ACTIVITY] com.kakao.sdk.auth.AuthCodeHandlerActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.appg.ebridge.ui.activity.IntroActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.appg.ebridge.ui.activity.MainWebViewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.appg.ebridge.ui.activity.AalcWebViewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.appg.ebridge.ui.activity.deeplink.CallIntroActivity
+        Has expected public intent action(s): android.intent.action.VIEW

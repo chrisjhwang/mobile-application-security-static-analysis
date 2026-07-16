@@ -1,0 +1,162 @@
+================================================================================
+APP    : MYPEUGEOT APP_1.37.0_Apkpure
+FILE   : MYPEUGEOT APP_1.37.0_Apkpure.apk
+DATE   : 2026-04-28 05:41:54
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 14 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_NOTIFICATION_POLICY
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (14):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ANSWER_PHONE_CALLS
+    android.permission.BLUETOOTH_ADVERTISE
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/stellantis/amimobilemodule/feature_magicbutton/repository/handler/MagicButtonHandler$startScan$2$1$1$2; -> <init>
+        @ Lcom/stellantis/amimobilemodule/feature_magicbutton/repository/handler/MagicButtonHandler$startScan$2$1$1$2; -> invoke
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$1; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$1; -> run
+    android.permission.READ_CALENDAR
+    android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.WRITE_CALENDAR
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 11 of 24 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_NOTIFICATION_POLICY
+    - android.permission.ANSWER_PHONE_CALLS
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADVERTISE
+    - android.permission.CALL_PHONE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.READ_CALENDAR
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_CALENDAR
+  Used permissions (13) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lorg/apache/cordova/networkinformation/NetworkManager; -> getConnectionInfo
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/stellantis/amimobilemodule/feature_magicbutton/repository/handler/MagicButtonHandler$startScan$2$1$1$2; -> <init>
+        @ Lcom/stellantis/amimobilemodule/feature_magicbutton/repository/handler/MagicButtonHandler$startScan$2$1$1$2; -> invoke
+    + android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$1; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$1; -> run
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lretrofit2/converter/moshi/MoshiConverterFactory; -> <init>
+        @ Lretrofit2/converter/moshi/MoshiConverterFactory; -> create
+    + android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 199 total). 11 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.psa.mym.receiver.BluetoothDeviceReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.psa.mym.receiver.BluetoothDeviceReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (11):
+      [ACTIVITY] com.psa.mym.activity.MainTabActivity
+        Has expected public intent action(s): android.intent.action.EDIT, android.intent.action.MAIN, android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.psa.mym.activity.SplashscreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] net.openid.appauth.RedirectUriReceiverActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.inetpsa.pims.basicauthentication.activity.ReceiverResponseActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.psa.mym.dealer.view.activities.DealerLocatorActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.stellantis.amimobilemodule.view.MainModuleActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.google.android.gms.analytics.CampaignTrackingReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] com.salesforce.marketingcloud.sfmcsdk.SFMCSdkReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

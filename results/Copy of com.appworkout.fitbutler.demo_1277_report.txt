@@ -1,0 +1,70 @@
+================================================================================
+APP    : Copy of com.appworkout.fitbutler.demo_1277
+FILE   : Copy of com.appworkout.fitbutler.demo_1277.apk
+DATE   : 2026-04-27 22:20:37
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+  Dangerous permissions found with INTERNET (6):
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> onPreviewFrame
+    android.permission.READ_CALENDAR
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_CALENDAR
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.READ_CALENDAR
+    - android.permission.WRITE_CALENDAR
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> onPreviewFrame
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.INTERNET
+        @ Lcom/bumptech/glide/annotation/compiler/GlideIndexer_GlideModule_com_bumptech_glide_integration_okhttp3_OkHttpLibraryGlideModule; -> <init>
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpStreamFetcher; -> <init>
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 26 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] com.appworkout.fitbutler.app.main.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN

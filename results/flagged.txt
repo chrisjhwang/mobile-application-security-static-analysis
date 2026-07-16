@@ -1,0 +1,92 @@
+======================================================================
+  Android APK Security Analysis — Flagged Findings
+  Generated     : 2026-04-28 11:23:27
+  Apps analyzed : 12
+  RQs run       : RQ4, RQ5, RQ7
+======================================================================
+
+── SUMMARY ──────────────────────────────────────────────────────
+  RQ4 — Internet + PII Permissions                   12/12  (100.0%)
+  RQ5 — Unused Permissions                           12/12  (100.0%)
+  RQ7 — Unprotected Exported Activities              12/12  (100.0%)
+
+  Errors: 0
+
+── RQ4 — Internet + PII Permissions (12 apps) ──
+  • TV Cast for Chromecast_35.13.25.19_Apkpure.apk
+    INTERNET combined with 3 normal permission(s) and 3 dangerous permission(s).
+  • Ultimate Alexa Voice Assistant_3.4.0_Apkpure.apk
+    INTERNET combined with 8 normal permission(s) and 4 dangerous permission(s).
+  • Universal Remote Control_1.0.34_Apkpure.apk
+    INTERNET combined with 6 normal permission(s) and 6 dangerous permission(s).
+  • Universal TV Remote Control_1.1.26_Apkpure.apk
+    INTERNET combined with 8 normal permission(s) and 4 dangerous permission(s).
+  • VLC Mobile Remote - PC & Mac_2.9.1_Apkpure.apk
+    INTERNET combined with 4 normal permission(s) and 3 dangerous permission(s).
+  • Watch Droid Phone_15.16_Apkpure.apk
+    INTERNET combined with 7 normal permission(s) and 3 dangerous permission(s).
+  • Web Video Cast _ Browser to TV_5.6.0_Apkpure.apk
+    INTERNET combined with 6 normal permission(s) and 3 dangerous permission(s).
+  • Withings Health Mate_5.12.1_Apkpure.apk
+    INTERNET combined with 7 normal permission(s) and 14 dangerous permission(s).
+  • Wyze - Make Your Home Smarter_2.36.0.96_Apkpure.apk
+    INTERNET combined with 11 normal permission(s) and 19 dangerous permission(s).
+  • Xfinity My Account_1.58.13.20220802141245_Apkpure.apk
+    INTERNET combined with 4 normal permission(s) and 4 dangerous permission(s).
+  • Yoho Sports_20.36.37_Apkpure.apk
+    INTERNET combined with 7 normal permission(s) and 11 dangerous permission(s).
+  • Yulu - EVs for Rides & Rentals_4.4.1.4_Apkpure.apk
+    INTERNET combined with 7 normal permission(s) and 11 dangerous permission(s).
+
+── RQ5 — Unused Permissions (12 apps) ──
+  • TV Cast for Chromecast_35.13.25.19_Apkpure.apk
+    2 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Ultimate Alexa Voice Assistant_3.4.0_Apkpure.apk
+    6 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Universal Remote Control_1.0.34_Apkpure.apk
+    6 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Universal TV Remote Control_1.1.26_Apkpure.apk
+    11 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • VLC Mobile Remote - PC & Mac_2.9.1_Apkpure.apk
+    3 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Watch Droid Phone_15.16_Apkpure.apk
+    10 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Web Video Cast _ Browser to TV_5.6.0_Apkpure.apk
+    2 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Withings Health Mate_5.12.1_Apkpure.apk
+    7 of 22 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Wyze - Make Your Home Smarter_2.36.0.96_Apkpure.apk
+    12 of 31 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Xfinity My Account_1.58.13.20220802141245_Apkpure.apk
+    4 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Yoho Sports_20.36.37_Apkpure.apk
+    9 of 19 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+  • Yulu - EVs for Rides & Rentals_4.4.1.4_Apkpure.apk
+    6 of 19 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+
+── RQ7 — Unprotected Exported Activities (12 apps) ──
+  • TV Cast for Chromecast_35.13.25.19_Apkpure.apk
+    2 component(s) exported without meaningful protection (of 46 total). 2 safe-by-design export(s) excluded from count.
+  • Ultimate Alexa Voice Assistant_3.4.0_Apkpure.apk
+    9 component(s) exported without meaningful protection (of 85 total). 6 safe-by-design export(s) excluded from count.
+  • Universal Remote Control_1.0.34_Apkpure.apk
+    1 component(s) exported without meaningful protection (of 76 total). 2 safe-by-design export(s) excluded from count.
+  • Universal TV Remote Control_1.1.26_Apkpure.apk
+    2 component(s) exported without meaningful protection (of 215 total). 3 safe-by-design export(s) excluded from count.
+  • VLC Mobile Remote - PC & Mac_2.9.1_Apkpure.apk
+    3 component(s) exported without meaningful protection (of 50 total). 2 safe-by-design export(s) excluded from count.
+  • Watch Droid Phone_15.16_Apkpure.apk
+    1 component(s) exported without meaningful protection (of 84 total). 3 safe-by-design export(s) excluded from count.
+  • Web Video Cast _ Browser to TV_5.6.0_Apkpure.apk
+    2 component(s) exported without meaningful protection (of 117 total). 2 safe-by-design export(s) excluded from count.
+  • Withings Health Mate_5.12.1_Apkpure.apk
+    8 component(s) exported without meaningful protection (of 302 total). 5 safe-by-design export(s) excluded from count.
+  • Wyze - Make Your Home Smarter_2.36.0.96_Apkpure.apk
+    9 component(s) exported without meaningful protection (of 1565 total). 7 safe-by-design export(s) excluded from count.
+  • Xfinity My Account_1.58.13.20220802141245_Apkpure.apk
+    2 component(s) exported without meaningful protection (of 113 total). 3 safe-by-design export(s) excluded from count.
+  • Yoho Sports_20.36.37_Apkpure.apk
+    7 component(s) exported without meaningful protection (of 33 total). 4 safe-by-design export(s) excluded from count.
+  • Yulu - EVs for Rides & Rentals_4.4.1.4_Apkpure.apk
+    13 component(s) exported without meaningful protection (of 148 total). 8 safe-by-design export(s) excluded from count.
+

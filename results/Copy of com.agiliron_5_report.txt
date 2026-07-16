@@ -1,0 +1,66 @@
+================================================================================
+APP    : Copy of com.agiliron_5
+FILE   : Copy of com.agiliron_5.apk
+DATE   : 2026-04-27 21:06:24
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lio/fabric/sdk/android/services/common/DeviceIdentifierProvider; -> getDeviceIdentifiers
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.INTERNET
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroid/support/v4/app/FragmentManager; -> enableDebugLogging
+        @ Landroid/support/v4/app/LoaderManager; -> enableDebugLogging
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lio/fabric/sdk/android/services/common/DeviceIdentifierProvider; -> getDeviceIdentifiers
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 4 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] com.agiliron.activities.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN

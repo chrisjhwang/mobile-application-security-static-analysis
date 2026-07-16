@@ -1,0 +1,80 @@
+================================================================================
+APP    : Copy of com.bosch.boschlevellingremoteapp_153
+FILE   : Copy of com.bosch.boschlevellingremoteapp_153.apk
+DATE   : 2026-04-27 23:31:32
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 7 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+  Dangerous permissions found with INTERNET (7):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_ADVERTISE
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/bosch/boschlevellingremoteapp/bluetooth/IBleDeviceScanner; -> startScan
+        @ Lcom/bosch/boschlevellingremoteapp/bluetooth/impl/ble/BleDeviceScanner21; -> startScan
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADVERTISE
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/activity/EdgeToEdge; -> enable
+        @ Landroidx/activity/EdgeToEdge; -> enable$default
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/bosch/boschlevellingremoteapp/bluetooth/IBleDeviceScanner; -> startScan
+        @ Lcom/bosch/boschlevellingremoteapp/bluetooth/impl/ble/BleDeviceScanner21; -> startScan
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 16 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] com.bosch.boschlevellingremoteapp.ui.activity.SplashScreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW

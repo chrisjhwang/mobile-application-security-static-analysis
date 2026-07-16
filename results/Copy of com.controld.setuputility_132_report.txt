@@ -1,0 +1,68 @@
+================================================================================
+APP    : Copy of com.controld.setuputility_132
+FILE   : Copy of com.controld.setuputility_132.apk
+DATE   : 2026-04-28 03:55:09
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CAMERA
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_BACKGROUND_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService$Default; -> notifyNotificationWithChannel
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 12 component(s). 2 component(s) are safely exported by design.
+    Safe-by-design exports (2):
+      [ACTIVITY] com.controld.setuputility.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.controld.setuputility.ControlDTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE

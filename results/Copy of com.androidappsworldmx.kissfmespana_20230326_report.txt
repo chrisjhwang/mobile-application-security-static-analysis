@@ -1,0 +1,80 @@
+================================================================================
+APP    : Copy of com.androidappsworldmx.kissfmespana_20230326
+FILE   : Copy of com.androidappsworldmx.kissfmespana_20230326.apk
+DATE   : 2026-04-27 21:24:35
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 1 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (1):
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 of 5 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+        @ Landroidx/core/content/a; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/a; -> notify
+        @ Landroidx/appcompat/view/menu/c$a; -> notifyDataSetChanged
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/a; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 39 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.androidappsworldmx.kissfmespana.firebasemsg.XRadioFBMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.androidappsworldmx.kissfmespana.firebasemsg.XRadioFBMessagingService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.androidappsworldmx.kissfmespana.stream.service.YPYIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.androidappsworldmx.kissfmespana.stream.service.YPYIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.androidappsworldmx.kissfmespana.XRadioSplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN

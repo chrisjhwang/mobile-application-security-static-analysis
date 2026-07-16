@@ -1,0 +1,101 @@
+================================================================================
+APP    : Copy of com.app.radiojibi_23
+FILE   : Copy of com.app.radiojibi_23.apk
+DATE   : 2026-04-27 21:56:44
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 1 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (1):
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Landroidx/work/impl/utils/NetworkApi21; -> getNetworkCapabilitiesCompat
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lretrofit2/Call; -> cancel
+        @ Lretrofit2/Call; -> clone
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 55 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivity" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.app.radiojibi.activities.ActivitySplash
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.app.radiojibi.activities.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.onesignal.notifications.receivers.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

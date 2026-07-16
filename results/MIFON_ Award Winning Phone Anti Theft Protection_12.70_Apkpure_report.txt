@@ -1,0 +1,328 @@
+================================================================================
+APP    : MIFON_ Award Winning Phone Anti Theft Protection_12.70_Apkpure
+FILE   : MIFON_ Award Winning Phone Anti Theft Protection_12.70_Apkpure.apk
+DATE   : 2026-04-28 05:35:12
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 10 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (10):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/onesignal/LocationGMS$FusedLocationApiWrapper; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lcom/crashlytics/android/beta/Beta; -> getDeviceIdentifiers
+    android.permission.WRITE_CONTACTS
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 18 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.GET_ACCOUNTS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_CONTACTS
+  Used permissions (11) — call-site evidence for manual review:
+    + android.permission.ACCESS_BACKGROUND_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/onesignal/LocationGMS$FusedLocationApiWrapper; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lcom/zendesk/sdk/util/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/constraint/solver/widgets/ConstraintWidget; -> disconnectUnlockedWidget
+        @ Landroid/support/constraint/solver/widgets/ConstraintWidget; -> disconnectWidget
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/support/v4/content/ContextCompat; -> startForegroundService
+        @ Landroid/support/v4/media/session/MediaButtonReceiver; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/framed/ErrorCode; -> <clinit>
+        @ Lokhttp3/internal/framed/ErrorCode; -> <init>
+    + android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lcom/crashlytics/android/beta/Beta; -> getDeviceIdentifiers
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 26 component(s) exported without meaningful protection (of 221 total). 17 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] mobi.mifon.VerifyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110172" android:label="@7F100071" android:name="mobi.mifon.VerifyActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] mobi.mifon.DistressActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1101B1" android:label="@7F1006B2" android:name="mobi.mifon.DistressActivity">
+          <intent-filter>
+            <action android:name="mobi.mifon.intent.action.TEST" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] mobi.mifon.Passphrase
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110172" android:label="@7F100071" android:name="mobi.mifon.Passphrase" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] mobi.mifon.VerifyMobileActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110172" android:label="@7F100071" android:name="mobi.mifon.VerifyMobileActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.google.android.gms.appinvite.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110188" android:name="com.google.android.gms.appinvite.PreviewActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.appinvite.ACTION_PREVIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] mobi.mifon.gcm.MyGcmListenerService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.gcm.MyGcmListenerService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] mobi.mifon.gcm.MyInstanceIDListenerService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.gcm.MyInstanceIDListenerService">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] mobi.mifon.PlayAppService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.PlayAppService" android:process=":remote">
+          <intent-filter>
+            <action android:name="service.mifon.playapp" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] mobi.mifon.LDRService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.LDRService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.CameraDummyServiceSOS
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.CameraDummyServiceSOS" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.AvClrService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.AvClrService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.MorningService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.MorningService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.BackUpService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.BackUpService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.InfoMsgService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.InfoMsgService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.LogFileService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.LogFileService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] mobi.mifon.RingerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.RingerService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="MY_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] mobi.mifon.CameraDummyService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="mobi.mifon.CameraDummyService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.firebase.messaging.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] mobi.mifon.LDRAlarmReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="mobi.mifon.LDRAlarmReceiver">
+          <intent-filter>
+            <action android:name="mobi.mifon.intent.action.ALARM" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] mobi.mifon.AlarmLogFileReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="mobi.mifon.AlarmLogFileReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] mobi.mifon.PlugInConnector
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="mobi.mifon.PlugInConnector">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] mobi.mifon.BootReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="mobi.mifon.BootReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] mobi.mifon.BatteryLevelReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="mobi.mifon.BatteryLevelReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.BATTERY_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] mobi.mifon.RestartService
+      export : explicit (android:exported=true)  [permission: android.permission.RECEIVE_BOOT_COMPLETED]
+      reason : Exported (declared permission 'android.permission.RECEIVE_BOOT_COMPLETED' is normal-level, offers no real guard) without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="RestartServiceWhenStopped" android:name="mobi.mifon.RestartService" android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="RestartService" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_BOOT_COMPLETED" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (17):
+      [ACTIVITY] mobi.mifon.SplashScreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] mobi.mifon.login.PaymentChoiceSDK
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] mobi.mifon.login.PaymentChoiceWebUpdated
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] mobi.mifon.login.ActivityStartV2
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] mobi.mifon.DirectCustomDashboardActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.android.gms.tagmanager.TagManagerPreviewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] mobi.mifon.MyAdminReceiver
+        Bound only by system via signature permission: android.permission.BIND_DEVICE_ADMIN
+      [RECEIVER] mobi.mifon.PhoneUnlockedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.USER_PRESENT
+      [RECEIVER] com.appsflyer.MultipleInstallBroadcastReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] mobi.mifon.SimChangeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.SIM_STATE_CHANGED
+      [RECEIVER] mobi.mifon.MyReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] mobi.mifon.antivirus.receiver.NewInstallAppReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_ADDED
+      [RECEIVER] mobi.mifon.NetworkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE, android.net.wifi.WIFI_STATE_CHANGED
+      [RECEIVER] com.frozendevs.cache.cleaner.model.BroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.google.android.gms.analytics.CampaignTrackingReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] com.zendesk.sdk.power.BatteryStateBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BATTERY_LOW, android.intent.action.BATTERY_OKAY
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

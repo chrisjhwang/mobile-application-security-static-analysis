@@ -1,0 +1,202 @@
+================================================================================
+APP    : Copy of com.AppRocks.now.prayer_907
+FILE   : Copy of com.AppRocks.now.prayer_907.apk
+DATE   : 2026-04-27 22:09:43
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_NOTIFICATION_POLICY
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+    android.permission.FOREGROUND_SERVICE_SPECIAL_USE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_PHONE_STATE
+        @ Lcom/apm/insight/ICommonParams; -> getDeviceId
+        @ Lcom/apm/insight/h$1; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 of 14 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_NOTIFICATION_POLICY
+    - android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+    - android.permission.FOREGROUND_SERVICE_SPECIAL_USE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+    + android.permission.INTERNET
+        @ Lokhttp3/Callback; -> onFailure
+        @ Lokhttp3/Callback; -> onResponse
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroidx/appcompat/view/menu/e$a; -> notifyDataSetChanged
+        @ Landroidx/appcompat/view/menu/f; -> notifyDataSetChanged
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/apm/insight/ICommonParams; -> getDeviceId
+        @ Lcom/apm/insight/h$1; -> getDeviceId
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 13 component(s) exported without meaningful protection (of 177 total). 14 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockCircleConfig_
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockCircleConfig_" android:exported="true" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockRectConfig_
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockRectConfig_" android:exported="true" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockPictureConfig_
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetClockPictureConfig_" android:exported="true" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetRemainingPictureConfig_
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AppRocks.now.prayer.activities.WidgetConfiguration.WidgetRemainingPictureConfig_" android:exported="true" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.google.android.gms.appinvite.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14025C" android:name="com.google.android.gms.appinvite.PreviewActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.appinvite.ACTION_PREVIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivity" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.notifications.activities.NotificationOpenedActivityAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED SERVICE] com.huawei.hms.support.api.push.service.HmsMsgService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.huawei.hms.support.api.push.service.HmsMsgService" android:enabled="true" android:exported="true" android:process=":pushservice" android:directBootAware="true">
+          <intent-filter>
+            <action android:name="com.huawei.push.msg.NOTIFY_MSG" />
+            <action android:name="com.huawei.push.msg.PASSBY_MSG" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.AppRocks.now.prayer.recievers.PrayerReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.AppRocks.now.prayer.recievers.PrayerReceiver" android:enabled="true" android:exported="true">
+          <intent-filter android:priority="999">
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            <action android:name="android.intent.action.TIME_SET" />
+            <action android:name="android.media.VOLUME_CHANGED_ACTION" />
+            <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.notifications.receivers.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.notifications.receivers.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.facebook.FacebookContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.facebook.FacebookContentProvider" android:exported="true" android:authorities="com.facebook.app.FacebookContentProvider1498356017091252" />
+    [UNPROTECTED PROVIDER] com.huawei.hms.support.api.push.PushProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.huawei.hms.support.api.push.PushProvider" android:readPermission="com.AppRocks.now.prayer.permission.PUSH_PROVIDER" android:writePermission="com.AppRocks.now.prayer.permission.PUSH_WRITE_PROVIDER" android:exported="true" android:authorities="com.AppRocks.now.prayer.huawei.push.provider" />
+    Safe-by-design exports (14):
+      [ACTIVITY] com.AppRocks.now.prayer.activities.IslamicWallPapers.WallPaperMainScreen_
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.AppRocks.now.prayer.activities.MainScreen
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.AppRocks.now.prayer.activities.PrayerSettings_
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.AppRocks.now.prayer.activities.Login
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.onesignal.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.google.android.gms.analytics.CampaignTrackingReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetNextPrayerHorizontal
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetNextPrayerVertical
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetClockCircle
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetClockRect
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetClockPicture
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.AppRocks.now.prayer.Widgets.WidgetRemainingPicture
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.onesignal.notifications.receivers.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

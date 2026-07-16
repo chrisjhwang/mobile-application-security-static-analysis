@@ -1,0 +1,152 @@
+================================================================================
+APP    : Copy of com.autocab.driverapp_9930
+FILE   : Copy of com.autocab.driverapp_9930.apk
+DATE   : 2026-04-27 22:44:44
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 10 normal permission(s) and 11 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (10):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_LOCATION
+    android.permission.POST_NOTIFICATIONS
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (11):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/sumup/merchant/reader/bluetooth/BtSmartScanner; -> startScan
+        @ Lcom/sumup/merchant/reader/ui/animations/BtScanAnimationController; -> startScanAnimation
+    android.permission.CALL_PHONE
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/autocab/driverapp/fragment/profile/driverdocuments/DriverDocumentsDetailFragment; -> saveFileMediaStore
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    android.permission.READ_MEDIA_VIDEO
+        @ Lcom/autocab/driverapp/fragment/profile/driverdocuments/DriverDocumentsDetailFragment; -> saveFileMediaStore
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.RECORD_AUDIO
+        @ Lcom/sumup/reader/core/pinplus/ReaderQualityIndicatorCollector; -> startRecordingEvent
+        @ Lmono/android/media/AudioRecord_OnRecordPositionUpdateListenerImplementor; -> <clinit>
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 22 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.BLUETOOTH
+    - android.permission.CALL_PHONE
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (19) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lmono/android/net/ConnectivityManager_OnNetworkActiveListenerImplementor; -> <clinit>
+        @ Lmono/android/net/ConnectivityManager_OnNetworkActiveListenerImplementor; -> <init>
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lmono/android/net/wifi/WifiManager_SuggestionConnectionStatusListenerImplementor; -> <clinit>
+        @ Lmono/android/net/wifi/WifiManager_SuggestionConnectionStatusListenerImplementor; -> <init>
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/sumup/merchant/reader/bluetooth/BtSmartScanner; -> startScan
+        @ Lcom/sumup/merchant/reader/ui/animations/BtScanAnimationController; -> startScanAnimation
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_LOCATION
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3copy/Address; -> <init>
+        @ Lokhttp3copy/Address; -> certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/autocab/driverapp/fragment/profile/driverdocuments/DriverDocumentsDetailFragment; -> saveFileMediaStore
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    + android.permission.READ_MEDIA_VIDEO
+        @ Lcom/autocab/driverapp/fragment/profile/driverdocuments/DriverDocumentsDetailFragment; -> saveFileMediaStore
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.RECORD_AUDIO
+        @ Lcom/sumup/reader/core/pinplus/ReaderQualityIndicatorCollector; -> startRecordingEvent
+        @ Lmono/android/media/AudioRecord_OnRecordPositionUpdateListenerImplementor; -> <clinit>
+    + android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+        @ Lmono/android/os/PowerManager_OnThermalStatusChangedListenerImplementor; -> <clinit>
+        @ Lmono/android/os/PowerManager_OnThermalStatusChangedListenerImplementor; -> <init>
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 41 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] net.openid.appauth.RedirectUriReceiverActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="net.openid.appauth.RedirectUriReceiverActivity" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.autocab.driverapp.util.MeterCompanionBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.autocab.driverapp.util.MeterCompanionBroadcastReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.autocab.meterapp.METER_STATE_ACTION" />
+            <action android:name="com.autocab.meterapp.FINISH_JOB_ACTION" />
+            <action android:name="com.autocab.meterapp.CHECK_APP_RUNNING" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.autocab.driverapp.splashscreen.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN

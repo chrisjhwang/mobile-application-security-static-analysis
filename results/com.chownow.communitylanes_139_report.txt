@@ -1,0 +1,68 @@
+================================================================================
+APP    : com.chownow.communitylanes_139
+FILE   : com.chownow.communitylanes_139.apk
+DATE   : 2026-04-27 20:03:37
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 2 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (2):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_PHONE_STATE
+        @ Lcom/newrelic/agent/android/util/PersistentUUID; -> getDeviceId
+        @ Lcom/newrelic/agent/android/SavedState; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.GET_ACCOUNTS
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.INTERNET
+        @ Lcom/newrelic/agent/android/instrumentation/okhttp3/OkHttp3Instrumentation$OkHttp32; -> <init>
+        @ Lcom/newrelic/agent/android/instrumentation/okhttp3/OkHttp3Instrumentation$OkHttp32; -> callEngineGetStreamAllocation
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/newrelic/agent/android/util/PersistentUUID; -> getDeviceId
+        @ Lcom/newrelic/agent/android/SavedState; -> getDeviceId
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 40 component(s). 2 component(s) are safely exported by design.
+    Safe-by-design exports (2):
+      [ACTIVITY] com.chownow.communitylanes.view.mainscreens.SplashScreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.google.android.gms.analytics.CampaignTrackingReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

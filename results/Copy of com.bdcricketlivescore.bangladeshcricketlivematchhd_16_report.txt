@@ -1,0 +1,205 @@
+================================================================================
+APP    : Copy of com.bdcricketlivescore.bangladeshcricketlivematchhd_16
+FILE   : Copy of com.bdcricketlivescore.bangladeshcricketlivematchhd_16.apk
+DATE   : 2026-04-27 22:51:38
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 4 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 30 component(s) exported without meaningful protection (of 67 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.MatchScheduleRemote
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.MatchScheduleRemote" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.GNine
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.GNine" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.BDvsTeam.Team02
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.BDvsTeam.Team02" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.BDvsTeam.Team01
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.BDvsTeam.Team01" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.T20CupTeamInfo
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.T20CupTeamInfo" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TNine
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TNine" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.PlayGame
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.PlayGame" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.PointTable
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.PointTable" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.CricketNews
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.CricketNews" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.PlayerInfo
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.PlayerInfo" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfoAll
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfoAll" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.DrawerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.DrawerActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.LiveScore
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.LiveScore" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.DisclaimerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.DisclaimerActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.TermsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.TermsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.PrivacyPolicy
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.PrivacyPolicy" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.AboutUs
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.Policy.AboutUs" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.LiveMatch
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.LiveMatch" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.MatchSchedule
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.MatchSchedule" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.MinisterGroupRaj
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.MinisterGroupRaj" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.GemconKhulna
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.GemconKhulna" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.GaziGroupCtg
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.GaziGroupCtg" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.FortuneBarishalActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.FortuneBarishalActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.BeximcoDhakaActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.TeamInfo.BeximcoDhakaActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.MainActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiver" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiverAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiverAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED SERVICE] com.bdcricketlivescore.bangladeshcricketlivematchhd.FirebasePushNotification
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bdcricketlivescore.bangladeshcricketlivematchhd.FirebasePushNotification" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.onesignal.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.bdcricketlivescore.bangladeshcricketlivematchhd.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.onesignal.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

@@ -1,0 +1,33 @@
+================================================================================
+APP    : Cast Web Videos to Smart TVs_8.905_Apkpure
+FILE   : Cast Web Videos to Smart TVs_8.905_Apkpure.apk
+DATE   : 2026-04-27 19:26:55
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET permission not declared.
+  Internet  : NO
+  Normal permissions found with INTERNET (0):
+    (none)
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: NONE
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No checkable permissions found in mapping database.
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : Manifest parse error: 'NoneType' object has no attribute 'iter'

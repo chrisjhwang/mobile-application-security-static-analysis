@@ -1,0 +1,84 @@
+================================================================================
+APP    : Universal TV Remote Control_1.1.26_Apkpure
+FILE   : Universal TV Remote Control_1.1.26_Apkpure.apk
+DATE   : 2026-04-28 10:25:03
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 11 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+        @ Landroidx/work/ListenableWorker$a; -> a
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/e$a; -> notifyDataSetChanged
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 215 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] codematics.official.myratingview.FirebaseFolder.FirebaseMssageService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="codematics.official.myratingview.FirebaseFolder.FirebaseMssageService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    Safe-by-design exports (3):
+      [ACTIVITY] codematics.universal.tv.remote.control._LogoScreen
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] codematics.universal.tv.remote.control._FirstScreen
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] codematics.roku.smart.rokutvremote.tvremote.MainActivity_Roku
+        Has expected public intent action(s): android.intent.action.VIEW

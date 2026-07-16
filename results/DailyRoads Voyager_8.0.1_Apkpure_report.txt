@@ -1,0 +1,166 @@
+================================================================================
+APP    : DailyRoads Voyager_8.0.1_Apkpure
+FILE   : DailyRoads Voyager_8.0.1_Apkpure.apk
+DATE   : 2026-04-28 04:37:13
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (6):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 11 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (1) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <clinit>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 component(s) exported without meaningful protection (of 50 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.dailyroads.activities.Voyager
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1200BA" android:label="@7F11019B" android:name="com.dailyroads.activities.Voyager" android:exported="true" android:launchMode="2" android:screenOrientation="10" />
+    [UNPROTECTED ACTIVITY] com.dailyroads.media.Gallery
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030006" android:label="@7F11019B" android:name="com.dailyroads.media.Gallery" android:exported="true" android:clearTaskOnLaunch="true" android:stateNotNeeded="true" android:configChanges="0x000004B0" android:noHistory="false" />
+    [UNPROTECTED RECEIVER] com.dailyroads.v.BckgrReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.v.BckgrReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.dailyroads.background.START_VIDEO" />
+            <action android:name="com.dailyroads.background.STOP_VIDEO" />
+            <action android:name="com.dailyroads.background.RETAIN_VIDEO" />
+            <action android:name="com.dailyroads.background.PROTECT_VIDEO" />
+            <action android:name="com.dailyroads.background.START_PHOTO" />
+            <action android:name="com.dailyroads.background.STOP_PHOTO" />
+            <action android:name="com.dailyroads.background.MIC_ON" />
+            <action android:name="com.dailyroads.background.MIC_OFF" />
+            <action android:name="com.dailyroads.background.BUTTONS_ON" />
+            <action android:name="com.dailyroads.background.BUTTONS_OFF" />
+            <action android:name="com.dailyroads.background.STOP_APP" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dailyroads.receivers.StatusReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.receivers.StatusReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.dailyroads.status.VIDEO" />
+            <action android:name="com.dailyroads.status.PHOTO" />
+            <action android:name="com.dailyroads.status.MIC" />
+            <action android:name="com.dailyroads.status.BUTTONS" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dailyroads.receivers.SettingsReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.receivers.SettingsReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.dailyroads.video.focus.CONT" />
+            <action android:name="com.dailyroads.video.focus.CONT_AUTO" />
+            <action android:name="com.dailyroads.video.focus.INFINITY" />
+            <action android:name="com.dailyroads.video.focus.AUTO" />
+            <action android:name="com.dailyroads.video.focus.EDOF" />
+            <action android:name="com.dailyroads.video.focus.FIXED" />
+            <action android:name="com.dailyroads.photo.focus.INFINITY" />
+            <action android:name="com.dailyroads.photo.focus.AUTO" />
+            <action android:name="com.dailyroads.photo.focus.EDOF" />
+            <action android:name="com.dailyroads.photo.focus.FIXED" />
+            <action android:name="com.dailyroads.camera.AUTO" />
+            <action android:name="com.dailyroads.camera.DAYLIGHT" />
+            <action android:name="com.dailyroads.camera.SUNNY" />
+            <action android:name="com.dailyroads.camera.CLOUDY" />
+            <action android:name="com.dailyroads.camera.MOONLIGHT" />
+            <action android:name="com.dailyroads.camera.DARKNIGHT" />
+            <action android:name="com.dailyroads.camera.CITYNIGHT" />
+            <action android:name="com.dailyroads.camera.CUSTOM" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dailyroads.receivers.DockReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.receivers.DockReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.DOCK_EVENT" />
+            <action android:name="android.app.action.ENTER_CAR_MODE" />
+            <action android:name="android.app.action.EXIT_CAR_MODE" />
+            <action android:name="android.app.action.ENTER_DESK_MODE" />
+            <action android:name="android.app.action.EXIT_DESK_MODE" />
+            <category android:name="android.intent.category.DESK_DOCK" />
+            <category android:name="android.intent.category.CAR_DOCK" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dailyroads.receivers.PowerConnectionReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.receivers.PowerConnectionReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dailyroads.receivers.ShutdownReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dailyroads.receivers.ShutdownReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            <action android:name="android.intent.action.QUICKBOOT_POWEROFF" />
+            <action android:name="com.htc.intent.action.QUICKBOOT_POWEROFF" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.dailyroads.v.Launch
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.dailyroads.v.Files
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.dailyroads.activities.Preferences
+        Has expected public intent action(s): android.intent.action.VIEW

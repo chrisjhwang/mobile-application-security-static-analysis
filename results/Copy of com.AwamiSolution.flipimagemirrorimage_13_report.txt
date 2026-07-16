@@ -1,0 +1,147 @@
+================================================================================
+APP    : Copy of com.AwamiSolution.flipimagemirrorimage_13
+FILE   : Copy of com.AwamiSolution.flipimagemirrorimage_13.apk
+DATE   : 2026-04-27 22:48:51
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Landroidx/work/impl/utils/NetworkApi21; -> getNetworkCapabilitiesCompat
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 33 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.ScreenPermission
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.ScreenPermission" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.ScreenPermission" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.MainActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.MainActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.Subscribe
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.Subscribe" android:exported="true">
+          <intent-filter>
+            <action android:name=".ui.Subscribe" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.SingleFlipActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.SingleFlipActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.SingleFlipActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.ScreenFlipGalley
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.ScreenFlipGalley" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.ScreenFlipGalley" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.MultipleFlipActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.MultipleFlipActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.MultipleFlipActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.HowtoUseActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.ui.HowtoUseActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".ui.HowtoUseActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.gallery.ImagesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.gallery.ImagesActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".gallery.ImagesActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.AwamiSolution.flipimagemirrorimage.gallery.MultiImagesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.AwamiSolution.flipimagemirrorimage.gallery.MultiImagesActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name=".gallery.MultiImagesActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.AwamiSolution.flipimagemirrorimage.ui.SplashScreen
+        Has expected public intent action(s): android.intent.action.MAIN

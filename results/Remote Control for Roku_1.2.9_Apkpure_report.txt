@@ -1,0 +1,89 @@
+================================================================================
+APP    : Remote Control for Roku_1.2.9_Apkpure
+FILE   : Remote Control for Roku_1.2.9_Apkpure.apk
+DATE   : 2026-04-28 07:04:26
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lio/bidmachine/core/Utils; -> getActiveNetworkInfo
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/pgl/sys/ces/out/ISdkInfo; -> getConnectionInfo
+        @ Lcom/bytedance/sdk/openadsdk/core/u$1; -> getConnectionInfo
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/platform/a$a; -> <init>
+        @ Lokhttp3/internal/platform/a$a; -> a
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 94 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.kraftwerk9.rokie.BaseActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.kraftwerk9.rokie.BaseActivity" android:exported="true" android:screenOrientation="1" android:resizeableActivity="false" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11002" />
+        </service>
+    [UNPROTECTED RECEIVER] com.ogury.core.internal.OguryLogEnablerReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.core.internal.OguryLogEnablerReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.ogury.sdk.intent.ENABLE_LOGS" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.kraftwerk9.rokie.ui.NavigationActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.kraftwerk9.rokie.tools.CustomTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [RECEIVER] com.kraftwerk9.rokie.widgets.ChannelsWidgetProvider3x1
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.kraftwerk9.rokie.widgets.ChannelsWidgetProvider3x2
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.appodeal.ads.AppodealPackageAddedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_ADDED

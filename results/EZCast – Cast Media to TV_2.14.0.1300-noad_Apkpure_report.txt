@@ -1,0 +1,161 @@
+================================================================================
+APP    : EZCast – Cast Media to TV_2.14.0.1300-noad_Apkpure
+FILE   : EZCast – Cast Media to TV_2.14.0.1300-noad_Apkpure.apk
+DATE   : 2026-04-28 04:42:08
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 12 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (12):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (6):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> a
+    android.permission.GET_ACCOUNTS
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 14 of 19 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+        @ Landroidx/work/ListenableWorker$a; -> a
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> a
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lorg/fourthline/cling/android/AndroidRouter; -> setWiFiMulticastLock
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 93 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.actionsmicro.ezdisplay.service.LaunchScreenCastActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.actionsmicro.ezdisplay.service.LaunchScreenCastActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.actionsmicro.iezvu.activity.UsbAccessoryActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1201E2" android:name="com.actionsmicro.iezvu.activity.UsbAccessoryActivity">
+          <intent-filter>
+            <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
+          </intent-filter>
+          <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" android:resource="@7F140000" />
+        </activity>
+    [UNPROTECTED ACTIVITY] com.actionsmicro.iezvu.activity.HelpActivity2
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F120016" android:name="com.actionsmicro.iezvu.activity.HelpActivity2" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.actionsmicro.ezcast.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1201E2" android:name="com.actionsmicro.ezcast.wxapi.WXEntryActivity" android:exported="true" android:launchMode="1" />
+    [UNPROTECTED ACTIVITY] com.actions.gallery3d.app.UsbDeviceActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F110031" android:name="com.actions.gallery3d.app.UsbDeviceActivity" android:taskAffinity="" android:launchMode="3">
+          <intent-filter>
+            <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+          </intent-filter>
+          <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@7F140001" />
+        </activity>
+    [UNPROTECTED SERVICE] com.actionsmicro.ezdisplay.service.UsbMirrorService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.actionsmicro.ezdisplay.service.UsbMirrorService" android:enabled="true" android:exported="true" android:foregroundServiceType="0x00000020" />
+    [UNPROTECTED SERVICE] com.actionsmicro.ezdisplay.service.UploadCloudService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.actionsmicro.ezdisplay.service.UploadCloudService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.actionsmicro.iezvu.cloudmessage.FCMService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.actionsmicro.iezvu.cloudmessage.FCMService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.actionsmicro.iezvu.receiver.PowerConnectReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.actionsmicro.iezvu.receiver.PowerConnectReceiver" android:enabled="true" android:exported="true" android:usesCleartextTraffic="true">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (8):
+      [ACTIVITY] com.actionsmicro.iezvu.StartUpActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.actionsmicro.iezvu.activity.EzChannelShareActivity
+        Has expected public intent action(s): android.intent.action.SEND
+      [ACTIVITY] com.dropbox.core.android.AuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.actionsmicro.iezvu.activity.EZChannelActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.actionsmicro.iezvu.activity.RedirectUriReceiverActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.actions.gallery3d.app.Gallery
+        Has expected public intent action(s): android.intent.action.GET_CONTENT, android.intent.action.MAIN, android.intent.action.PICK
+      [ACTIVITY] net.openid.appauth.RedirectUriReceiverActivity
+        Has expected public intent action(s): android.intent.action.VIEW

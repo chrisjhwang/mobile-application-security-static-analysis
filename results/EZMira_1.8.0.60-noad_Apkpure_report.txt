@@ -1,0 +1,91 @@
+================================================================================
+APP    : EZMira_1.8.0.60-noad_Apkpure
+FILE   : EZMira_1.8.0.60-noad_Apkpure.apk
+DATE   : 2026-04-28 04:43:51
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (3):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> a
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+        @ Landroidx/work/ListenableWorker$a; -> a
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$a; -> a
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lorg/fourthline/cling/android/AndroidRouter; -> setWiFiMulticastLock
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 48 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.winnerwave.miraapp.service.FirebaseInstanceService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.winnerwave.miraapp.service.FirebaseInstanceService">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.winnerwave.miraapp.service.FCMService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.winnerwave.miraapp.service.FCMService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.winnerwave.miraapp.activity.StartUpActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

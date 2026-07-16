@@ -1,0 +1,182 @@
+================================================================================
+APP    : Ultimate Alexa Voice Assistant_3.4.0_Apkpure
+FILE   : Ultimate Alexa Voice Assistant_3.4.0_Apkpure.apk
+DATE   : 2026-04-28 10:17:53
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.HIGH_SAMPLING_RATE_SENSORS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat; -> getImei
+        @ Lcom/amazon/identity/auth/device/utils/MAPUtils; -> getDeviceId
+    android.permission.RECORD_AUDIO
+        @ Lai/kitt/snowboy/audio/RecordingThread; -> startRecording
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.HIGH_SAMPLING_RATE_SENSORS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (7) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$b; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/work/impl/foreground/ForegroundProcessor; -> startForeground
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat; -> getImei
+        @ Lcom/amazon/identity/auth/device/utils/MAPUtils; -> getDeviceId
+    + android.permission.RECORD_AUDIO
+        @ Lai/kitt/snowboy/audio/RecordingThread; -> startRecording
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 85 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.customsolutions.android.alexa.AlertService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.customsolutions.android.alexa.AlertService" android:exported="true">
+          <intent-filter>
+            <data android:scheme="ultimatealexa" android:host="alerts" />
+            <action android:name="android.intent.action.VIEW" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.customsolutions.android.alexa.WearListenerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.customsolutions.android.alexa.WearListenerService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+            <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED" />
+            <data android:scheme="wear" android:host="*" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.customsolutions.android.alexa.RecognitionServiceTrampoline
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:label="RecognitionServiceTrampoline" android:name="com.customsolutions.android.alexa.RecognitionServiceTrampoline" android:exported="true">
+          <intent-filter>
+            <action android:name="android.speech.RecognitionService" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.teragence.client.service.MetricsService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.teragence.client.service.MetricsService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.teragence.client.service.MetricsService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.customsolutions.android.alexa.Notifier
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.customsolutions.android.alexa.Notifier" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.customsolutions.android.alexa.BootupHandler
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.customsolutions.android.alexa.BootupHandler" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.cellrebel.sdk.utils.PhoneStateReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.cellrebel.sdk.utils.PhoneStateReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.teragence.client.service.PresenceReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.teragence.client.service.PresenceReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.umlaut.crowd.InsightReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.umlaut.crowd.InsightReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            <action android:name="android.intent.action.PHONE_STATE" />
+            <action android:name="android.hardware.usb.action.USB_STATE" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (6):
+      [ACTIVITY] com.customsolutions.android.alexa.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.amazon.identity.auth.device.authorization.AuthorizationActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.customsolutions.android.alexa.AlexaVoiceInteractionService
+        Bound only by system via signature permission: android.permission.BIND_VOICE_INTERACTION
+      [SERVICE] com.customsolutions.android.alexa.BixbyInterceptor
+        Bound only by system via signature permission: android.permission.BIND_ACCESSIBILITY_SERVICE
+      [RECEIVER] com.customsolutions.android.alexa.Widget
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.networkinsights.runtime.NIRebootIntentReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

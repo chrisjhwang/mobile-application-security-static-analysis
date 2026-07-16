@@ -1,0 +1,273 @@
+================================================================================
+APP    : Copy of com.danale.video_10199
+FILE   : Copy of com.danale.video_10199.apk
+DATE   : 2026-04-28 04:02:11
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 9 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (9):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CAMERA
+        @ Lcom/danale/video/qrcodescan/zbar/CameraManager; -> <clinit>
+        @ Lcom/danale/video/qrcodescan/zbar/CameraManager; -> <init>
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/bd/update/utils/FileUtils; -> getExternalStorageDirectory
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    android.permission.READ_MEDIA_VIDEO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    android.permission.READ_PHONE_STATE
+        @ Lcom/blankj/utilcode/util/PhoneUtils; -> getDeviceId
+        @ Lcom/blankj/utilcode/util/PhoneUtils; -> getImeiOrMeid
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/bd/update/utils/FileUtils; -> getExternalStorageDirectory
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 of 19 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (11) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lcom/blankj/utilcode/util/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/danale/sdk/device/Command; -> getConnectionInfo
+        @ Lcom/danale/sdk/device/CommandImpl; -> getConnectionInfo
+    + android.permission.CAMERA
+        @ Lcom/danale/video/qrcodescan/zbar/CameraManager; -> <clinit>
+        @ Lcom/danale/video/qrcodescan/zbar/CameraManager; -> <init>
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/bd/update/utils/FileUtils; -> getExternalStorageDirectory
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    + android.permission.READ_MEDIA_VIDEO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/blankj/utilcode/util/PhoneUtils; -> getDeviceId
+        @ Lcom/blankj/utilcode/util/PhoneUtils; -> getImeiOrMeid
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/bd/update/utils/FileUtils; -> getExternalStorageDirectory
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 19 component(s) exported without meaningful protection (of 208 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.danale.video.wxapi.WXPayEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.danale.video.wxapi.WXPayEntryActivity" android:exported="true" android:launchMode="1" />
+    [UNPROTECTED ACTIVITY] com.danale.video.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.danale.video.wxapi.WXEntryActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.xiaomi.mipush.sdk.NotificationClickedActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.xiaomi.mipush.sdk.NotificationClickedActivity" android:enabled="true" android:exported="true" android:excludeFromRecents="true" android:launchMode="3">
+          <meta-data android:name="supportStyle" android:value="scene|voip" />
+        </activity>
+    [UNPROTECTED ACTIVITY] com.sina.weibo.sdk.share.ShareTransActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.sina.weibo.sdk.share.ShareTransActivity" android:exported="true" android:launchMode="2" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.id.MobIDSYActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.id.MobIDSYActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.id.app_lk" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.guard.MobTranPullLockActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.guard.MobTranPullLockActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.open.app_lk" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.id.MobIDActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.id.MobIDActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.id.app_30000" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.guard.MobTranPullUpActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.guard.MobTranPullUpActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.open.app_20000" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.xiaomi.push.service.XMPushService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.xiaomi.push.service.XMPushService" android:enabled="true" android:exported="true" android:process=":pushservice" />
+    [UNPROTECTED SERVICE] com.xiaomi.mipush.sdk.MessageHandleService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.xiaomi.mipush.sdk.MessageHandleService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.firebase.service.FirebaseMessageService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.firebase.service.FirebaseMessageService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.firebase.service.FirebaseInstanceService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.firebase.service.FirebaseInstanceService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.messaging.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mob.MobACService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.MobACService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.service.action.MOB_AC_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mob.id.MobIDService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.id.MobIDService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.intent.MOB_ID_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mob.guard.MobGuardPullUpService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.guard.MobGuardPullUpService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.intent.MOB_GUARD_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.danale.push.receiver.XmPushReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.danale.push.receiver.XmPushReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.xiaomi.mipush.ERROR" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.cardinalcommerce.a.setShadowLayer
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.cardinalcommerce.a.setShadowLayer" android:enabled="true" android:exported="true" android:authorities="com.danale.video.CCInitProvider" />
+    Safe-by-design exports (5):
+      [ACTIVITY] com.danale.video.account.view.FirstSplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.braintreepayments.api.BraintreeBrowserSwitchActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.mob.tools.MobUIShell
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cn.sharesdk.tencent.qq.ReceiveActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.xiaomi.push.service.receivers.NetworkStatusReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

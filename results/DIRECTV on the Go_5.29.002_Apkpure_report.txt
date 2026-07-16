@@ -1,0 +1,142 @@
+================================================================================
+APP    : DIRECTV on the Go_5.29.002_Apkpure
+FILE   : DIRECTV on the Go_5.29.002_Apkpure.apk
+DATE   : 2026-04-28 04:39:41
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.KILL_BACKGROUND_PROCESSES
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/zzbym; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lcom/morega/qew/engine/download/StorageManager; -> getExternalFilesDir
+        @ Lcom/morega/qew/engine/download/StorageManager; -> getExternalStorageDirectory
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.KILL_BACKGROUND_PROCESSES
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/zzbym; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lcom/att/halox/plugin/core/RemoteBase; -> disconnect
+        @ Lcom/directv/dvrscheduler/domain/data/ConfigurationData; -> setWifiEnabled
+    + android.permission.INTERNET
+        @ Lcom/newrelic/agent/android/instrumentation/okhttp3/CallExtension; -> <clinit>
+        @ Lcom/newrelic/agent/android/instrumentation/okhttp3/CallExtension; -> <init>
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lcom/morega/qew/engine/download/StorageManager; -> getExternalFilesDir
+        @ Lcom/morega/qew/engine/download/StorageManager; -> getExternalStorageDirectory
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 199 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.google.android.gms.appinvite.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F12020C" android:name="com.google.android.gms.appinvite.PreviewActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.appinvite.ACTION_PREVIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.google.firebase.messaging.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.directv.dvrscheduler.appwidget.WhatsHotAppWidgetProvider
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:icon="@7F08037E" android:name="com.directv.dvrscheduler.appwidget.WhatsHotAppWidgetProvider">
+          <intent-filter>
+            <action android:name="com.directv.dvrscheduler.appwidget.action.CLICK_REFRESH" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_UI_ERROR" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_UI_LOADING" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_UI_HERO_READY" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_UI_CHANNEL_READY" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_DATA" />
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_UI_DEFAULT" />
+            <action android:name="com.directv.dvrscheduler.appwidget.action.UPDATE_DATA_WITH_CACHE_ONLY" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F140008" />
+        </receiver>
+    Safe-by-design exports (8):
+      [ACTIVITY] com.directv.dvrscheduler.activity.core.Setup
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.directv.dvrscheduler.activity.search.Search
+        Has expected public intent action(s): android.intent.action.SEARCH
+      [ACTIVITY] com.directv.dvrscheduler.activity.share.TwitterOauth
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.directv.dvrscheduler.activity.browse.TermsAndConditionsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.android.gms.tagmanager.TagManagerPreviewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN

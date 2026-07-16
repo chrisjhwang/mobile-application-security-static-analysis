@@ -1,0 +1,44 @@
+================================================================================
+APP    : Copy of com.fc2.blog9.zze128.poffxtwinkle_5
+FILE   : Copy of com.fc2.blog9.zze128.poffxtwinkle_5.apk
+DATE   : 2026-04-28 04:22:36
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET permission not declared.
+  Internet  : NO
+  Normal permissions found with INTERNET (0):
+    (none)
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: NONE
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No checkable permissions found in mapping database.
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 10 component(s). 5 component(s) are safely exported by design.
+    Safe-by-design exports (5):
+      [ACTIVITY] com.fc2.blog9.zze128.poffxtwinkle.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.fc2.blog9.zze128.poffxtwinkle.AutoExecActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.fc2.blog9.zze128.poffxtwinkle.PoffActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.fc2.blog9.zze128.poffxtwinkle.TwinkleService
+        Bound only by system via signature permission: android.permission.BIND_ACCESSIBILITY_SERVICE
+      [RECEIVER] com.fc2.blog9.zze128.poffxtwinkle.DeviceRcv
+        Bound only by system via signature permission: android.permission.BIND_DEVICE_ADMIN

@@ -1,0 +1,116 @@
+================================================================================
+APP    : TrackView_3.7.06_Apkpure
+FILE   : TrackView_3.7.06_Apkpure.apk
+DATE   : 2026-04-28 08:32:52
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 8 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_NOTIFICATION_POLICY
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (8):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.ACTIVITY_RECOGNITION
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_PHONE_STATE
+    android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/videoengine/TrackViewMediaRecorder; -> startRecording
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 13 of 15 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_BACKGROUND_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_NOTIFICATION_POLICY
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.ACTIVITY_RECOGNITION
+    - android.permission.CAMERA
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lcom/google/android/gms/ads/identifier/AdvertisingIdClient$zza; -> disconnect
+        @ Lcom/google/android/gms/common/internal/c; -> disconnect
+    + android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/videoengine/TrackViewMediaRecorder; -> startRecording
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 70 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.trackview.service.GcmService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.trackview.service.GcmService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.trackview.receiver.TrackViewReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)  [permission: android.permission.RECEIVE_BOOT_COMPLETED]
+      reason : Exported (declared permission 'android.permission.RECEIVE_BOOT_COMPLETED' is normal-level, offers no real guard) without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.trackview.receiver.TrackViewReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            <action android:name="android.intent.action.QUICKBOOT_POWEROFF" />
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="com.trackview.alarm" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.trackview.map.locationhistory.LocationHistoryGeofenceBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.trackview.map.locationhistory.LocationHistoryGeofenceBroadcastReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.trackview.map.locationhistory.ActivityTransitionReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.trackview.map.locationhistory.ActivityTransitionReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.trackview.geofencing.GeofenceBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.trackview.geofencing.GeofenceBroadcastReceiver" android:enabled="true" android:exported="true" />
+    Safe-by-design exports (6):
+      [ACTIVITY] com.trackview.activity.TrackView
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.trackview.billing.SubscriptionActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.trackview.sender.LoginCallbackActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.trackview.voice.AssistLoggerService
+        Bound only by system via signature permission: android.permission.BIND_VOICE_INTERACTION

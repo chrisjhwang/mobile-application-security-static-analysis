@@ -1,0 +1,111 @@
+================================================================================
+APP    : Speedometer HD_13.6_Apkpure
+FILE   : Speedometer HD_13.6_Apkpure.apk
+DATE   : 2026-04-28 08:11:57
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.CAMERA
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/connection/ConnectionSpecSelector; -> <init>
+        @ Lokhttp3/internal/connection/ConnectionSpecSelector; -> isFallbackPossible
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 87 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.speedgauge.tachometer.speedometer.Nearby.TaskCreatorActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F120009" android:label="@7F110215" android:name="com.speedgauge.tachometer.speedometer.Nearby.TaskCreatorActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.speedgauge.tachometer.speedometer.Nearby.SavedPlacesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F120009" android:label="@7F110222" android:name="com.speedgauge.tachometer.speedometer.Nearby.SavedPlacesActivity" android:exported="true" android:parentActivityName="com.speedgauge.tachometer.speedometer.Nearby.TaskCreatorActivity" />
+    [UNPROTECTED ACTIVITY] com.speedgauge.tachometer.speedometer.Nearby.AlarmActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1201CC" android:label="Alarm" android:name="com.speedgauge.tachometer.speedometer.Nearby.AlarmActivity" android:exported="true" android:excludeFromRecents="true" android:launchMode="3" android:showOnLockScreen="true" android:showWhenLocked="true" android:turnScreenOn="true" />
+    [UNPROTECTED SERVICE] com.speedgauge.tachometer.speedometer.Services.LocationService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.speedgauge.tachometer.speedometer.Services.LocationService" android:enabled="true" android:exported="true" android:foregroundServiceType="0x00000008" />
+    [UNPROTECTED SERVICE] com.speedgauge.tachometer.speedometer.Nearby.services.ActivityDetectionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.speedgauge.tachometer.speedometer.Nearby.services.ActivityDetectionService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.speedgauge.tachometer.speedometer.Nearby.services.FusedLocationService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.speedgauge.tachometer.speedometer.Nearby.services.FusedLocationService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.speedgauge.tachometer.speedometer.Services.UnsafeZone_NearBy_ReminderService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.speedgauge.tachometer.speedometer.Services.UnsafeZone_NearBy_ReminderService" android:enabled="true" android:exported="true" android:foregroundServiceType="0x00000008" />
+    Safe-by-design exports (4):
+      [ACTIVITY] com.speedgauge.tachometer.speedometer.Activities.Main.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.speedgauge.tachometer.speedometer.ServiceWakeUp
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

@@ -1,0 +1,385 @@
+================================================================================
+APP    : com.blossomsazz.app_1
+FILE   : com.blossomsazz.app_1.apk
+DATE   : 2026-04-27 19:59:00
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (6):
+    android.permission.CAMERA
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_MEDIA_AUDIO
+    android.permission.READ_MEDIA_IMAGES
+    android.permission.READ_MEDIA_VIDEO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.READ_MEDIA_AUDIO
+    - android.permission.READ_MEDIA_IMAGES
+    - android.permission.READ_MEDIA_VIDEO
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroidx/appcompat/view/menu/e$a; -> notifyDataSetChanged
+        @ Landroidx/appcompat/view/menu/f; -> notifyDataSetChanged
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 58 component(s) exported without meaningful protection (of 148 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.maintenence_section.MaintenenceActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.maintenence_section.MaintenenceActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.AllAliReviewsListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.AllAliReviewsListActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.ordersection.activities.OrderDetails
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.ordersection.activities.OrderDetails" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.cartsection.activities.NativeCheckoutAddressPage
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.cartsection.activities.NativeCheckoutAddressPage" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.AllJudgeMeReviews
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.AllJudgeMeReviews" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.JudgeMeCreateReview
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.JudgeMeCreateReview" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.VideoPlayerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.VideoPlayerActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.cartsection.fragment.CardDataActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.cartsection.fragment.CardDataActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.dashboard.activities.LoopSubscription
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.dashboard.activities.LoopSubscription" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.cartsection.fragment.ShippingMethod
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.cartsection.fragment.ShippingMethod" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.homesection.activities.Stories
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.homesection.activities.Stories" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.AllReviewListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.AllReviewListActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.ZoomActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.ZoomActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.AllReviewsIo
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.AllReviewsIo" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.checkoutsection.activities.OrderSuccessActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.checkoutsection.activities.OrderSuccessActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.dashboard.activities.AccountActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.dashboard.activities.AccountActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.earnrewards.FaqsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.earnrewards.FaqsActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.myrewards.MyRewardsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.myrewards.MyRewardsActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.referfriend.ReferFriendActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.referfriend.ReferFriendActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.earnrewards.EarnRewardsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.earnrewards.EarnRewardsActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.getrewards.GetRewardsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.getrewards.GetRewardsActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.dashboard.activities.YourSubscription
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.dashboard.activities.YourSubscription" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.rewarddashboard.RewardDashboard
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.rewarddashboard.RewardDashboard" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.yotporewards.withoutlogin.RewardsPointActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.yotporewards.withoutlogin.RewardsPointActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.addresssection.activities.AddressList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.addresssection.activities.AddressList" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000013" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.basesection.activities.Weblink
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.basesection.activities.Weblink" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.basesection.activities.NewBaseActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.basesection.activities.NewBaseActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.ProductList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.ProductList" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.ProductView
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.ProductView" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.collectionsection.activities.CollectionList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.collectionsection.activities.CollectionList" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.collectionsection.activities.CollectionListMenu
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.collectionsection.activities.CollectionListMenu" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.AllFeraReview
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.AllFeraReview" android:exported="true" android:launchMode="1" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.wishlistsection.activities.WishList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.wishlistsection.activities.WishList" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.cartsection.activities.CartList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.cartsection.activities.CartList" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000020" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.cartsection.activities.SubscribeCartList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.cartsection.activities.SubscribeCartList" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000020" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.ordersection.activities.OrderList
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.ordersection.activities.OrderList" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.searchsection.activities.AutoSearch
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.searchsection.activities.AutoSearch" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.checkoutsection.activities.CheckoutWeblink
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.checkoutsection.activities.CheckoutWeblink" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.trialsection.activities.TrialExpired
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.trialsection.activities.TrialExpired" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.homesection.activities.HomePage
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.homesection.activities.HomePage" android:exported="true" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.loginsection.activity.LoginActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.loginsection.activity.LoginActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000030" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.userprofilesection.activities.UserProfile
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.userprofilesection.activities.UserProfile" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000013" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.loginsection.activity.RegistrationActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.loginsection.activity.RegistrationActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000013" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.VariationsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.blossomsazz.app.productsection.activities.VariationsActivity" android:exported="true" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000013" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.searchsection.activities.SearchByScanner
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1304C6" android:label="@7F12003C" android:name="com.blossomsazz.app.searchsection.activities.SearchByScanner" android:exported="true" android:stateNotNeeded="true" android:screenOrientation="10" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000003" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.livepreviewsection.LivePreview
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1304C6" android:label="@7F12003C" android:name="com.blossomsazz.app.livepreviewsection.LivePreview" android:exported="true" android:stateNotNeeded="true" android:screenOrientation="10" android:configChanges="0x00000200" android:windowSoftInputMode="0x00000003" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.WriteAReview
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F12003C" android:name="com.blossomsazz.app.productsection.activities.WriteAReview" android:exported="true" android:screenOrientation="10" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.FilterPage
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F12003C" android:name="com.blossomsazz.app.productsection.activities.FilterPage" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] com.blossomsazz.app.productsection.activities.FilterActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F12003C" android:name="com.blossomsazz.app.productsection.activities.FilterActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000200" />
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity" android:exported="true" android:configChanges="0x00000200">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" android:exported="true" android:configChanges="0x00000200">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiver" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED ACTIVITY] com.onesignal.NotificationOpenedReceiverAndroid22AndOlder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.onesignal.NotificationOpenedReceiverAndroid22AndOlder" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+    [UNPROTECTED SERVICE] com.blossomsazz.app.notificationsection.FirebaseInstanceIDService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.blossomsazz.app.notificationsection.FirebaseInstanceIDService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.blossomsazz.app.notificationsection.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.blossomsazz.app.notificationsection.FirebaseMessagingService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.onesignal.NotificationDismissReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.NotificationDismissReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (6):
+      [ACTIVITY] com.blossomsazz.app.basesection.activities.Splash
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.onesignal.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

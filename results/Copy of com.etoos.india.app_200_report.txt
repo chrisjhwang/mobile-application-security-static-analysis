@@ -1,0 +1,105 @@
+================================================================================
+APP    : Copy of com.etoos.india.app_200
+FILE   : Copy of com.etoos.india.app_200.apk
+DATE   : 2026-04-28 04:22:30
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 7 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (7):
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/hbisoft/pickit/SDUtil; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat; -> getImei
+        @ Lcom/etoos/india/app/Util/TelephonyInfo; -> getDeviceIdBySlot
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/hbisoft/pickit/SDUtil; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (7) — call-site evidence for manual review:
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/work/impl/foreground/ForegroundProcessor; -> startForeground
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/hbisoft/pickit/SDUtil; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat; -> getImei
+        @ Lcom/etoos/india/app/Util/TelephonyInfo; -> getDeviceIdBySlot
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/hbisoft/pickit/SDUtil; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 111 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.etoos.india.app.services.TimerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.etoos.india.app.services.TimerService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.etoos.india.app.fcm.NotificationReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.etoos.india.app.fcm.NotificationReceiver" android:exported="true" />
+    Safe-by-design exports (5):
+      [ACTIVITY] com.etoos.india.app.activity.WelcomeActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] com.etoos.india.app.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

@@ -1,0 +1,160 @@
+================================================================================
+APP    : Copy of com.dylan.gamepad.pro_155
+FILE   : Copy of com.dylan.gamepad.pro_155.apk
+DATE   : 2026-04-28 04:08:29
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageBackend; -> onDisconnectChannel
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 14 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageBackend; -> onDisconnectChannel
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 component(s) exported without meaningful protection (of 82 total). 11 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.dylan.gamepad.pro.mappings.keymaps.CreateKeyMapShortcutActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1302FE" android:name="com.dylan.gamepad.pro.mappings.keymaps.CreateKeyMapShortcutActivity" android:exported="true" android:taskAffinity="">
+          <intent-filter>
+            <action android:name="android.intent.action.CREATE_SHORTCUT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.swordfish.radialgamepad.library.page.TesterActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F140152" android:name="com.swordfish.radialgamepad.library.page.TesterActivity" android:exported="true" android:screenOrientation="0" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11002" />
+        </service>
+    [UNPROTECTED RECEIVER] com.dylan.gamepad.pro.system.notifications.NotificationClickReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dylan.gamepad.pro.system.notifications.NotificationClickReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS" />
+          </intent-filter>
+          <meta-data android:name="android.hardware.input.metadata.KEYBOARD_LAYOUTS" android:resource="@7F160004" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dylan.gamepad.pro.api.PauseMappingsBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dylan.gamepad.pro.api.PauseMappingsBroadcastReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.dylan.gamepad.pro.ACTION_PAUSE_MAPPINGS" />
+            <action android:name="com.dylan.gamepad.pro.ACTION_RESUME_MAPPINGS" />
+            <action android:name="com.dylan.gamepad.pro.ACTION_TOGGLE_MAPPINGS" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.dylan.gamepad.pro.system.bluetooth.BluetoothBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.dylan.gamepad.pro.system.bluetooth.BluetoothBroadcastReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (11):
+      [ACTIVITY] com.dylan.gamepad.pro.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.dylan.gamepad.pro.api.LaunchKeyMapShortcutActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.dylan.gamepad.pro.system.accessibility.MyAccessibilityService
+        Bound only by system via signature permission: android.permission.BIND_ACCESSIBILITY_SERVICE
+      [SERVICE] com.dylan.gamepad.pro.system.inputmethod.KeyMapperImeService
+        Bound only by system via signature permission: android.permission.BIND_INPUT_METHOD
+      [SERVICE] com.dylan.gamepad.pro.system.tiles.ToggleMappingsTile
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [SERVICE] com.dylan.gamepad.pro.system.tiles.ToggleKeyMapperKeyboardTile
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [RECEIVER] com.dylan.gamepad.pro.system.BootBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.dylan.gamepad.pro.system.DeviceAdmin
+        Bound only by system via signature permission: android.permission.BIND_DEVICE_ADMIN

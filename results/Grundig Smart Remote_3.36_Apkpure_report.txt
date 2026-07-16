@@ -1,0 +1,53 @@
+================================================================================
+APP    : Grundig Smart Remote_3.36_Apkpure
+FILE   : Grundig Smart Remote_3.36_Apkpure.apk
+DATE   : 2026-04-28 05:10:05
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 5 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lcom/facebook/imagepipeline/backends/okhttp3/BuildConfig; -> <init>
+        @ Lcom/facebook/imagepipeline/backends/okhttp3/OkHttpImagePipelineConfigFactory; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 15 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    Safe-by-design exports (1):
+      [ACTIVITY] arcelik.android.grundig.remote.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN

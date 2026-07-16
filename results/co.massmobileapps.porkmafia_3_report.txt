@@ -1,0 +1,179 @@
+================================================================================
+APP    : co.massmobileapps.porkmafia_3
+FILE   : co.massmobileapps.porkmafia_3.apk
+DATE   : 2026-04-27 19:38:15
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 9 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (9):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraInstance; -> getCameraManager
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.RECORD_AUDIO
+        @ Lcom/test/myaarlibrary/record/RecordingService; -> startRecording
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 15 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (9) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraInstance; -> getCameraManager
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lcom/facebook/stetho/okhttp3/BuildConfig; -> <init>
+        @ Lcom/facebook/stetho/okhttp3/R$anim; -> <init>
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.RECORD_AUDIO
+        @ Lcom/test/myaarlibrary/record/RecordingService; -> startRecording
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 11 component(s) exported without meaningful protection (of 143 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.newhome.AddressActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="co.massmobileapps.porkmafia.newhome.AddressActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.newhome.NewHomeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14000D" android:label="@7F1302C3" android:name="co.massmobileapps.porkmafia.newhome.NewHomeActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.new_punch.NewPunchActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14030D" android:name="co.massmobileapps.porkmafia.new_punch.NewPunchActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.PdfViwerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="co.massmobileapps.porkmafia.PdfViwerActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.SpecialDeals
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:0103000A" android:name="co.massmobileapps.porkmafia.SpecialDeals" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="co.massmobileapps.porkmafia.SpecialDeals" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.NotificationListing
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:0103000A" android:name="co.massmobileapps.porkmafia.NotificationListing" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="co.massmobileapps.porkmafia.NotificationListing" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.MyRedeem
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:0103000A" android:name="co.massmobileapps.porkmafia.MyRedeem" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.newhome.MapsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="co.massmobileapps.porkmafia.newhome.MapsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] co.massmobileapps.porkmafia.WebbrowserChatActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14000A" android:name="co.massmobileapps.porkmafia.WebbrowserChatActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000010">
+          <intent-filter>
+            <action android:name="com.massmobile.chatnotification" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] co.massmobileapps.porkmafia.firebase.MyFirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="co.massmobileapps.porkmafia.firebase.MyFirebaseMessagingService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] co.massmobileapps.porkmafia.BroadcastDenimGeo
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="co.massmobileapps.porkmafia.BroadcastDenimGeo" android:enabled="true" android:exported="true" />
+    Safe-by-design exports (7):
+      [ACTIVITY] co.massmobileapps.porkmafia.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] co.massmobileapps.porkmafia.NotificationDescription
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] co.massmobileapps.porkmafia.SpecialDealDescription
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] co.massmobileapps.porkmafia.Share
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] co.massmobileapps.porkmafia.RecieptShareFb
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] co.massmobileapps.porkmafia.DenimBroadCastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED, android.intent.action.PACKAGE_ADDED, android.intent.action.USER_PRESENT, android.net.conn.CONNECTIVITY_CHANGE, android.net.wifi.WIFI_STATE_CHANGED

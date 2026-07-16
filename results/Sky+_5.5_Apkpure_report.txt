@@ -1,0 +1,69 @@
+================================================================================
+APP    : Sky+_5.5_Apkpure
+FILE   : Sky+_5.5_Apkpure.apk
+DATE   : 2026-04-28 07:40:30
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 2 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (2):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+  Dangerous permissions found with INTERNET (3):
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatFroyo; -> getExternalFilesDir
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatFroyo; -> getExternalFilesDir
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.INTERNET
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatFroyo; -> getExternalFilesDir
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatFroyo; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 45 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.bskyb.android.skyplus.accountmanager.AccountLoginActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F070011" android:label="@7F0A0279" android:name="com.bskyb.android.skyplus.accountmanager.AccountLoginActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.bskyb.android.skyplus.accountmanager.authenticator.AuthenticatorService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bskyb.android.skyplus.accountmanager.authenticator.AuthenticatorService" android:exported="true">
+          <intent-filter>
+            <action android:name="android.accounts.AccountAuthenticator" />
+          </intent-filter>
+          <meta-data android:name="android.accounts.AccountAuthenticator" android:resource="@7F050000" />
+        </service>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.bskyb.android.skyplus.activity.GenreListActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW

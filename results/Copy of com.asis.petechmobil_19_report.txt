@@ -1,0 +1,412 @@
+================================================================================
+APP    : Copy of com.asis.petechmobil_19
+FILE   : Copy of com.asis.petechmobil_19.apk
+DATE   : 2026-04-27 22:36:14
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 2 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (2):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+  Dangerous permissions found with INTERNET (4):
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> a
+    android.permission.READ_PHONE_STATE
+    android.permission.RECORD_AUDIO
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 7 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECORD_AUDIO
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.CAMERA
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> <init>
+        @ Lcom/journeyapps/barcodescanner/camera/CameraManager$CameraPreviewCallback; -> a
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 34 component(s) exported without meaningful protection (of 41 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.QrtanitActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.QrtanitActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.QRTANITACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.Phonegir_Activity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.Phonegir_Activity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.PHONEGIRACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.Smsonay_Activity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.Smsonay_Activity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.SMSONAYACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.QrKoduActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.QrKoduActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.QRKDONYACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.SignupActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.SignupActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.SIGNUPACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.LoginActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.LoginActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.LOGINACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.MainActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000A" android:name="com.asis.petechmobil.MainActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.MAINACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.AnlikTankDurumActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.AnlikTankDurumActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".AnlikTankDurumActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.ANLIKTANKDURUMACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.TankDolumActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.TankDolumActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".TankDolumActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.TANKDOLUMACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.BirimFiyatActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.BirimFiyatActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".BirimFiyatActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.BIRIMFIYATACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.BirimFiyatDegisActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.BirimFiyatDegisActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".BirimFiyatDegisActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.BIRIMFIYATDEGISACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.TanimliFiyatActivitiy
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.TanimliFiyatActivitiy" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".TanimliFiyatActivitiy" />
+          <intent-filter>
+            <action android:name="android.intent.action.TANIMLIFIYATACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.ServisTalepGet
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.ServisTalepGet" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ServisTalepGet" />
+          <intent-filter>
+            <action android:name="android.intent.action.SERVISTALEPGET" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.RaporlarMenuGet
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.RaporlarMenuGet" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".RaporlarMenuGet" />
+          <intent-filter>
+            <action android:name="android.intent.action.RAPORLARMENUGET" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.RaporWebActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.RaporWebActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".RaporWebActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.RAPORWEBACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.ServisGirActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.ServisGirActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ServisGirActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.SERVISGIRACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.CurrentShiftInfoActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.CurrentShiftInfoActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".CurrentShiftInfoActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.CURRENTSHIFTINFOACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.SearchCurrentShiftInfoActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.SearchCurrentShiftInfoActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".SearchCurrentShiftInfoActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.SEARCHCURRENTSHIFTINFOACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.AraTankDolumActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.AraTankDolumActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".AraTankDolumActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.ARATANKDOLUMACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.IletisimActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.IletisimActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".IletisimActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.ILETISIMACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.EmailActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.EmailActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".EmailActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.EMAILACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.StationListActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.StationListActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.STATIONLISTACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.StationAddActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.StationAddActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".StationAddActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.STATIONADDACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.UserListActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.UserListActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".UserListActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.USERLISTACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.UserAddActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.UserAddActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.USERADDACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.VersionHistoryActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.VersionHistoryActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".VersionHistoryActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.VERSIONHISTORYACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.BildirimActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.BildirimActivity" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="android.intent.action.BILDIRIMACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.HatirlatmaWebActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.HatirlatmaWebActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HatirlatmaWebActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.HATIRLATMAWEBACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.HtrEkleWebActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.HtrEkleWebActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HtrEkleWebActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.HTREKLEWEBACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.asis.petechmobil.HatirOnayWebActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:name="com.asis.petechmobil.HatirOnayWebActivity" android:screenOrientation="1">
+          <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HatirOnayWebActivity" />
+          <intent-filter>
+            <action android:name="android.intent.action.HATIRONAYWEBACTIVITY" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.asis.petechmobil.MyFirebaseMessagingService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.asis.petechmobil.MyFirebaseMessagingService">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.asis.petechmobil.MyFirebaseInstanceIDService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.asis.petechmobil.MyFirebaseInstanceIDService">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.messaging.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (2):
+      [ACTIVITY] com.asis.petechmobil.AnaActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.asis.petechmobil.AsistMainActivity
+        Has expected public intent action(s): android.intent.action.SEARCH

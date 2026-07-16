@@ -1,0 +1,56 @@
+================================================================================
+APP    : Remote for Roku _ Codematics_1.29_Apkpure
+FILE   : Remote for Roku _ Codematics_1.29_Apkpure.apk
+DATE   : 2026-04-28 07:24:51
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 5 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (1) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <clinit>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 39 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000" />
+        </service>
+    Safe-by-design exports (2):
+      [ACTIVITY] codematics.roku.smart.rokutvremote.tvremote.MainActivity_Roku
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] codematics.roku.smart.rokutvremote.tvremote._LogoScreen
+        Has expected public intent action(s): android.intent.action.MAIN

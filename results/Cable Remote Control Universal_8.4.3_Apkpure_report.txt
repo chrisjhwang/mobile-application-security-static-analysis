@@ -1,0 +1,78 @@
+================================================================================
+APP    : Cable Remote Control Universal_8.4.3_Apkpure
+FILE   : Cable Remote Control Universal_8.4.3_Apkpure.apk
+DATE   : 2026-04-27 16:48:05
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 33 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.bragasil.josemauricio.remotecontrol.GerenciarAtividades
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:label="@7F100026" android:name="com.bragasil.josemauricio.remotecontrol.GerenciarAtividades" android:exported="true" android:launchMode="3" android:screenOrientation="1">
+          <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.bragasil.josemauricio.remotecontrol.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:label="@7F100026" android:name="com.bragasil.josemauricio.remotecontrol.SettingsActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.bragasil.josemauricio.remotecontrol.AquisicaoControleRemoto
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F110008" android:label="@7F100026" android:name="com.bragasil.josemauricio.remotecontrol.AquisicaoControleRemoto" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.bragasil.josemauricio.remotecontrol.Splash
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.bragasil.josemauricio.remotecontrol.Main2Activity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

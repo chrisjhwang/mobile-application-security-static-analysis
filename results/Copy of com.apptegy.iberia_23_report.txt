@@ -1,0 +1,52 @@
+================================================================================
+APP    : Copy of com.apptegy.iberia_23
+FILE   : Copy of com.apptegy.iberia_23.apk
+DATE   : 2026-04-27 22:15:03
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.CALL_PHONE
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_PHONE_STATE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CALL_PHONE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (1) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/connection/RouteException; -> <init>
+        @ Lokhttp3/internal/http2/ConnectionShutdownException; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 29 component(s). 1 component(s) are safely exported by design.
+    Safe-by-design exports (1):
+      [ACTIVITY] com.apptegy.app.main.activity.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN

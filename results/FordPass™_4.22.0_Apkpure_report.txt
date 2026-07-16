@@ -1,0 +1,152 @@
+================================================================================
+APP    : FordPass™_4.22.0_Apkpure
+FILE   : FordPass™_4.22.0_Apkpure.apk
+DATE   : 2026-04-28 05:04:15
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 7 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (7):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    android.permission.CAMERA
+        @ Lcom/fordmps/addvin/camera/CameraManager$2; -> <init>
+        @ Lcom/fordmps/addvin/camera/CameraManager$2; -> surfaceChanged
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Lcom/humanify/expertconnect/api/IdentityManager; -> getDeviceId
+        @ Lcom/humanify/expertconnect/api/model/breadcrumbs/BreadcrumbsSession; -> getDeviceId
+    android.permission.RECORD_AUDIO
+        @ Lcom/humanify/expertconnect/view/RecordButtonView; -> startRecordingAnimation
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 15 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Lcom/google/common/util/concurrent/ListenableFuture; -> addListener
+        @ Lcom/smartdevicelink/transport/SdlRouterService; -> enableLegacyMode
+    + android.permission.CAMERA
+        @ Lcom/fordmps/addvin/camera/CameraManager$2; -> <init>
+        @ Lcom/fordmps/addvin/camera/CameraManager$2; -> surfaceChanged
+    + android.permission.FOREGROUND_SERVICE
+        @ Lorg/altbeacon/beacon/service/BeaconService; -> startForegroundIfConfigured
+        @ Lcom/fordmps/paak/dev/viewmodels/PaakDevCalibrationViewModel; -> restartForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Credentials; -> <clinit>
+        @ Lokhttp3/Credentials; -> <init>
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/humanify/expertconnect/api/IdentityManager; -> getDeviceId
+        @ Lcom/humanify/expertconnect/api/model/breadcrumbs/BreadcrumbsSession; -> getDeviceId
+    + android.permission.RECORD_AUDIO
+        @ Lcom/humanify/expertconnect/view/RecordButtonView; -> startRecordingAnimation
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 452 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.fordmps.login.views.LoginActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fordmps.login.views.LoginActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000020" />
+    [UNPROTECTED ACTIVITY] com.fordmps.mobileapp.find.eventparking.FindEventParkingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fordmps.mobileapp.find.eventparking.FindEventParkingActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000020" />
+    [UNPROTECTED ACTIVITY] com.fordmps.termsandprivacy.views.TermsAndPrivacyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fordmps.termsandprivacy.views.TermsAndPrivacyActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.fordmps.termsandprivacy.views.PersonalizationConsentActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fordmps.termsandprivacy.views.PersonalizationConsentActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.fordmps.ev.publiccharging.views.PublicChargingNoSubscriptionSmartCardActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fordmps.ev.publiccharging.views.PublicChargingNoSubscriptionSmartCardActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] androidx.compose.ui.tooling.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.compose.ui.tooling.PreviewActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] androidx.biometric.DeviceCredentialHandlerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F140105" android:name="androidx.biometric.DeviceCredentialHandlerActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000" />
+        </service>
+    [UNPROTECTED RECEIVER] com.smartdevicelink.api.SdlBluetoothReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.smartdevicelink.api.SdlBluetoothReceiver">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+            <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (2):
+      [ACTIVITY] com.fordmps.mobileapp.shared.login.LauncherActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.fordmps.mobileapp.shared.login.DeeplinkActivity
+        Has expected public intent action(s): android.intent.action.VIEW

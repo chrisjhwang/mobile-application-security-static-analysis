@@ -1,0 +1,72 @@
+================================================================================
+APP    : Copy of com.earthglobemap.livesatellite.gps_13
+FILE   : Copy of com.earthglobemap.livesatellite.gps_13.apk
+DATE   : 2026-04-28 04:12:48
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzbb; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.CAMERA
+    android.permission.READ_PHONE_STATE
+        @ Lcom/adjust/sdk/DeviceInfo$UtilDeviceIds; -> getImeiParameters
+        @ Lcom/adjust/sdk/Reflection; -> getImeiParameters
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzbb; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+        @ Lcom/adjust/sdk/ActivityHandler; -> startForegroundTimerI
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+    + android.permission.POST_NOTIFICATIONS
+        @ Ladmost/sdk/fairads/external/AFABaseWebViewViewability; -> notifyImpression
+        @ Ladmost/sdk/fairads/core/AFAFullScreenAdObservable; -> notifyObservers
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/adjust/sdk/DeviceInfo$UtilDeviceIds; -> getImeiParameters
+        @ Lcom/adjust/sdk/Reflection; -> getImeiParameters
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : CLEAN
+  Notes  : No unprotected exported components detected across 129 component(s). 2 component(s) are safely exported by design.
+    Safe-by-design exports (2):
+      [ACTIVITY] com.earthglobemap.livesatellite.gps.InitialActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.mbridge.msdk.foundation.same.broadcast.NetWorkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

@@ -1,0 +1,89 @@
+================================================================================
+APP    : Smart TV Remote Control_1.55_Apkpure
+FILE   : Smart TV Remote Control_1.55_Apkpure.apk
+DATE   : 2026-04-28 07:54:48
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+        @ Landroidx/work/ListenableWorker$a; -> a
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 68 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] codematics.android.smarttv.wifi.remote.tvremote.activities.DialogUnderstant
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="codematics.android.smarttv.wifi.remote.tvremote.activities.DialogUnderstant" android:exported="true" />
+    [UNPROTECTED SERVICE] codematics.official.myratingview.FirebaseFolder.FirebaseMssageService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="codematics.official.myratingview.FirebaseFolder.FirebaseMssageService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    Safe-by-design exports (5):
+      [ACTIVITY] codematics.wifitv.tvremote.smarttv.remotecontrol.tv.remote.control._LogoScreen
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] codematics.wifitv.tvremote.smarttv.remotecontrol.tv.remote.control._FirstScreen
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] codematics.roku.smart.rokutvremote.tvremote.MainActivity_Roku
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] codematics.android.smarttv.wifi.remote.tvremote.androidauth.WifiStateChangeReceiver
+        Receives only system-protected broadcast(s): android.net.wifi.STATE_CHANGE, android.net.wifi.WIFI_STATE_CHANGED
+      [RECEIVER] codematics.wifi.sony.remote.androidauth.WifiStateChangeReceiver
+        Receives only system-protected broadcast(s): android.net.wifi.STATE_CHANGE, android.net.wifi.WIFI_STATE_CHANGED

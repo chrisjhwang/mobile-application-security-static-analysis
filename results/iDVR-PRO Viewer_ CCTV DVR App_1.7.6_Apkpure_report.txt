@@ -1,0 +1,102 @@
+================================================================================
+APP    : iDVR-PRO Viewer_ CCTV DVR App_1.7.6_Apkpure
+FILE   : iDVR-PRO Viewer_ CCTV DVR App_1.7.6_Apkpure.apk
+DATE   : 2026-04-28 05:17:53
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (6):
+    android.permission.CAMERA
+        @ Lcom/itxsecurity/zxing/client/android/CaptureActivity; -> getCameraManager
+        @ Lcom/itxsecurity/zxing/client/android/ViewfinderView; -> setCameraManager
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat$ContentResolverCompatImpl; -> query
+        @ Landroid/support/v4/content/ContentResolverCompat$ContentResolverCompatImplBase; -> <init>
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatKitKat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Lorg/acra/util/ReportUtils; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatKitKat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.INTERNET
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.CAMERA
+        @ Lcom/itxsecurity/zxing/client/android/CaptureActivity; -> getCameraManager
+        @ Lcom/itxsecurity/zxing/client/android/ViewfinderView; -> setCameraManager
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImplApi21; -> disconnect
+    + android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat$ContentResolverCompatImpl; -> query
+        @ Landroid/support/v4/content/ContentResolverCompat$ContentResolverCompatImplBase; -> <init>
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatKitKat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Lorg/acra/util/ReportUtils; -> getDeviceId
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroid/support/v4/content/ContextCompatKitKat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 36 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.itxsecurity.zxing.book.SearchBookContentsActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F06017A" android:name="com.itxsecurity.zxing.book.SearchBookContentsActivity" android:stateNotNeeded="true" android:screenOrientation="6">
+          <intent-filter>
+            <action android:name="com.itxsecurity.zxing.client.android.SEARCH_BOOK_CONTENTS" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.itxsecurity.zxing.share.ShareActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.itxsecurity.zxing.share.ShareActivity" android:stateNotNeeded="true" android:screenOrientation="2">
+          <intent-filter>
+            <action android:name="com.itxsecurity.zxing.client.android.SHARE" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.nviewer.dvrviewer.activities.Intro
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.nviewer.dvrviewer.activities.ConnectionListActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.itxsecurity.zxing.client.android.CaptureActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.itxsecurity.zxing.encode.EncodeActivity
+        Has expected public intent action(s): android.intent.action.SEND

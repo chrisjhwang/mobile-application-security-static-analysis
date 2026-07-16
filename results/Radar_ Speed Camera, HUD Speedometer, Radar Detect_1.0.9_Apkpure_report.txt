@@ -1,0 +1,145 @@
+================================================================================
+APP    : Radar_ Speed Camera, HUD Speedometer, Radar Detect_1.0.9_Apkpure
+FILE   : Radar_ Speed Camera, HUD Speedometer, Radar Detect_1.0.9_Apkpure.apk
+DATE   : 2026-04-28 06:30:06
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.FOREGROUND_SERVICE
+        @ Lcom/adjust/sdk/ActivityHandler; -> startForegroundTimerI
+        @ Lcom/google/android/exoplayer2/offline/DownloadService; -> startForeground
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 107 total). 10 safe-by-design export(s) excluded from count.
+    [UNPROTECTED RECEIVER] com.radar.headupnavigationapp.periodicnotification.BootReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.radar.headupnavigationapp.periodicnotification.BootReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.ogury.analytics.receiver.NextAlarmClockChangedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.analytics.receiver.NextAlarmClockChangedReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.ogury.analytics.receiver.EventReminderReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.analytics.receiver.EventReminderReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.EVENT_REMINDER" />
+            <data android:scheme="content" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.ogury.analytics.receiver.BluetoothReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.analytics.receiver.BluetoothReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            <action android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.ogury.analytics.receiver.PackageFullyRemovedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.analytics.receiver.PackageFullyRemovedReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+            <data android:scheme="package" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.ogury.analytics.receiver.AlarmReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ogury.analytics.receiver.AlarmReceiver" android:enabled="true" android:exported="true" />
+    Safe-by-design exports (10):
+      [ACTIVITY] com.radar.headupnavigationapp.activity.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.onesignal.NotificationOpenedActivityHMS
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] io.presage.mraid.browser.ShortcutActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.radar.headupnavigationapp.utils.NotificationService
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED
+      [RECEIVER] com.ogury.analytics.receiver.UserPresentReceiver
+        Receives only system-protected broadcast(s): android.intent.action.USER_PRESENT
+      [RECEIVER] com.ogury.analytics.receiver.BootCompletedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED, android.intent.action.LOCKED_BOOT_COMPLETED
+      [RECEIVER] com.ogury.analytics.receiver.TimeSetReceiver
+        Receives only system-protected broadcast(s): android.intent.action.TIME_SET
+      [RECEIVER] com.ogury.analytics.receiver.CarrierConfigChangedReceiver
+        Receives only system-protected broadcast(s): android.telephony.action.CARRIER_CONFIG_CHANGED

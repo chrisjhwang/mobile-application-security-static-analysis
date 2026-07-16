@@ -1,0 +1,217 @@
+================================================================================
+APP    : Wyze - Make Your Home Smarter_2.36.0.96_Apkpure
+FILE   : Wyze - Make Your Home Smarter_2.36.0.96_Apkpure.apk
+DATE   : 2026-04-28 11:13:23
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 11 normal permission(s) and 19 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (11):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (19):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ANSWER_PHONE_CALLS
+    android.permission.BLUETOOTH_ADVERTISE
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/wyze/headset/business/mainpage/HeadphoneMainPagePresenter; -> startScan
+        @ Lcom/wyze/headset/business/setup/SetupPresenter; -> startScan
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> a
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_IMAGES
+        @ Landroidx/camera/core/ImageSaver; -> isSaveToMediaStore
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> isSavingToMediaStore
+    android.permission.READ_MEDIA_VIDEO
+        @ Landroidx/camera/core/ImageSaver; -> isSaveToMediaStore
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> isSavingToMediaStore
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.READ_SMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.RECORD_AUDIO
+        @ Landroidx/camera/view/CameraController; -> startRecording
+        @ Landroidx/camera/core/VideoCapture; -> lambda$startRecording$0
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 12 of 31 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.ANSWER_PHONE_CALLS
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADVERTISE
+    - android.permission.CALL_PHONE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_SMS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_SMS
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (19) — call-site evidence for manual review:
+    + android.permission.ACCESS_BACKGROUND_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/wyze/headset/business/mainpage/HeadphoneMainPagePresenter; -> startScan
+        @ Lcom/wyze/headset/business/setup/SetupPresenter; -> startScan
+    + android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper; -> a
+    + android.permission.CHANGE_NETWORK_STATE
+        @ Lcom/wyze/sun/activity/SunAddDeviceActualActivity; -> access$requestNetworkStatusBLE
+        @ Lcom/wyze/sun/activity/SunAddDeviceActualActivity; -> requestNetworkStatusBLE
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_IMAGES
+        @ Landroidx/camera/core/ImageSaver; -> isSaveToMediaStore
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> isSavingToMediaStore
+    + android.permission.READ_MEDIA_VIDEO
+        @ Landroidx/camera/core/ImageSaver; -> isSaveToMediaStore
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> isSavingToMediaStore
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.RECORD_AUDIO
+        @ Landroidx/camera/view/CameraController; -> startRecording
+        @ Landroidx/camera/core/VideoCapture; -> lambda$startRecording$0
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 1565 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.hualai.home.smartsupport.ui.WyzeSupportHomeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.hualai.home.smartsupport.ui.WyzeSupportHomeActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x00000DB0" />
+    [UNPROTECTED ACTIVITY] com.wyze.cpp.setting.CppMyInformationActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.wyze.cpp.setting.CppMyInformationActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.wyze.cpp.setting.CppMonitorCertificateActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.wyze.cpp.setting.CppMonitorCertificateActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.wyze.cpp.setting.CppSettingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.wyze.cpp.setting.CppSettingActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.hualai.cam_v3.camera.activity.CamV3MainPage
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.hualai.cam_v3.camera.activity.CamV3MainPage" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.hualai.cam_v3.camera.activity.live.live.CamLiveMainPage
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.hualai.cam_v3.camera.activity.live.live.CamLiveMainPage" android:exported="true" android:launchMode="1" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.wyze.series.activity.SeriesScaleMainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F14022E" android:name="com.wyze.series.activity.SeriesScaleMainActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] androidx.compose.ui.tooling.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.compose.ui.tooling.PreviewActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.wyze.samples.SettingsSampleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.wyze.samples.SettingsSampleActivity" android:exported="true" />
+    Safe-by-design exports (7):
+      [ACTIVITY] com.hualai.home.StartActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.hualai.home.scheme.WyzeDeepLinkPage
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.hualai.home.profile.WyzeAlexaLinkYourActivty
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.wyze.shop.page.WyzeStoreReviewsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.wyze.shop.page.WyzeStoreCartsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.wyze.shop.profile.WyzeMyOrdersTwoDetailsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.amazon.identity.auth.device.workflow.WorkflowActivity
+        Has expected public intent action(s): android.intent.action.VIEW

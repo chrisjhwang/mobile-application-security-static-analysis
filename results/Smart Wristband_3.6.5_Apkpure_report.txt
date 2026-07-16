@@ -1,0 +1,160 @@
+================================================================================
+APP    : Smart Wristband_3.6.5_Apkpure
+FILE   : Smart Wristband_3.6.5_Apkpure.apk
+DATE   : 2026-04-28 07:56:32
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 11 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (11):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.BODY_SENSORS
+    android.permission.CAMERA
+        @ Lcom/jaga/ibraceletplus/smartwristband/decoding/CameraManager; -> <clinit>
+        @ Lcom/jaga/ibraceletplus/smartwristband/decoding/CameraManager; -> <init>
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Lcom/mob/tools/utils/DeviceHelper; -> getDeviceId
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 of 21 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BODY_SENSORS
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.INTERNET
+    - android.permission.READ_CALL_LOG
+    - android.permission.RECORD_AUDIO
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (11) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroid/support/v4/app/FragmentManager; -> enableDebugLogging
+        @ Landroid/support/v4/app/LoaderManager; -> enableDebugLogging
+    + android.permission.CAMERA
+        @ Lcom/jaga/ibraceletplus/smartwristband/decoding/CameraManager; -> <clinit>
+        @ Lcom/jaga/ibraceletplus/smartwristband/decoding/CameraManager; -> <init>
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/support/v4/content/ContextCompat; -> startForegroundService
+        @ Landroid/support/v4/media/session/MediaButtonReceiver; -> startForegroundService
+    + android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/mob/tools/utils/DeviceHelper; -> getDeviceId
+    + android.permission.RECEIVE_BOOT_COMPLETED
+        @ Lcom/jaga/ibraceletplus/smartwristband/main/MainFragment; -> initBOOT_COMPLETED
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 84 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.jaga.ibraceletplus.smartwristband.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.jaga.ibraceletplus.smartwristband.wxapi.WXEntryActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000004A0" />
+    [UNPROTECTED SERVICE] com.jaga.ibraceletplus.smartwristband.BluetoothLeService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.jaga.ibraceletplus.smartwristband.BluetoothLeService" android:enabled="true" android:process=":bleService">
+          <intent-filter android:priority="1000">
+            <action android:name="cn.BluetoothLeService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.jaga.ibraceletplus.smartwristband.KeepAliveService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.jaga.ibraceletplus.smartwristband.KeepAliveService" android:enabled="true">
+          <intent-filter android:priority="1000">
+            <action android:name="cn.KeepAliveService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.amiccomupdator.Ble.BleService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.amiccomupdator.Ble.BleService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.amiccomupdator.Log.BleLogMonitor
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.amiccomupdator.Log.BleLogMonitor" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.amiccomupdator.Ble.BleScanCallback
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.amiccomupdator.Ble.BleScanCallback" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.jaga.ibraceletplus.smartwristband.bean.ReceiverHelper
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.jaga.ibraceletplus.smartwristband.bean.ReceiverHelper" android:enabled="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            <action android:name="android.intent.action.PHONE_STATE" />
+            <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            <action android:name="POWERSENSOR.ACTION_REMINDER_CMD" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.jaga.ibraceletplus.smartwristband.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.mob.tools.MobUIShell
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.jaga.ibraceletplus.smartwristband.NLService
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE

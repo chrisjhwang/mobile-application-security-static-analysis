@@ -1,0 +1,287 @@
+================================================================================
+APP    : SJCAM Zone_6.1.7_Apkpure
+FILE   : SJCAM Zone_6.1.7_Apkpure.apk
+DATE   : 2026-04-28 07:39:35
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CAMERA
+        @ Lorg/jght/sjcam/zone/icatch/MyCamera/CameraManager; -> <init>
+        @ Lorg/jght/sjcam/zone/icatch/MyCamera/CameraManager; -> getInstance
+    android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.CAMERA
+        @ Lorg/jght/sjcam/zone/icatch/MyCamera/CameraManager; -> <init>
+        @ Lorg/jght/sjcam/zone/icatch/MyCamera/CameraManager; -> getInstance
+    + android.permission.CHANGE_NETWORK_STATE
+        @ Lcom/thanosfisherman/wifiutils/wifiConnect/DisconnectCallbackHolder; -> requestNetwork
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+    + android.permission.INTERNET
+        @ Lcom/bumptech/glide/annotation/compiler/GlideIndexer_GlideModule_com_bumptech_glide_integration_okhttp3_OkHttpLibraryGlideModule; -> <init>
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpStreamFetcher; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 21 component(s) exported without meaningful protection (of 262 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] org.jght.sjcam.zone.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="org.jght.sjcam.zone.wxapi.WXEntryActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.mob.id.MobIDActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.id.MobIDActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.id.app_30000" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.id.MobIDSYActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.id.MobIDSYActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.id.app_lk" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.guard.MobTranPullUpActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.guard.MobTranPullUpActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.open.app_20000" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mob.guard.MobTranPullLockActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030011" android:name="com.mob.guard.MobTranPullLockActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.open.app_lk" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] cn.jpush.android.ui.PopWinActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130181" android:name="cn.jpush.android.ui.PopWinActivity" android:exported="true">
+          <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+            <action android:name="cn.jpush.android.ui.PopWinActivity" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] cn.jpush.android.ui.PushActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030006" android:name="cn.jpush.android.ui.PushActivity" android:exported="true" android:configChanges="0x000000A0">
+          <intent-filter>
+            <action android:name="cn.jpush.android.ui.PushActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] cn.jpush.android.service.DActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="cn.jpush.android.service.DActivity" android:enabled="true" android:exported="true" android:taskAffinity="jpush.custom">
+          <intent-filter>
+            <action android:name="cn.jpush.android.intent.DActivity" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] cn.jpush.android.service.JNotifyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130152" android:name="cn.jpush.android.service.JNotifyActivity" android:exported="true" android:taskAffinity="jpush.custom">
+          <intent-filter>
+            <action android:name="cn.jpush.android.intent.JNotifyActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] cn.android.service.JTransitActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130152" android:name="cn.android.service.JTransitActivity" android:exported="true" android:taskAffinity="jpush.custom">
+          <intent-filter>
+            <action android:name="cn.android.service.JTransitActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.kwai.auth.login.kwailogin.applogin.RouteHandlerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130153" android:label="@7F1207D6" android:name="com.kwai.auth.login.kwailogin.applogin.RouteHandlerActivity" android:exported="true" android:screenOrientation="3" android:configChanges="0x000004B0" />
+    [UNPROTECTED ACTIVITY] com.kwai.opensdk.sdk.openapi.KwaiHandlerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.kwai.opensdk.sdk.openapi.KwaiHandlerActivity" android:exported="true" android:taskAffinity="net.sourceforge.simcpux" android:launchMode="2" android:screenOrientation="3" android:configChanges="0x000004B0" />
+    [UNPROTECTED ACTIVITY] com.kwai.opensdk.sdk.openapi.KwaiRouterActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.kwai.opensdk.sdk.openapi.KwaiRouterActivity" android:exported="true" android:screenOrientation="3" android:configChanges="0x000004B0" />
+    [UNPROTECTED ACTIVITY] com.mob.tools.MobUIShell
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.mob.tools.MobUIShell" android:exported="true" android:configChanges="0x000004A0" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED SERVICE] com.mob.MobACService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.MobACService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.service.action.MOB_AC_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mob.id.MobIDService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.id.MobIDService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.intent.MOB_ID_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mob.guard.MobGuardPullUpService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mob.guard.MobGuardPullUpService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.mob.intent.MOB_GUARD_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] cn.jpush.android.service.DaemonService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="cn.jpush.android.service.DaemonService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="cn.jpush.android.intent.DaemonService" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] cn.jpush.android.service.PushReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="cn.jpush.android.service.PushReceiver" android:enabled="true" android:exported="true">
+          <intent-filter android:priority="1000">
+            <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+            <category android:name="org.jght.sjcam.zone" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.PACKAGE_REMOVED" />
+            <data android:scheme="package" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.facebook.FacebookContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.facebook.FacebookContentProvider" android:exported="true" android:authorities="com.facebook.app.FacebookContentProvider638837849802421" />
+    [UNPROTECTED PROVIDER] cn.jpush.android.service.DownloadProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="cn.jpush.android.service.DownloadProvider" android:exported="true" android:authorities="org.jght.sjcam.zone.DownloadProvider" />
+    Safe-by-design exports (7):
+      [ACTIVITY] cn.sharesdk.tencent.qq.ReceiveActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] org.jght.sjcam.zone.ui.activity.SMainActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] org.jght.sjcam.zone.ui.activity.BoredActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] org.jght.sjcam.zone.ui.rduisdk.rd.veuisdk.VideoPreviewActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cn.sharesdk.tencent.qq.ReceiveActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] org.jght.sjcam.zone.receiver.NetworkConnectChangedReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

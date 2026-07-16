@@ -1,0 +1,96 @@
+================================================================================
+APP    : Copy of cleaner.clean.booster_231
+FILE   : Copy of cleaner.clean.booster_231.apk
+DATE   : 2026-04-27 20:59:11
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 1 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_DATA_SYNC
+    android.permission.KILL_BACKGROUND_PROCESSES
+    android.permission.PACKAGE_USAGE_STATS
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (1):
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.FOREGROUND_SERVICE_DATA_SYNC
+    - android.permission.KILL_BACKGROUND_PROCESSES
+    - android.permission.PACKAGE_USAGE_STATS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+    + android.permission.INTERNET
+        @ Lcom/yandex/mobile/ads/embedded/okhttp/src/main/kotlin/okhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lcom/yandex/mobile/ads/embedded/okhttp/src/main/kotlin/okhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+        @ Landroidx/appcompat/view/menu/MenuAdapter; -> notifyDataSetChanged
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalFilesDirectoryPath
+        @ Lch/qos/logback/core/android/AndroidContextUtil; -> getExternalStorageDirectoryPath
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 103 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED RECEIVER] code.jobs.receivers.WakeUpNotificationBackgroundServiceBroadcastReceiver
+      export : explicit (android:exported=true)  [permission: android.permission.RECEIVE_BOOT_COMPLETED]
+      reason : Exported (declared permission 'android.permission.RECEIVE_BOOT_COMPLETED' is normal-level, offers no real guard) without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="code.jobs.receivers.WakeUpNotificationBackgroundServiceBroadcastReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.intent.action.MEDIA_MOUNTED" />
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.zipoapps.premiumhelper.util.ConsumeAllReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.zipoapps.premiumhelper.util.ConsumeAllReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.zipoapps.premiumhelper.CONSUME_ALL" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.yandex.metrica.PreloadInfoContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.yandex.metrica.PreloadInfoContentProvider" android:enabled="true" android:exported="true" android:process=":Metrica" android:authorities="cleaner.clean.booster.appmetrica.preloadinfo.retail" />
+    Safe-by-design exports (2):
+      [ACTIVITY] com.zipoapps.premiumhelper.ui.splash.PHSplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] code.jobs.services.NotificationListener
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE

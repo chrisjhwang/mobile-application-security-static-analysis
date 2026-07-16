@@ -1,0 +1,106 @@
+================================================================================
+APP    : PayPal Zettle_ Point of Sale_7.36.2_Apkpure
+FILE   : PayPal Zettle_ Point of Sale_7.36.2_Apkpure.apk
+DATE   : 2026-04-28 06:13:53
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (6):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/izettle/payments/android/bluetooth/ble/BleScanner; -> startScanner$bluetooth_release
+        @ Lcom/izettle/payments/android/bluetooth/classic/ClassicBluetoothScannerHelperImpl; -> access$startScanner
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+        @ Lcom/izettle/android/multiaccounts/api/MultiAccountAccountManager; -> getAccounts
+        @ Lcom/izettle/android/multiaccounts/impl/data/storage/AccountStorage; -> getAccounts
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 13 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/izettle/payments/android/bluetooth/ble/BleScanner; -> startScanner$bluetooth_release
+        @ Lcom/izettle/payments/android/bluetooth/classic/ClassicBluetoothScannerHelperImpl; -> access$startScanner
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/work/impl/foreground/ForegroundProcessor; -> startForeground
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/izettle/android/multiaccounts/api/MultiAccountAccountManager; -> getAccounts
+        @ Lcom/izettle/android/multiaccounts/impl/data/storage/AccountStorage; -> getAccounts
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 component(s) exported without meaningful protection (of 180 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] androidx.compose.ui.tooling.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.compose.ui.tooling.PreviewActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.izettle.android.printer.PrinterBluetoothDeviceConnectedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.izettle.android.printer.PrinterBluetoothDeviceConnectedReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.izettle.android.ActivitySplash
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.izettle.android.applinks.AppLinkActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.izettle.android.auth.OAuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW

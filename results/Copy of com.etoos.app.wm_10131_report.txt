@@ -1,0 +1,101 @@
+================================================================================
+APP    : Copy of com.etoos.app.wm_10131
+FILE   : Copy of com.etoos.app.wm_10131.apk
+DATE   : 2026-04-28 04:16:53
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 7 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (7):
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    android.permission.READ_MEDIA_VIDEO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 12 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.CAMERA
+    - android.permission.GET_ACCOUNTS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    + android.permission.READ_MEDIA_VIDEO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 63 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.facebook.FacebookActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1302EA" android:label="@7F12008F" android:name="com.facebook.FacebookActivity" android:exported="true" android:configChanges="0x000005B0" />
+    Safe-by-design exports (7):
+      [ACTIVITY] com.etoos.app.wm.ui.at.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.kakao.sdk.auth.AuthCodeHandlerActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.etoos.sdk.common.ui.activty.EtoosSDKActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.nhn.android.naverlogin.ui.OAuthCustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

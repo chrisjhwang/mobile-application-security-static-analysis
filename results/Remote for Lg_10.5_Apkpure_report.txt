@@ -1,0 +1,66 @@
+================================================================================
+APP    : Remote for Lg_10.5_Apkpure
+FILE   : Remote for Lg_10.5_Apkpure.apk
+DATE   : 2026-04-28 07:22:52
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 1 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (1):
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (1) — call-site evidence for manual review:
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 50 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED RECEIVER] com.onesignal.BootUpReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.onesignal.BootUpReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.ggg.universal.tv.remote.activity.LGHomeActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.wifismart.android.androidauth.ic_WifiStateChangeReceiver
+        Receives only system-protected broadcast(s): android.net.wifi.STATE_CHANGE, android.net.wifi.WIFI_STATE_CHANGED
+      [RECEIVER] com.wifismart.sony.androidauth.SmartWifiStateChangeReceiver
+        Receives only system-protected broadcast(s): android.net.wifi.STATE_CHANGE, android.net.wifi.WIFI_STATE_CHANGED
+      [RECEIVER] com.onesignal.UpgradeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED

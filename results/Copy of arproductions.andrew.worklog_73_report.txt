@@ -1,0 +1,81 @@
+================================================================================
+APP    : Copy of arproductions.andrew.worklog_73
+FILE   : Copy of arproductions.andrew.worklog_73.apk
+DATE   : 2026-04-27 20:33:17
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_SPECIAL_USE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 5 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.INTERNET
+  Used permissions (3) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Lcom/mbridge/msdk/playercommon/exoplayer2/offline/DownloadService; -> startForeground
+        @ Lcom/mbridge/msdk/playercommon/exoplayer2/util/Util; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_SPECIAL_USE
+        @ Lcom/mbridge/msdk/playercommon/exoplayer2/offline/DownloadService; -> startForeground
+        @ Lcom/mbridge/msdk/playercommon/exoplayer2/util/Util; -> startForegroundService
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroid/support/v4/app/INotificationSideChannel$Default; -> notify
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 68 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED RECEIVER] arproductions.andrew.worklog.WorkWidgetProviderMini
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="arproductions.andrew.worklog.WorkWidgetProviderMini" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_NEW_SHIFT" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_PUNCH" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_CANCEL" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F15000E" />
+        </receiver>
+    [UNPROTECTED RECEIVER] arproductions.andrew.worklog.WorkWidgetProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="arproductions.andrew.worklog.WorkWidgetProvider" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_NEW_SHIFT" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_PUNCH" />
+            <action android:name="arproductions.andrew.worklog.WorkWidgetProvider.ACTION_WIDGET_CANCEL" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F15000D" />
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] arproductions.andrew.worklog.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] arproductions.andrew.worklog.Settings
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.mbridge.msdk.foundation.same.broadcast.NetWorkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

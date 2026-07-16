@@ -1,0 +1,66 @@
+================================================================================
+APP    : Quick Cast_3.5.2.400_Apkpure
+FILE   : Quick Cast_3.5.2.400_Apkpure.apk
+DATE   : 2026-04-28 06:20:56
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lcom/shuyu/gsyvideoplayer/utils/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/amazon/whisperlink/service/Registrar$Iface; -> getConnectionInfo
+        @ Lcom/amazon/whisperlink/service/Registrar$getConnectionInfo_args; -> <clinit>
+    + android.permission.CHANGE_WIFI_MULTICAST_STATE
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> acquireMulticastLock
+        @ Lcom/amazon/whisperlink/core/android/explorers/ThreadSafeJmdnsManager$JmdnsManager; -> releaseMulticastLock
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/http2/f$i; -> <clinit>
+        @ Lokhttp3/internal/http2/f$i; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 58 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.wukongtv.wkcast.activity.DebugActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F11000F" android:name="com.wukongtv.wkcast.activity.DebugActivity" android:exported="true" android:screenOrientation="1" />
+    Safe-by-design exports (3):
+      [ACTIVITY] com.wukongtv.wkcast.activity.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.wukongtv.wkcast.browser.BrowserActivity
+        Has expected public intent action(s): android.intent.action.SEND, android.intent.action.SEND_MULTIPLE, android.intent.action.VIEW
+      [ACTIVITY] com.wukongtv.wkcast.activity.SchameFilterActivity
+        Has expected public intent action(s): android.intent.action.VIEW

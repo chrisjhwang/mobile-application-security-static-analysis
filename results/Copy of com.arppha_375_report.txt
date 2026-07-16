@@ -1,0 +1,104 @@
+================================================================================
+APP    : Copy of com.arppha_375
+FILE   : Copy of com.arppha_375.apk
+DATE   : 2026-04-27 22:30:21
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.INTERNET
+        @ Lcom/bumptech/glide/annotation/compiler/GlideIndexer_GlideModule_com_bumptech_glide_integration_okhttp3_OkHttpLibraryGlideModule; -> <init>
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpStreamFetcher; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 4 component(s) exported without meaningful protection (of 113 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1502F9" android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1502F9" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1502F8" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.arppha.service.MyFirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.arppha.service.MyFirebaseMessagingService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.arppha.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN

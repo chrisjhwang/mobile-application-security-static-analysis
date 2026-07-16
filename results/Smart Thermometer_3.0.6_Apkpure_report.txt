@@ -1,0 +1,116 @@
+================================================================================
+APP    : Smart Thermometer_3.0.6_Apkpure
+FILE   : Smart Thermometer_3.0.6_Apkpure.apk
+DATE   : 2026-04-28 07:52:00
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 1 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (1):
+    android.permission.ACCESS_FINE_LOCATION
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 24 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.colortiger.thermo.widget.ThermoAppWidgetConfigure1x1
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F080114" android:name="com.colortiger.thermo.widget.ThermoAppWidgetConfigure1x1" android:excludeFromRecents="true" android:launchMode="1">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.colortiger.thermo.widget.ThermoAppWidgetConfigure2x2
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F080114" android:name="com.colortiger.thermo.widget.ThermoAppWidgetConfigure2x2" android:excludeFromRecents="true" android:launchMode="1">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.colortiger.thermo.widget.ThermoAppWidgetChartConfigure
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F080114" android:name="com.colortiger.thermo.widget.ThermoAppWidgetChartConfigure" android:excludeFromRecents="true" android:launchMode="1">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.colortiger.thermo.widget.ThermoAppWidgetProvider1x1Impl
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="Thermo mini widget" android:icon="@7F020121" android:name="com.colortiger.thermo.widget.ThermoAppWidgetProvider1x1Impl">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.colortiger.thermo.SERVICE_APPWIDGET_UPDATE" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F050001" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.colortiger.thermo.widget.ThermoAppWidgetProvider2x2Impl
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="Thermo full widget" android:icon="@7F020121" android:name="com.colortiger.thermo.widget.ThermoAppWidgetProvider2x2Impl">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.colortiger.thermo.SERVICE_APPWIDGET_UPDATE" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F050002" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.colortiger.thermo.widget.ThermoAppWidgetChartProvider2x2Impl
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="Thermo chart widget" android:icon="@7F020121" android:name="com.colortiger.thermo.widget.ThermoAppWidgetChartProvider2x2Impl">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.colortiger.thermo.SERVICE_APPWIDGET_UPDATE" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F050000" />
+        </receiver>
+    Safe-by-design exports (2):
+      [ACTIVITY] com.colortiger.thermo.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.colortiger.thermo.service.StartupBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

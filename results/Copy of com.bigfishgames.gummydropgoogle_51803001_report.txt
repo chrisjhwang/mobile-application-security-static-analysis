@@ -1,0 +1,113 @@
+================================================================================
+APP    : Copy of com.bigfishgames.gummydropgoogle_51803001
+FILE   : Copy of com.bigfishgames.gummydropgoogle_51803001.apk
+DATE   : 2026-04-27 23:11:33
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/bidmachine/core/Utils; -> getExternalFilesDir
+    android.permission.READ_MEDIA_AUDIO
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+    android.permission.READ_MEDIA_VIDEO
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (9) — call-site evidence for manual review:
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Landroidx/work/impl/utils/NetworkApi21; -> getNetworkCapabilitiesCompat
+        @ Lio/bidmachine/core/Utils; -> getActiveNetworkInfo
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lmono/android/net/wifi/WifiManager_LocalOnlyConnectionFailureListenerImplementor; -> <clinit>
+        @ Lmono/android/net/wifi/WifiManager_LocalOnlyConnectionFailureListenerImplementor; -> <init>
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/app/ServiceCompat$Api29Impl; -> startForeground
+        @ Landroidx/core/app/ServiceCompat$Api34Impl; -> startForeground
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/bidmachine/core/Utils; -> getExternalFilesDir
+    + android.permission.READ_MEDIA_AUDIO
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+    + android.permission.READ_MEDIA_VIDEO
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 155 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.leanplum.LeanplumPushRegistrationService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.leanplum.LeanplumPushRegistrationService" android:exported="true" />
+    [UNPROTECTED SERVICE] crc647a3576cb1c31ed53.NotificationService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="crc647a3576cb1c31ed53.NotificationService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] crc647a3576cb1c31ed53.NotificationScheduler
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="crc647a3576cb1c31ed53.NotificationScheduler" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.bigfishgames.bfglib.NotificationAlarmBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bigfishgames.bfglib.NotificationAlarmBroadcastReceiver" android:enabled="true" android:exported="true" />
+    Safe-by-design exports (4):
+      [ACTIVITY] crc64bc4d1dfc029775c6.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] crc64bc4d1dfc029775c6.MainActivity_BootReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.appsflyer.MultipleInstallBroadcastReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

@@ -1,0 +1,119 @@
+================================================================================
+APP    : Copy of com.app.azantime_58
+FILE   : Copy of com.app.azantime_58.apk
+DATE   : 2026-04-27 21:51:01
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_AUDIO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+  Used permissions (8) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+    + android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService$Default; -> notifyNotificationWithChannel
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_AUDIO
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> isMediaStoreImageUri
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 67 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.app.azantime.activities.AddCityActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.azantime.activities.AddCityActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.azantime.activities.QiblaFinder
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Qibla Finder" android:name="com.app.azantime.activities.QiblaFinder" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.azantime.activities.RingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.azantime.activities.RingActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] com.app.azantime.services.AlarmService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.app.azantime.services.AlarmService" android:exported="true" android:foregroundServiceType="0x00000002" />
+    [UNPROTECTED SERVICE] com.app.azantime.services.StopAlarmService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.app.azantime.services.StopAlarmService" android:exported="true" />
+    [UNPROTECTED SERVICE] com.app.azantime.firebase.MyFirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.app.azantime.firebase.MyFirebaseInstanceIdService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.app.azantime.services.AlertReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.app.azantime.services.AlertReceiver" android:exported="true" />
+    Safe-by-design exports (3):
+      [ACTIVITY] com.app.azantime.activities.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW

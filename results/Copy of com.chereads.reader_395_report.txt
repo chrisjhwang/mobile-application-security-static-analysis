@@ -1,0 +1,90 @@
+================================================================================
+APP    : Copy of com.chereads.reader_395
+FILE   : Copy of com.chereads.reader_395.apk
+DATE   : 2026-04-28 03:52:11
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 3 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (3):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/twitter/sdk/android/core/a; -> getExternalFilesDir
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> a
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/twitter/sdk/android/core/a; -> getExternalFilesDir
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Lcom/liulishuo/filedownloader/FileDownloadLine; -> startForeground
+    + android.permission.INTERNET
+        @ Lcom/apm/okhttp3/APMEventListener; -> <init>
+        @ Lcom/apm/okhttp3/APMNetworkInterceptor; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+        @ Landroid/support/v4/app/INotificationSideChannel$Default; -> notify
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/twitter/sdk/android/core/a; -> getExternalFilesDir
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> <init>
+        @ Lcom/bumptech/glide/load/data/mediastore/MediaStoreUtil; -> a
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/twitter/sdk/android/core/a; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 78 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    [UNPROTECTED PROVIDER] com.facebook.FacebookContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.facebook.FacebookContentProvider" android:exported="true" android:authorities="com.facebook.app.FacebookContentProvider1273299769761652" />
+    Safe-by-design exports (6):
+      [ACTIVITY] com.chereads.reader.start.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.chereads.reader.app.MainActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.qidian.Int.reader.tiktokapi.TikTokCallBackActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.linecorp.linesdk.auth.internal.LineAuthenticationCallbackActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.appsflyer.MultipleInstallBroadcastReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

@@ -1,0 +1,117 @@
+================================================================================
+APP    : Copy of com.areeb.doobo_535
+FILE   : Copy of com.areeb.doobo_535.apk
+DATE   : 2026-04-27 22:26:00
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 5 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (5):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.CAMERA
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 component(s) exported without meaningful protection (of 67 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.areeb.doobo.paymentMethods.PaymentMethodsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.areeb.doobo.paymentMethods.PaymentMethodsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.areeb.doobo.home.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.areeb.doobo.home.MainActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="com.areeb.doobo.doobo.userAuthenticated" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.areeb.doobo.vehicleDetails.VehicleDetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.areeb.doobo.vehicleDetails.VehicleDetailsActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.areeb.doobo.tripdetails.TripDetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.areeb.doobo.tripdetails.TripDetailsActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.canhub.cropper.CropImageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F120237" android:name="com.canhub.cropper.CropImageActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED SERVICE] com.areeb.doobo.pushnotification.GuestFcmService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.areeb.doobo.pushnotification.GuestFcmService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.areeb.doobocore.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.stripe.android.payments.StripeBrowserLauncherActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN

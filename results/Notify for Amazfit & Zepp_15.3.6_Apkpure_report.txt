@@ -1,0 +1,866 @@
+================================================================================
+APP    : Notify for Amazfit & Zepp_15.3.6_Apkpure
+FILE   : Notify for Amazfit & Zepp_15.3.6_Apkpure.apk
+DATE   : 2026-04-28 05:55:08
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 18 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_NOTIFICATION_POLICY
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (18):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.ACTIVITY_RECOGNITION
+        @ Lcom/google/android/gms/location/ActivityRecognitionApi; -> requestActivityUpdates
+        @ Lcom/google/android/gms/internal/location/zzg; -> requestActivityUpdates
+    android.permission.ANSWER_PHONE_CALLS
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$d; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$h$c; -> onServiceDisconnected
+    android.permission.BLUETOOTH_SCAN
+    android.permission.BODY_SENSORS
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+    android.permission.READ_CALENDAR
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+    android.permission.READ_PHONE_STATE
+        @ Lcom/huawei/hms/ads/consent/bean/ConsentSyncReq; -> getDeviceId
+        @ Lcom/huawei/hms/ads/consent/bean/ConsentSyncReq; -> getDeviceIdType
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.RECORD_AUDIO
+    android.permission.SEND_SMS  [HARD RESTRICTED]
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 18 of 28 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_NOTIFICATION_POLICY
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.ANSWER_PHONE_CALLS
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_SCAN
+    - android.permission.BODY_SENSORS
+    - android.permission.CALL_PHONE
+    - android.permission.CAMERA
+    - android.permission.READ_CALENDAR
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_CONTACTS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_SMS
+    - android.permission.RECORD_AUDIO
+    - android.permission.SEND_SMS
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_BACKGROUND_LOCATION
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient; -> <init>
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzz; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.ACTIVITY_RECOGNITION
+        @ Lcom/google/android/gms/location/ActivityRecognitionApi; -> requestActivityUpdates
+        @ Lcom/google/android/gms/internal/location/zzg; -> requestActivityUpdates
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$d; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$h$c; -> onServiceDisconnected
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$d; -> disconnect
+        @ Lcom/google/android/gms/common/api/GoogleApiClient; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Ly5/i; -> startForegroundIfNeeded
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> <init>
+        @ Lokhttp3/internal/publicsuffix/PublicSuffixDatabase$a; -> a
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/huawei/hms/ads/consent/bean/ConsentSyncReq; -> getDeviceId
+        @ Lcom/huawei/hms/ads/consent/bean/ConsentSyncReq; -> getDeviceIdType
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 76 component(s) exported without meaningful protection (of 294 total). 15 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.mc.miband1.widget.WidgetWorkoutStartConfigureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1202EB" android:name="com.mc.miband1.widget.WidgetWorkoutStartConfigureActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerHeartMeasureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E62" android:name="com.mc.miband1.ui.tasker.TaskerHeartMeasureActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerHeartMonitorActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E63" android:name="com.mc.miband1.ui.tasker.TaskerHeartMonitorActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerWorkoutStartActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E67" android:name="com.mc.miband1.ui.tasker.TaskerWorkoutStartActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerWorkoutStopActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E68" android:name="com.mc.miband1.ui.tasker.TaskerWorkoutStopActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityRealtimeHeartRateEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Realtime heart rate value" android:name="com.mc.miband1.ui.assistant.tasker.ActivityRealtimeHeartRateEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityRealtimeStepsEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Realtime steps value" android:name="com.mc.miband1.ui.assistant.tasker.ActivityRealtimeStepsEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.StartupActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.mc.miband1.ui.StartupActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.mc.miband1.test.Test2Activity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.mc.miband1.test.Test2Activity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerIncomingCallEndActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120113" android:name="com.mc.miband1.ui.tasker.TaskerIncomingCallEndActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerIncomingCallStartActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120112" android:name="com.mc.miband1.ui.tasker.TaskerIncomingCallStartActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.CustomVibrationTaskerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F12033D" android:name="com.mc.miband1.ui.tasker.CustomVibrationTaskerActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerRestoreWatchfaceActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120B12" android:name="com.mc.miband1.ui.tasker.TaskerRestoreWatchfaceActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerUploadPictureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120A5D" android:name="com.mc.miband1.ui.tasker.TaskerUploadPictureActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerWatchfaceUploadActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120FDC" android:name="com.mc.miband1.ui.tasker.TaskerWatchfaceUploadActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.settings.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120BC7" android:name="com.mc.miband1.ui.settings.SettingsActivity" android:exported="true" android:screenOrientation="1" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001" />
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.customNotification.CustomNotificationTaskerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E65" android:name="com.mc.miband1.ui.customNotification.CustomNotificationTaskerActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.tasker.TaskerSwitchModeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120E66" android:name="com.mc.miband1.ui.tasker.TaskerSwitchModeActivity" android:exported="true" android:windowSoftInputMode="0x00000010" android:uiOptions="0x00000001">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityBatteryEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Band battery value" android:name="com.mc.miband1.ui.assistant.tasker.ActivityBatteryEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityBatteryChargedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Band battery charged" android:name="com.mc.miband1.ui.assistant.tasker.ActivityBatteryChargedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivitySmartAlarmEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Smart alarm started" android:name="com.mc.miband1.ui.assistant.tasker.ActivitySmartAlarmEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityWakeUpAlarmStartedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Wake up alarm fired" android:name="com.mc.miband1.ui.assistant.tasker.ActivityWakeUpAlarmStartedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivitySensorDataEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Realtime sensor data" android:name="com.mc.miband1.ui.assistant.tasker.ActivitySensorDataEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerNotWearingEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Not wearing trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerNotWearingEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerFellAsleepEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Fell asleep trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerFellAsleepEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerWokeUpEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Woke up trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerWokeUpEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerStepsGoalReachedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Steps goal trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerStepsGoalReachedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerEarlyBirdEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Early bird alarm trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerEarlyBirdEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerBandConnectedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Band connected trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerBandConnectedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerBandDisconnectedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Band disconnected trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerBandDisconnectedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerWorkoutStartedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Notify workout started trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerWorkoutStartedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityTriggerWorkoutEndedEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Notify workout ended trigger" android:name="com.mc.miband1.ui.assistant.tasker.ActivityTriggerWorkoutEndedEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonActionEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button (Zepp OS numbered mode) fired" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonActionEvent" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonRejectCallEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Button call reject fired" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonRejectCallEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonIgnoreCallEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Button call ignore fired" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonIgnoreCallEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed1Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button 1 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed1Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed3Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button 3 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonPressed3Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonLift1Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button lift 1 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonLift1Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonLift2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button lift 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonLift2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonLift3Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button lift 3 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonLift3Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonFindMyPhoneEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button find my phone action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonFindMyPhoneEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonSilentPhoneEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button silent phone action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonSilentPhoneEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonDNDEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button DND mode action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonDNDEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPlayEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Play action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPlayEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicNextEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Next action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicNextEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPreviousEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Previous action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPreviousEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeUpEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Volume Up action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeUpEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeDownEvent
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Volume Down action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeDownEvent" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPlay2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Play 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPlay2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicNext2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Next 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicNext2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPrevious2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Previous 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicPrevious2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeUp2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Volume Up 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeUp2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeDown2Event
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Event: Custom button music Volume Down 2 action" android:name="com.mc.miband1.ui.assistant.tasker.ActivityButtonMusicVolumeDown2Event" android:exported="true">
+          <intent-filter>
+            <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.joaomgcd.taskerpluginlibrary.action.IntentServiceAction
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.joaomgcd.taskerpluginlibrary.action.IntentServiceAction" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.joaomgcd.taskerpluginlibrary.condition.IntentServiceCondition
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.joaomgcd.taskerpluginlibrary.condition.IntentServiceCondition" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.QUERY_CONDITION" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mc.miband1.helper.BackgroundAudioService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mc.miband1.helper.BackgroundAudioService" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="android.media.browse.MediaBrowserService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.mc.miband1.ButtonMusicService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mc.miband1.ButtonMusicService" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="android.media.browse.MediaBrowserService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003" />
+        </service>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.DashboardWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120853" android:name="com.mc.miband1.widget.DashboardWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150002" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.StepsWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120C9A" android:name="com.mc.miband1.widget.StepsWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.stepsRequestWidget" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150012" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.WeightWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120F67" android:name="com.mc.miband1.widget.WeightWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.weightRequestWidget" />
+            <action android:name="48dcaaae-48bb-462f-89ae-830741a42389" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150014" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.CaloriesWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F1206FC" android:name="com.mc.miband1.widget.CaloriesWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.stepsRequestWidget" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150001" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.SleepWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120859" android:name="com.mc.miband1.widget.SleepWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F15000C" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.HeartRateWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F1210D1" android:name="com.mc.miband1.widget.HeartRateWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.heartRateManual" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150003" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.WorkoutStartWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F121147" android:name="com.mc.miband1.widget.WorkoutStartWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.widget.workoutStartToggle" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150015" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.receiver.StartupReceiver
+      export : explicit (android:exported=true)  [permission: android.permission.RECEIVE_BOOT_COMPLETED]
+      reason : Exported (declared permission 'android.permission.RECEIVE_BOOT_COMPLETED' is normal-level, offers no real guard) without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mc.miband1.receiver.StartupReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.receiver.CallReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mc.miband1.receiver.CallReceiver" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+            <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.receiver.FireReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mc.miband1.receiver.FireReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.joaomgcd.taskerpluginlibrary.condition.BroadcastReceiverCondition
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.joaomgcd.taskerpluginlibrary.condition.BroadcastReceiverCondition" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="com.twofortyfouram.locale.intent.action.QUERY_CONDITION" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.SwitchModeWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F1210D4" android:name="com.mc.miband1.widget.SwitchModeWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.switchMode" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150013" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.BatteryWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F1210CD" android:name="com.mc.miband1.widget.BatteryWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="com.mc.miband.batteryRequestWidget" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150000" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.ScreenMirrorWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120EEF" android:name="com.mc.miband1.widget.ScreenMirrorWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="34b13db8-e083-4f48-b9a4-321363918bc8" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150008" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.QuickNoteWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120AAE" android:name="com.mc.miband1.widget.QuickNoteWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="34b13db8-e083-4f48-b9a4-321363918bc8" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F150007" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.widget.ShowerModeWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F120D34" android:name="com.mc.miband1.widget.ShowerModeWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="3f80c199-012e-4bb5-9685-f0a12ce0d3be" />
+            <action android:name="dbf2cd99-f647-4a3b-832c-21b11623b63c" />
+            <action android:name="com.mc.miband.forceUpdateWidget" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F15000B" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.mc.miband1.receiver.MusicReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mc.miband1.receiver.MusicReceiver" android:enabled="true" android:exported="true" android:process=":NotifyService">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (15):
+      [ACTIVITY] com.mc.miband1.ui.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.mc.miband1.ui.MainActivityNight
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.mc.miband1.ui.updateFirmware.UpdateFirmwareActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.mc.miband1.ui.QuickNoteActivity
+        Has expected public intent action(s): android.intent.action.SEND
+      [ACTIVITY] com.mc.miband1.ui.watchfaces.AmazfitWatchfaceUploadActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.amazon.identity.auth.device.workflow.WorkflowActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.huawei.opendevice.open.OAIDSettingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.huawei.opendevice.open.PrivacyActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.huawei.opendevice.open.WhyThisAdStatementActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.huawei.openalliance.ad.activity.PPSLauncherActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.mc.miband1.tile.HeartTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [SERVICE] com.mc.miband1.tile.SwitchModeTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [SERVICE] com.mc.miband1.tile.SwitchProfileTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [SERVICE] com.mc.miband1.tile.ScreenMirrorTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE
+      [SERVICE] com.mc.miband1.tile.ShowerModeTileService
+        Bound only by system via signature permission: android.permission.BIND_QUICK_SETTINGS_TILE

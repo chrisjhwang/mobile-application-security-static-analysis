@@ -1,0 +1,139 @@
+================================================================================
+APP    : Thermometer Free_1.6.1_Apkpure
+FILE   : Thermometer Free_1.6.1_Apkpure.apk
+DATE   : 2026-04-28 08:24:00
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 3 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (3):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 6 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (3) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.ACCESS_WIFI_STATE
+        @ Lcom/amazon/device/ads/AdController; -> getConnectionInfo
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 component(s) exported without meaningful protection (of 79 total). 10 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.yandex.metrica.MetricaService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.yandex.metrica.MetricaService" android:enabled="true" android:exported="true" android:process=":Metrica">
+          <intent-filter>
+            <category android:name="android.intent.category.DEFAULT" />
+            <action android:name="com.yandex.metrica.IMetricaService" />
+            <data android:scheme="metrica" />
+          </intent-filter>
+          <meta-data android:name="metrica:api:level" android:value="87" />
+        </service>
+    [UNPROTECTED RECEIVER] io.presage.core.receiver.NextAlarmClockChangedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="io.presage.core.receiver.NextAlarmClockChangedReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.app.action.NEXT_ALARM_CLOCK_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] io.presage.core.receiver.EventReminderReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="io.presage.core.receiver.EventReminderReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.EVENT_REMINDER" />
+            <data android:scheme="content" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] io.presage.core.receiver.BluetoothReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="io.presage.core.receiver.BluetoothReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            <action android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] io.presage.core.receiver.PackageFullyRemovedReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="io.presage.core.receiver.PackageFullyRemovedReceiver" android:enabled="false" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+            <data android:scheme="package" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] io.presage.core.receiver.AlarmReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="io.presage.core.receiver.AlarmReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.yandex.metrica.ConfigurationServiceReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.yandex.metrica.ConfigurationServiceReceiver" android:enabled="true" android:exported="true" android:process=":Metrica">
+          <intent-filter>
+            <action android:name="com.yandex.metrica.configuration.service.PLC" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (10):
+      [ACTIVITY] androidesko.android.electronicthermometer.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] io.presage.mraid.browser.ShortcutActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.appodeal.ads.AppodealPackageAddedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_ADDED
+      [RECEIVER] com.tapjoy.InstallReferrerReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] io.presage.core.receiver.UserPresentReceiver
+        Receives only system-protected broadcast(s): android.intent.action.USER_PRESENT
+      [RECEIVER] io.presage.core.receiver.BootCompletedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED, android.intent.action.LOCKED_BOOT_COMPLETED
+      [RECEIVER] io.presage.core.receiver.TimeSetReceiver
+        Receives only system-protected broadcast(s): android.intent.action.TIME_SET
+      [RECEIVER] io.presage.core.receiver.CarrierConfigChangedReceiver
+        Receives only system-protected broadcast(s): android.telephony.action.CARRIER_CONFIG_CHANGED
+      [RECEIVER] com.startapp.sdk.adsbase.remoteconfig.BootCompleteListener
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.yandex.metrica.MetricaEventHandler
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

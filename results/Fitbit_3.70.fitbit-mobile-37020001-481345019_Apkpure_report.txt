@@ -1,0 +1,287 @@
+================================================================================
+APP    : Fitbit_3.70.fitbit-mobile-37020001-481345019_Apkpure
+FILE   : Fitbit_3.70.fitbit-mobile-37020001-481345019_Apkpure.apk
+DATE   : 2026-04-28 04:52:30
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 21 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (21):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACTIVITY_RECOGNITION
+    android.permission.ANSWER_PHONE_CALLS
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageBackend; -> onDisconnectChannel
+    android.permission.BLUETOOTH_SCAN
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+        @ Lcom/google/android/gms/auth/api/identity/MatchPasswordResult; -> getAccounts
+    android.permission.READ_CALENDAR
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_MEDIA_IMAGES
+        @ Landroidx/media3/common/util/Util; -> isMediaStoreExternalContentUri
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    android.permission.READ_PHONE_NUMBERS
+    android.permission.READ_PHONE_STATE
+        @ Lcom/google/android/gms/cast/CastDevice; -> getDeviceId
+        @ Lcom/google/android/gms/cast/CastDevice; -> getDeviceIdRaw
+    android.permission.RECORD_AUDIO
+        @ Ltvo/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Ltvo/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+    android.permission.SEND_SMS  [HARD RESTRICTED]
+    android.permission.WRITE_CALENDAR
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 14 of 29 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_BACKGROUND_LOCATION
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.ACTIVITY_RECOGNITION
+    - android.permission.ANSWER_PHONE_CALLS
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_SCAN
+    - android.permission.CALL_PHONE
+    - android.permission.CAMERA
+    - android.permission.READ_CALENDAR
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_PHONE_NUMBERS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SEND_SMS
+    - android.permission.WRITE_CALENDAR
+  Used permissions (15) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Landroidx/work/impl/utils/NetworkApi21; -> getNetworkCapabilitiesCompat
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/browser/customtabs/CustomTabsIntent$Builder; -> enableUrlBarHiding
+        @ Landroidx/compose/runtime/Composer; -> enableReusing
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroidx/browser/customtabs/CustomTabsClient; -> connectAndInitialize
+        @ Landroidx/browser/customtabs/PostMessageBackend; -> onDisconnectChannel
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/google/android/gms/auth/api/identity/MatchPasswordResult; -> getAccounts
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> a
+    + android.permission.POST_NOTIFICATIONS
+        @ LaV; -> notify
+        @ Landroid/support/v7/widget/RecyclerView$Adapter; -> notifyDataSetChanged
+    + android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat$Api16Impl; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_MEDIA_IMAGES
+        @ Landroidx/media3/common/util/Util; -> isMediaStoreExternalContentUri
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/google/android/gms/cast/CastDevice; -> getDeviceId
+        @ Lcom/google/android/gms/cast/CastDevice; -> getDeviceIdRaw
+    + android.permission.RECORD_AUDIO
+        @ Ltvo/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Ltvo/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 18 component(s) exported without meaningful protection (of 543 total). 12 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.fitbit.ExternalGDPRActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1607FD" android:name="com.fitbit.ExternalGDPRActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="com.fitbit.intent.action.GDPR_REAFFIRM" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.google.android.libraries.social.licenses.LicenseMenuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F160762" android:label="@7F15143F" android:name="com.google.android.libraries.social.licenses.LicenseMenuActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] co.ujet.android.activity.incomingcall.UjetIncomingCallActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F16087B" android:name="co.ujet.android.activity.incomingcall.UjetIncomingCallActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] co.ujet.android.activity.incomingcall.UjetScheduleTimePickerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F16087B" android:name="co.ujet.android.activity.incomingcall.UjetScheduleTimePickerActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] co.ujet.android.activity.UjetActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F16087B" android:name="co.ujet.android.activity.UjetActivity" android:exported="true" android:clearTaskOnLaunch="true" android:launchMode="2" android:screenOrientation="1" android:windowSoftInputMode="0x00000020" />
+    [UNPROTECTED ACTIVITY] com.fitbit.healthplatform.ui.HealthConnectOnboardingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1607FD" android:name="com.fitbit.healthplatform.ui.HealthConnectOnboardingActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.fitbit.healthplatform.ui.HealthConnectSettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1607FD" android:name="com.fitbit.healthplatform.ui.HealthConnectSettingsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.fitbit.healthplatform.ui.PermissionsRationaleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.fitbit.healthplatform.ui.PermissionsRationaleActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+          </intent-filter>
+          <meta-data android:name="health_permissions" android:resource="@7F030030" />
+        </activity>
+    [UNPROTECTED ACTIVITY] com.fitbit.potato.ga.oauth.ui.AccountLinkingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1607FD" android:name="com.fitbit.potato.ga.oauth.ui.AccountLinkingActivity" android:exported="true" android:screenOrientation="1">
+          <intent-filter>
+            <action android:name="com.fitbit.potato.ga.oauth.AccountLinking" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.fitbit.sleep.score.ui.OxygenVariationLearnMoreActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1607FD" android:name="com.fitbit.sleep.score.ui.OxygenVariationLearnMoreActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.fitbit.widget.ui.QuickAccessAppWidgetConfigureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F160803" android:name="com.fitbit.widget.ui.QuickAccessAppWidgetConfigureActivity" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.fitbit.fcm.FCMMessageListenerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fitbit.fcm.FCMMessageListenerService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.fitbit.cronus.impl.wear.WearService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fitbit.cronus.impl.wear.WearService" android:exported="true" />
+    [UNPROTECTED SERVICE] com.fitbit.navigation.NavigationConsumerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fitbit.navigation.NavigationConsumerService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] androidx.health.platform.client.impl.sdkservice.HealthDataSdkService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="androidx.health.platform.client.impl.sdkservice.HealthDataSdkService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="androidx.health.platform.client.ACTION_BIND_SDK_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.fitbit.challenges.ui.LandmarkShareBroadcastReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.fitbit.challenges.ui.LandmarkShareBroadcastReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="com.fitbit.challenges.ui.LandmarkShareBroadcastReceiver.SHARED" />
+            <data android:scheme="fitbit-internal" android:host="shared" android:path="landmark" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.fitbit.device.notifications.listener.calls.PhoneCallReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.fitbit.device.notifications.listener.calls.PhoneCallReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.fitbit.platform.externalapp.ExternalAppsRequestContentProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.fitbit.platform.externalapp.ExternalAppsRequestContentProvider" android:enabled="true" android:exported="true" android:authorities="com.fitbit.FitbitMobile.external-apps" />
+    Safe-by-design exports (12):
+      [ACTIVITY] com.fitbit.FirstActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.fitbit.device.ui.setup.choose.FastPairLandingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.amazon.identity.auth.device.workflow.WorkflowActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.stripe.android.payments.StripeBrowserLauncherActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.fitbit.deeplink.DeepLinkActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.fitbit.sleep.ui.onboarding.SleepStagesOnboardingActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.fitbit.dncs.observers.AllAppNotificationListenerService
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      [RECEIVER] com.fitbit.airlink.service.BootCompletedReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.fitbit.mobiletrack.MobileTrackAppUpdateReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED
+      [RECEIVER] com.fitbit.heart.survey.impl.di.LocaleChangeBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.LOCALE_CHANGED
+      [RECEIVER] com.fitbit.widget.ui.PrimaryGoalWidgetProvider
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_DISABLED, android.appwidget.action.APPWIDGET_ENABLED, android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.fitbit.widget.ui.QuickAccessWidgetProvider
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE

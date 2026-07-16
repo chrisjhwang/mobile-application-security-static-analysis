@@ -1,0 +1,80 @@
+================================================================================
+APP    : Copy of com.avempace.smaart.doorphone_7365
+FILE   : Copy of com.avempace.smaart.doorphone_7365.apk
+DATE   : 2026-04-27 22:46:47
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 6 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (6):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.CAMERA
+        @ Lcom/avempace/smaart/doorphone/qrcodeScannerZxing/camera/CameraManager; -> <init>
+        @ Lcom/avempace/smaart/doorphone/qrcodeScannerZxing/camera/CameraManager; -> get
+    android.permission.READ_PHONE_STATE
+    android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Lorg/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 11 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.CAMERA
+        @ Lcom/avempace/smaart/doorphone/qrcodeScannerZxing/camera/CameraManager; -> <init>
+        @ Lcom/avempace/smaart/doorphone/qrcodeScannerZxing/camera/CameraManager; -> get
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroidx/constraintlayout/solver/widgets/ConstraintWidget; -> disconnectUnlockedWidget
+        @ Landroidx/constraintlayout/solver/widgets/ConstraintWidget; -> disconnectWidget
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.RECORD_AUDIO
+        @ Lorg/webrtc/audio/WebRtcAudioRecord; -> startRecording
+        @ Lorg/webrtc/voiceengine/WebRtcAudioRecord; -> startRecording
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 30 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.avempace.smaart.doorphone.notifications.GcmMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.avempace.smaart.doorphone.notifications.GcmMessagingService" android:exported="true" android:stopWithTask="false">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.avempace.smaart.doorphone.activities.SplashScreenActivity
+        Has expected public intent action(s): android.intent.action.MAIN

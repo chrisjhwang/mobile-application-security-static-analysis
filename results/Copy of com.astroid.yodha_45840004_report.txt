@@ -1,0 +1,84 @@
+================================================================================
+APP    : Copy of com.astroid.yodha_45840004
+FILE   : Copy of com.astroid.yodha_45840004.apk
+DATE   : 2026-04-27 22:39:08
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 4 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (4):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_PHONE_STATE
+        @ Lcom/astroid/yodha/customersupport/CustomerSupportInfoProvider; -> getDeviceId
+        @ Lcom/astroid/yodha/customersupport/YodhaCustomerSupportModule$provideCustomerSupportInfoProvider$1; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 of 9 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpGlideModule; -> <init>
+        @ Lcom/bumptech/glide/integration/okhttp3/OkHttpGlideModule; -> registerComponents
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroidx/appcompat/view/menu/ListMenuPresenter$MenuAdapter; -> notifyDataSetChanged
+        @ Landroidx/appcompat/view/menu/MenuAdapter; -> notifyDataSetChanged
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/astroid/yodha/customersupport/CustomerSupportInfoProvider; -> getDeviceId
+        @ Lcom/astroid/yodha/customersupport/YodhaCustomerSupportModule$provideCustomerSupportInfoProvider$1; -> getDeviceId
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 73 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] androidx.core.google.shortcuts.TrampolineActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030055" android:name="androidx.core.google.shortcuts.TrampolineActivity" android:exported="true" android:noHistory="true">
+          <intent-filter>
+            <action android:name="androidx.core.content.pm.SHORTCUT_LISTENER" />
+          </intent-filter>
+          <meta-data android:name="androidx.core.content.pm.shortcut_listener_impl" android:value="androidx.core.google.shortcuts.ShortcutInfoChangeListenerImpl" />
+        </activity>
+    Safe-by-design exports (7):
+      [ACTIVITY] com.astroid.yodha.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.stripe.android.link.LinkRedirectHandlerActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.stripe.android.payments.StripeBrowserProxyReturnActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [RECEIVER] com.astroid.yodha.LocaleChangeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.LOCALE_CHANGED

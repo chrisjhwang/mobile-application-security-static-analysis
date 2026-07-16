@@ -1,0 +1,213 @@
+================================================================================
+APP    : Fastrack Reflex_4.2.3_Apkpure
+FILE   : Fastrack Reflex_4.2.3_Apkpure.apk
+DATE   : 2026-04-28 04:45:40
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 9 normal permission(s) and 13 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (9):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_NOTIFICATION_POLICY
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Dangerous permissions found with INTERNET (13):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lcom/crashlytics/android/beta/Beta; -> getDeviceIdentifiers
+    android.permission.READ_SMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.SEND_SMS  [HARD RESTRICTED]
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 13 of 23 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_NOTIFICATION_POLICY
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CALL_PHONE
+    - android.permission.CAMERA
+    - android.permission.GET_ACCOUNTS
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_SMS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_SMS
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SEND_SMS
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/location/zzq; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroid/support/customtabs/CustomTabsIntent$Builder; -> enableUrlBarHiding
+        @ Landroid/support/v4/app/FragmentManager; -> enableDebugLogging
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/constraint/solver/widgets/ConstraintWidget; -> disconnectUnlockedWidget
+        @ Landroid/support/constraint/solver/widgets/ConstraintWidget; -> disconnectWidget
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/support/v4/content/ContextCompat; -> startForegroundService
+        @ Landroid/support/v4/media/session/MediaButtonReceiver; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lretrofit2/http/DELETE; -> value
+        @ Lretrofit2/http/Field; -> encoded
+    + android.permission.READ_CONTACTS
+        @ Landroid/support/v4/content/ContentResolverCompat; -> <init>
+        @ Landroid/support/v4/content/ContentResolverCompat; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/crashlytics/android/core/SessionProtobufHelper; -> getDeviceIdentifierSize
+        @ Lcom/crashlytics/android/beta/Beta; -> getDeviceIdentifiers
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroid/support/v4/content/ContextCompat; -> getExternalFilesDirs
+        @ Lio/fabric/sdk/android/FabricContext; -> getExternalFilesDir
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 9 component(s) exported without meaningful protection (of 190 total). 8 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.isport.fastrack.camera.CameraActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F0D010D" android:name="com.isport.fastrack.camera.CameraActivity" android:screenOrientation="1" android:configChanges="0x000001A0" android:hardwareAccelerated="true">
+          <intent-filter>
+            <action android:name="CameraActivityIF" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] clovewearable.commons.fitnesscommons.FitnessBuddiesActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F0D010A" android:name="clovewearable.commons.fitnesscommons.FitnessBuddiesActivity" android:launchMode="1" android:screenOrientation="1" android:configChanges="0x000004A0">
+          <intent-filter>
+            <action android:name="ReflexFitnessActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.isport.fastrack.utils.PlayerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.isport.fastrack.utils.PlayerService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.firebase.messaging.FirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.firebase.iid.FirebaseInstanceIdService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.firebase.iid.FirebaseInstanceIdService" android:exported="true">
+          <intent-filter android:priority="-500">
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.isport.fastrack.call.CallReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.isport.fastrack.call.CallReceiver">
+          <intent-filter android:priority="100">
+            <action android:name="android.intent.action.PHONE_STATE" />
+            <action android:name="com.android.phone.NotificationMgr.MissedCall_intent" />
+            <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.isport.fastrack.broadcast.MainServiceStatusReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.isport.fastrack.broadcast.MainServiceStatusReceiver" android:enabled="true">
+          <intent-filter>
+            <action android:name="ReflexRestartServiceIF" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.isport.fastrack.firebaseservices.CloveFirebaseMessagingService$OnClickListener
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.isport.fastrack.firebaseservices.CloveFirebaseMessagingService$OnClickListener">
+          <intent-filter>
+            <action android:name="yes" />
+            <action android:name="no" />
+            <action android:name="maybe" />
+            <action android:name="root" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] clovewearable.commons.firebaseservices.CloveFirebaseMessagingService$OnClickListener
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="clovewearable.commons.firebaseservices.CloveFirebaseMessagingService$OnClickListener">
+          <intent-filter>
+            <action android:name="yes" />
+            <action android:name="no" />
+            <action android:name="maybe" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (8):
+      [ACTIVITY] clovewearable.commons.commonsplash.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.cove.payment.upi.PayementIntentActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.coveiot.android.permissionsandsettings.PermissionRequestActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.isport.fastrack.notification.NotifService
+        Bound only by system via signature permission: android.permission.BIND_ACCESSIBILITY_SERVICE
+      [SERVICE] com.isport.fastrack.notification.NotiServiceListener
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      [RECEIVER] com.isport.fastrack.broadcast.BootReceive
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.cove.payment.upi.receivers.ConnectivityReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE
+      [RECEIVER] com.cove.payment.upi.receivers.UserPresentBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.SCREEN_OFF

@@ -1,0 +1,159 @@
+================================================================================
+APP    : Cisco Secure Client-AnyConnect_5.0.00247_Apkpure
+FILE   : Cisco Secure Client-AnyConnect_5.0.00247_Apkpure.apk
+DATE   : 2026-04-27 19:31:02
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 4 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (4):
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+        @ Lcom/samsung/android/knox/accounts/DeviceAccountPolicy; -> getAccountsFromAdditionBlackLists
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/samsung/android/knox/sdp/SdpFileSystem; -> getExternalStorageDirectory
+    android.permission.READ_PHONE_STATE
+        @ Lcom/cisco/android/nchs/support/DeviceInfoReport; -> getDeviceIdFromRestrictions
+        @ Lcom/cisco/android/nchs/support/DeviceInfoReport; -> getDeviceId
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 10 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.INTERNET
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/media/session/MediaButtonReceiver; -> startForegroundService
+    + android.permission.GET_ACCOUNTS
+        @ Lcom/google/api/client/googleapis/extensions/android/accounts/GoogleAccountManager; -> getAccounts
+        @ Lcom/samsung/android/knox/accounts/DeviceAccountPolicy; -> getAccountsFromAdditionBlackLists
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+        @ Lcom/samsung/android/knox/sdp/SdpFileSystem; -> getExternalStorageDirectory
+    + android.permission.READ_PHONE_STATE
+        @ Lcom/cisco/android/nchs/support/DeviceInfoReport; -> getDeviceIdFromRestrictions
+        @ Lcom/cisco/android/nchs/support/DeviceInfoReport; -> getDeviceId
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 8 component(s) exported without meaningful protection (of 65 total). 7 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.cisco.anyconnect.vpn.android.service.VpnService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.cisco.anyconnect.vpn.android.service.VpnService">
+          <intent-filter>
+            <action android:name="android.net.VpnService" />
+            <action android:name="com.cisco.anyconnect.vpn.android.service.IVpnService" />
+            <action android:name="com.cisco.anyconnect.vpn.android.PER_APP_APPS_ACTION" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.cisco.anyconnect.vpn.android.apptunnel.KnoxInteractionService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.cisco.anyconnect.vpn.android.apptunnel.KnoxInteractionService" android:process=":knox">
+          <intent-filter>
+            <action android:name="com.cisco.anyconnect.vpn.android.avf.BIND_SERVICE_NEW" />
+            <action android:name="com.cisco.anyconnect.vpn.android.KNOX_INTERACTION_BIND_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.cisco.anyconnect.vpn.interceptor.TestInterceptorService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.cisco.anyconnect.vpn.interceptor.TestInterceptorService" android:enabled="true" android:exported="true" android:process=":testintercept" />
+    [UNPROTECTED SERVICE] com.cisco.anyconnect.nvm.services.NVMService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:label="NVMService" android:name="com.cisco.anyconnect.nvm.services.NVMService" android:process=":NVMService">
+          <intent-filter>
+            <action android:name="com.cisco.anyconnect.vpn.android.avf_namonitoraction" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.cisco.anyconnect.vpn.android.widgets.SmallWidget
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:label="@7F110327" android:name="com.cisco.anyconnect.vpn.android.widgets.SmallWidget" android:exported="true">
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.cisco.anyconnect.vpn.android.UPDATE_STATE" />
+            <action android:name="com.cisco.anyconnect.vpn.android.UPDATE_CONNECT_IN_PROGRESS" />
+            <action android:name="com.cisco.anyconnect.vpn.android.UPDATE_DISCONNECT_IN_PROGRESS" />
+            <action android:name="com.cisco.anyconnect.vpn.android.ACTION_APP_INSTALL_COMPLETE" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@7F140012" />
+        </receiver>
+    [UNPROTECTED RECEIVER] com.cisco.umbrella.receiver.UACReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.cisco.umbrella.receiver.UACReceiver" android:process=":umbrella" android:directBootAware="true">
+          <intent-filter android:priority="999">
+            <action android:name="com.cisco.anyconnect.vpn.android.VPN_SERVICE_START_INTENT" />
+            <action android:name="com.cisco.anyconnect.vpn.android.UMBRELLA_ENROLL" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.cisco.anyconnect.nvm.receivers.NVMStartEventsReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.cisco.anyconnect.nvm.receivers.NVMStartEventsReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            <action android:name="com.cisco.anyconnect.vpn.android.EULA_ACTION" />
+            <action android:name="com.cisco.anyconnect.vpn.android.VPN_SERVICE_START_INTENT" />
+            <action android:name="com.cisco.anyconnect.nvm.NPA_PROFILE_AVAILABLE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.cisco.android.nchs.NetworkStateProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.cisco.android.nchs.NetworkStateProvider" android:readPermission="com.cisco.android.nchs.networkstateprovider.permission.READ_PROVIDER" android:exported="true" android:process=":nchs" android:authorities="com.cisco.android.nchs.networkstateprovider" />
+    Safe-by-design exports (7):
+      [ACTIVITY] com.cisco.anyconnect.vpn.android.ui.URIHandlerActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.cisco.anyconnect.ui.PrimaryActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [SERVICE] com.cisco.android.nchs.support.ics.ICSSupportService
+        Bound only by system via signature permission: android.permission.BIND_VPN_SERVICE
+      [RECEIVER] com.cisco.anyconnect.vpn.android.ui.helpers.NetworkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE
+      [RECEIVER] com.cisco.anyconnect.vpn.android.ui.helpers.PackageUpdateReceiver
+        Receives only system-protected broadcast(s): android.intent.action.MY_PACKAGE_REPLACED
+      [RECEIVER] com.cisco.android.nchs.receivers.BootCompleteReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED
+      [RECEIVER] com.cisco.anyconnect.nvm.receivers.NVMBootStrapReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

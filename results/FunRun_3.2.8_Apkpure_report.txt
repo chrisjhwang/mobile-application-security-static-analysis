@@ -1,0 +1,129 @@
+================================================================================
+APP    : FunRun_3.2.8_Apkpure
+FILE   : FunRun_3.2.8_Apkpure.apk
+DATE   : 2026-04-28 05:04:16
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 13 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (13):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+    android.permission.READ_PHONE_STATE
+    android.permission.READ_SMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.SEND_SMS  [HARD RESTRICTED]
+    android.permission.WRITE_CALL_LOG  [HARD RESTRICTED]
+    android.permission.WRITE_CONTACTS
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 22 of 22 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADMIN
+    - android.permission.CAMERA
+    - android.permission.CHANGE_WIFI_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.INTERNET
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_CONTACTS
+    - android.permission.READ_PHONE_STATE
+    - android.permission.READ_SMS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_SMS
+    - android.permission.SEND_SMS
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_CALL_LOG
+    - android.permission.WRITE_CONTACTS
+    - android.permission.WRITE_EXTERNAL_STORAGE
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 51 total). 6 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.szkct.funrun.main.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.szkct.funrun.main.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED SERVICE] com.mtk.service.TrajectoryService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.mtk.service.TrajectoryService" android:process=":remotegps">
+          <intent-filter>
+            <action android:name="com.mtk.service.TrajectoryService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.szkct.funrun.trajectory.SportsService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.szkct.funrun.trajectory.SportsService" android:process=":remotegps">
+          <intent-filter>
+            <action android:name="com.szkct.funrun.trajectory.SportsService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.szkct.funrun.trajectory.ReportAddressService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.szkct.funrun.trajectory.ReportAddressService" android:process=":report">
+          <intent-filter>
+            <action android:name="com.szkct.funrun.trajectory.ReportAddressService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.mtk.service.TelephoneService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.mtk.service.TelephoneService">
+          <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+            <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (6):
+      [ACTIVITY] com.szkct.funrun.main.WelcomeActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.tencent.tauth.AuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cn.sharesdk.framework.ShareSDKUIShell
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.mob.tools.MobUIShell
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] com.mtk.service.NotificationMonitor
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      [RECEIVER] com.mtk.service.BootReceiver
+        Receives only system-protected broadcast(s): android.intent.action.BOOT_COMPLETED

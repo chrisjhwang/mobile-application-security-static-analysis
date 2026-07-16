@@ -1,0 +1,97 @@
+================================================================================
+APP    : myQ Garage & Access Control_5.219.62292_Apkpure
+FILE   : myQ Garage & Access Control_5.219.62292_Apkpure.apk
+DATE   : 2026-04-28 05:48:18
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 9 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (9):
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.CALL_PHONE
+    android.permission.CAMERA
+    android.permission.GET_ACCOUNTS
+    android.permission.READ_CONTACTS
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.RECORD_AUDIO
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 14 of 18 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.CALL_PHONE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.GET_ACCOUNTS
+    - android.permission.READ_CONTACTS
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECORD_AUDIO
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (4) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ Lno/nordicsemi/android/dfu/BaseDfuImpl; -> enableCCCD
+        @ Landroidx/work/ListenableWorker$a; -> <init>
+    + android.permission.CHANGE_WIFI_STATE
+        @ Lno/nordicsemi/android/dfu/DfuBaseService; -> disconnect
+        @ Lcom/google/firebase/perf/network/c; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Lno/nordicsemi/android/dfu/DfuBaseService; -> startForeground
+    + android.permission.INTERNET
+        @ Lokhttp3/a0$a; -> <init>
+        @ Lokhttp3/a0$a; -> a
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 component(s) exported without meaningful protection (of 95 total). 4 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] androidx.biometric.DeviceCredentialHandlerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F140102" android:name="androidx.biometric.DeviceCredentialHandlerActivity" android:exported="true" />
+    [UNPROTECTED RECEIVER] no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (4):
+      [ACTIVITY] com.chamberlain.myq.features.splashscreen.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.chamberlain.myq.features.login.LoginActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.chamberlain.myq.main.HomeTabsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.kochava.base.ReferralReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER

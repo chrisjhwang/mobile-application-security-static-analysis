@@ -1,0 +1,165 @@
+================================================================================
+APP    : Pacer Pedometer & Step Tracker_p9.10.2_Apkpure
+FILE   : Pacer Pedometer & Step Tracker_p9.10.2_Apkpure.apk
+DATE   : 2026-04-28 06:07:20
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 7 normal permission(s) and 8 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (7):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (8):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient$a; -> <init>
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient$a; -> e6
+    android.permission.ACTIVITY_RECOGNITION
+    android.permission.CAMERA
+    android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Lcc/pacer/androidapp/ui/werun/WeRunDeviceToken; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 16 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CAMERA
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+  Used permissions (10) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient$a; -> <init>
+        @ Lcom/google/android/gms/location/FusedLocationProviderClient$a; -> e6
+    + android.permission.ACTIVITY_RECOGNITION
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Protocol; -> <clinit>
+        @ Lokhttp3/Protocol; -> <init>
+    + android.permission.POST_NOTIFICATIONS
+        @ Lcom/j256/ormlite/dao/Dao; -> notifyChanges
+        @ Lcom/j256/ormlite/dao/BaseDaoImpl; -> notifyChanges
+    + android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Lcc/pacer/androidapp/ui/werun/WeRunDeviceToken; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 component(s) exported without meaningful protection (of 368 total). 14 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.mandian.android.dongdong.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.mandian.android.dongdong.wxapi.WXEntryActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] cc.pacer.androidapp.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="cc.pacer.androidapp.wxapi.WXEntryActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] cc.pacer.androidapp.dataaccess.push.service.PacerFcmListenerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="cc.pacer.androidapp.dataaccess.push.service.PacerFcmListenerService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] cc.pacer.androidapp.dataaccess.push.service.PacerInstanceIDListenerService
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="cc.pacer.androidapp.dataaccess.push.service.PacerInstanceIDListenerService">
+          <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true" />
+    [UNPROTECTED RECEIVER] cc.pacer.androidapp.dataaccess.core.service.PowerReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="cc.pacer.androidapp.dataaccess.core.service.PowerReceiver">
+          <intent-filter>
+            <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (14):
+      [ACTIVITY] cc.pacer.androidapp.ui.subscription.controllers.StoreFrontVerticalButtonsActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cc.pacer.androidapp.ui.splash.FakeSplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] cc.pacer.androidapp.ui.splash.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] cc.pacer.androidapp.ui.main.MainActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.tencent.tauth.AuthActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cc.pacer.androidapp.ui.mfp.MFPActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cc.pacer.androidapp.ui.tutorial.controllers.video.TutorialVideoActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cc.pacer.androidapp.ui.partner.controllers.PartnerConnectActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] cc.pacer.androidapp.ui.account.view.b.ResetPasswordActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] cc.pacer.androidapp.dataaccess.core.service.RebootBroadcastReceiver
+        Receives only system-protected broadcast(s): android.intent.action.PACKAGE_REPLACED
+      [RECEIVER] com.appsflyer.SingleInstallBroadcastReceiver
+        Receives only system-protected broadcast(s): com.android.vending.INSTALL_REFERRER
+      [RECEIVER] cc.pacer.androidapp.ui.appwidget.PacerWidget
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_DELETED, android.appwidget.action.APPWIDGET_DISABLED, android.appwidget.action.APPWIDGET_ENABLED, android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] cc.pacer.androidapp.ui.appwidget.PacerWidgetBig
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_DELETED, android.appwidget.action.APPWIDGET_DISABLED, android.appwidget.action.APPWIDGET_ENABLED, android.appwidget.action.APPWIDGET_UPDATE

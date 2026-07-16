@@ -1,0 +1,840 @@
+================================================================================
+APP    : fitpro_2.1.0_Apkpure
+FILE   : fitpro_2.1.0_Apkpure.apk
+DATE   : 2026-04-28 04:58:54
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 8 normal permission(s) and 13 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (8):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  Dangerous permissions found with INTERNET (13):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    android.permission.BLUETOOTH_ADVERTISE
+        @ Lcom/example/bluetoothlibrary/bluetooth4/IBLEAdvertiseManager; -> startAdvertising
+        @ Lcom/example/bluetoothlibrary/bluetooth/BTBluetooth; -> startAdvertising
+    android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcn/bertsir/zbar/QrManager; -> startScan
+        @ Lcn/bertsir/zbar/view/ScanView; -> startScan
+    android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$$ExternalSyntheticLambda0; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$$ExternalSyntheticLambda0; -> run
+    android.permission.READ_CALL_LOG  [HARD RESTRICTED]
+    android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    android.permission.READ_SMS  [HARD RESTRICTED]
+    android.permission.RECEIVE_SMS  [HARD RESTRICTED]
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 6 of 22 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.READ_CALL_LOG
+    - android.permission.READ_SMS
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.RECEIVE_SMS
+  Used permissions (16) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Landroidx/core/location/LocationManagerCompat$Api31Impl; -> requestLocationUpdates
+        @ Landroidx/core/location/LocationManagerCompat; -> requestLocationUpdates
+    + android.permission.ACCESS_NETWORK_STATE
+        @ Lcom/blankj/utilcode/util/NetworkUtils; -> getActiveNetworkInfo
+    + android.permission.BLUETOOTH_ADMIN
+        @ Landroidx/appcompat/view/ActionBarPolicy; -> enableHomeButtonByDefault
+        @ Landroidx/appcompat/widget/ActionBarOverlayLayout$ActionBarVisibilityCallback; -> enableContentAnimations
+    + android.permission.BLUETOOTH_ADVERTISE
+        @ Lcom/example/bluetoothlibrary/bluetooth4/IBLEAdvertiseManager; -> startAdvertising
+        @ Lcom/example/bluetoothlibrary/bluetooth/BTBluetooth; -> startAdvertising
+    + android.permission.BLUETOOTH_CONNECT
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> connect
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcn/bertsir/zbar/QrManager; -> startScan
+        @ Lcn/bertsir/zbar/view/ScanView; -> startScan
+    + android.permission.CAMERA
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$$ExternalSyntheticLambda0; -> <init>
+        @ Landroidx/camera/camera2/internal/compat/CameraManagerCompat$AvailabilityCallbackExecutorWrapper$$ExternalSyntheticLambda0; -> run
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroid/support/v4/media/MediaBrowserCompat$MediaBrowserImpl; -> disconnect
+        @ Landroid/support/v4/media/MediaBrowserCompat$ServiceBinderWrapper; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat$Api26Impl; -> startForegroundService
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.READ_CONTACTS
+        @ Landroidx/camera/core/ImageCapture$OutputFileOptions; -> getContentResolver
+        @ Landroidx/camera/core/VideoCapture$OutputFileOptions; -> getContentResolver
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.READ_PHONE_STATE
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api23Impl; -> getDeviceId
+        @ Landroidx/core/telephony/TelephonyManagerCompat$Api26Impl; -> getImei
+    + android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+        @ Lxfkj/fitpro/utils/KeepLiveUtils; -> isIgnoringBatteryOptimizations
+        @ Lcom/realsil/sdk/support/permission/PermissionHelper; -> isIgnoringBatteryOptimizations
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat$Api19Impl; -> getExternalFilesDirs
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 134 component(s) exported without meaningful protection (of 224 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.speak.AddUserActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.speak.AddUserActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.speak.SpeakUserListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.speak.SpeakUserListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.speak.UserIdeasActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.speak.UserIdeasActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ota.OMOTAActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ota.OMOTAActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.debug.DebugFunctionActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.debug.DebugFunctionActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ota.LyOTActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ota.LyOTActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.test.FileSendFilesActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.test.FileSendFilesActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ota.BKOTAActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ota.BKOTAActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.keeplive.BackPermissionSettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.keeplive.BackPermissionSettingsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ecg.ECGHistoryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ecg.ECGHistoryActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ecg.ECGMeasureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ecg.ECGMeasureActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ecg.EcgTransformImageActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ecg.EcgTransformImageActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.BTConectGuideActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.BTConectGuideActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.log.SleepLogActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.log.SleepLogActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.UserProtocolActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.UserProtocolActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.clockDial.watchTheme1.ClockDialDetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.clockDial.watchTheme1.ClockDialDetailsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.clockDial.watchTheme1.ClockDialListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.clockDial.watchTheme1.ClockDialListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2Activity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2Activity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2DetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2DetailsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2ListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.clockDial.watchTheme2.WatchTheme2ListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.TempHistoryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.TempHistoryActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.SynContractsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.SynContractsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ShareStepsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ShareStepsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.feedback.FeedbackListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.feedback.FeedbackListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.feedback.FeedbackDetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.feedback.FeedbackDetailsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.Camera2Activity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.Camera2Activity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.motion.SportTrackDetailsGmapActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130131" android:name="xfkj.fitpro.activity.motion.SportTrackDetailsGmapActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.motion.SportHistoryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.motion.SportHistoryActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.motion.SportSettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.motion.SportSettingsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.habbit.HealthHabbitRankListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.habbit.HealthHabbitRankListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.habbit.HealthHabbitDetailsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.habbit.HealthHabbitDetailsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.habbit.HealthHabbitCreateActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.habbit.HealthHabbitCreateActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.habbit.HealthHabbitAddActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.habbit.HealthHabbitAddActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.habbit.HealthHabbitListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.habbit.HealthHabbitListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ModifyPasswordActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.ModifyPasswordActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.personinfo.PersonalInfoSubActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.personinfo.PersonalInfoSubActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.personinfo.PersonalInfoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.personinfo.PersonalInfoActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.DebugUIActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.DebugUIActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.HealthReportActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.HealthReportActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.RankActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.RankActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.login.RegisterFinishActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.login.RegisterFinishActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.login.ForgetPsdActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.login.ForgetPsdActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.login.RegisterActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.login.RegisterActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.login.LoginActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130131" android:name="xfkj.fitpro.activity.login.LoginActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.MiBandReaderActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.MiBandReaderActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.SetInfoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130011" android:name="xfkj.fitpro.activity.SetInfoActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130011" android:name="xfkj.fitpro.activity.MainActivity" android:exported="true" android:configChanges="0x000020A4" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.ApiDebugActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130011" android:name="xfkj.fitpro.activity.ApiDebugActivity" android:exported="true" android:configChanges="0x000020A4" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.WelcomeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F1301E8" android:name="xfkj.fitpro.activity.WelcomeActivity" android:exported="true" android:configChanges="0x000020A4" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.AboutActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.AboutActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.AlarmActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.AlarmActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.LongsitWarnActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.LongsitWarnActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.MessageSettingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.MessageSettingActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.UinfoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.UinfoActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.MoreSleepActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.MoreSleepActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.StepNumberMoreActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.StepNumberMoreActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.BrightScreenActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.BrightScreenActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.HeartAutoActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.HeartAutoActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.SleepSwitchActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.SleepSwitchActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.DisturbSwitchActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.DisturbSwitchActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.UpdateOtaActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.UpdateOtaActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.WxSportActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.WxSportActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.MeasureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.MeasureActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.feedback.FeedbackActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.feedback.FeedbackActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.WxUploadActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.WxUploadActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.motion.SportGMapActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130131" android:name="xfkj.fitpro.activity.motion.SportGMapActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] cn.xiaofengkj.fitpro.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="cn.xiaofengkj.fitpro.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.majia.alading.watch.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.majia.alading.watch.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.majia.daku.sports.watch.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.majia.daku.sports.watch.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.legend.youhuo.watch.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.legend.youhuo.watch.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.legend.superband.watch.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.legend.superband.watch.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.legend.hiwatchpro.app.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.legend.hiwatchpro.app.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.legend.hiwtchMax.app.wxapi.WXEntryActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@android:01030010" android:name="com.legend.hiwtchMax.app.wxapi.WXEntryActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.measure.BloodMeasureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.measure.BloodMeasureActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] xfkj.fitpro.activity.measure.HeartMeasureActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="xfkj.fitpro.activity.measure.HeartMeasureActivity" android:exported="true" android:configChanges="0x00002014" />
+    [UNPROTECTED ACTIVITY] com.fanjun.keeplive.activity.OnePixelActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130533" android:name="com.fanjun.keeplive.activity.OnePixelActivity" android:exported="true" android:excludeFromRecents="true" android:launchMode="3" />
+    [UNPROTECTED ACTIVITY] com.onmicro.omtoolbox.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.onmicro.omtoolbox.MainActivity" android:exported="true" android:launchMode="2" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.onmicro.omtoolbox.dfu.DfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F12011F" android:icon="@7F0800F6" android:name="com.onmicro.omtoolbox.dfu.DfuActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.onmicro.omtoolbox.dfu.NotificationActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="DFU升级" android:name="com.onmicro.omtoolbox.dfu.NotificationActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.MuiltOTAFileChoiseActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.beken.beken_ota.MuiltOTAFileChoiseActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.SelectModeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.beken.beken_ota.SelectModeActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.BRScanActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130010" android:name="com.beken.beken_ota.BRScanActivity" android:exported="true" android:minHeight="?7F04000B" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.BRMuiltScanActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130010" android:name="com.beken.beken_ota.BRMuiltScanActivity" android:exported="true" android:minHeight="?7F04000B" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.BLEScanActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130010" android:name="com.beken.beken_ota.BLEScanActivity" android:exported="true" android:minHeight="?7F04000B" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.OTAMuiltFunctionActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130010" android:name="com.beken.beken_ota.OTAMuiltFunctionActivity" android:exported="true" android:minHeight="?7F04000B" />
+    [UNPROTECTED ACTIVITY] com.beken.beken_ota.OTAFunctionActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130010" android:name="com.beken.beken_ota.OTAFunctionActivity" android:exported="true" android:minHeight="?7F04000B" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureSelectorActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureSelectorActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureSelectorWeChatStyleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureSelectorWeChatStyleActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureSelectorCameraEmptyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13015D" android:name="com.luck.picture.lib.PictureSelectorCameraEmptyActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureCustomCameraActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureCustomCameraActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PicturePreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PicturePreviewActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureSelectorPreviewWeChatStyleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureSelectorPreviewWeChatStyleActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureVideoPlayActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureVideoPlayActivity" android:exported="true" android:screenOrientation="4" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PictureExternalPreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PictureExternalPreviewActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.luck.picture.lib.PicturePlayAudioActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.luck.picture.lib.PicturePlayAudioActivity" android:exported="true" android:configChanges="0x000004A0" />
+    [UNPROTECTED ACTIVITY] com.yalantis.ucrop.UCropActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13007C" android:name="com.yalantis.ucrop.UCropActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.yalantis.ucrop.PictureMultiCuttingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F13007C" android:name="com.yalantis.ucrop.PictureMultiCuttingActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.mupdate.ScanBleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.realsil.ota.function.mupdate.ScanBleActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.mupdate.MulpUpdateConfigActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.realsil.ota.function.mupdate.MulpUpdateConfigActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.ui.SplashActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.realsil.ota.ui.SplashActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.GattDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.GattDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.mupdate.MuilGattDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.mupdate.MuilGattDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.HidOtaActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.HidOtaActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.BackgroundDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.BackgroundDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.SppDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.SppDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.HeadsetOtaActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205C6" android:name="com.realsil.ota.function.HeadsetOtaActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.ui.MainActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205F5" android:name="com.realsil.ota.ui.MainActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.ui.AboutActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.realsil.ota.ui.AboutActivity" android:exported="true" android:launchMode="1" android:configChanges="0x000004B0">
+          <intent-filter android:priority="1">
+            <action android:name="rtk.action.OTA_ABOUT" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.UsbDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205D0" android:name="com.realsil.ota.function.UsbDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.ota.function.UsbGattDfuActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205D0" android:name="com.realsil.ota.function.UsbGattDfuActivity" android:exported="true" android:launchMode="1" android:configChanges="0x40002FFF" />
+    [UNPROTECTED ACTIVITY] com.realsil.sdk.support.settings.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130194" android:label="@7F120473" android:name="com.realsil.sdk.support.settings.SettingsActivity" android:exported="true" android:launchMode="1" android:screenOrientation="4" android:configChanges="0x000004B0">
+          <intent-filter android:priority="1">
+            <action android:name="rtk.action.settings.BT_SCAN_FILTER" />
+            <action android:name="rtk.action.settings.DEVELOPER_OPTIONS" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.realsil.sdk.dfu.support.settings.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F120473" android:name="com.realsil.sdk.dfu.support.settings.SettingsActivity" android:exported="true" android:launchMode="1" android:configChanges="0x000004B0" />
+    [UNPROTECTED ACTIVITY] com.realsil.sdk.support.ui.LocalActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130194" android:label="@7F120473" android:name="com.realsil.sdk.support.ui.LocalActivity" android:exported="true" android:launchMode="1" android:configChanges="0x000004B0">
+          <intent-filter android:priority="1">
+            <action android:name="rtk.action.local.DEVICE_INFO" />
+            <action android:name="rtk.action.local.DEPENDENCE_INFO" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] com.realsil.sdk.support.ui.LocalAssetHtmlActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130194" android:label="@7F120473" android:name="com.realsil.sdk.support.ui.LocalAssetHtmlActivity" android:exported="true" android:launchMode="1" android:configChanges="0x000004B0">
+          <intent-filter android:priority="1">
+            <action android:name="rtk.settings.HELP" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] app.akexorcist.bluetotohspp.demo.ListenerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205F4" android:name="app.akexorcist.bluetotohspp.demo.ListenerActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] app.akexorcist.bluetotohspp.demo.AutoConnectActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205F2" android:name="app.akexorcist.bluetotohspp.demo.AutoConnectActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] app.akexorcist.bluetotohspp.demo.DeviceListActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="@7F1205F3" android:name="app.akexorcist.bluetotohspp.demo.DeviceListActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] app.akexorcist.bluetotohspp.demo.TerminalActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F130014" android:label="@7F1205F7" android:name="app.akexorcist.bluetotohspp.demo.TerminalActivity" android:exported="true" />
+    [UNPROTECTED SERVICE] xfkj.fitpro.websocket.JWebSocketClientService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="xfkj.fitpro.websocket.JWebSocketClientService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] xfkj.fitpro.service.LeService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="xfkj.fitpro.service.LeService" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name=".service.LeService" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] xfkj.fitpro.bluetooth.BluetoothLeService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="xfkj.fitpro.bluetooth.BluetoothLeService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] xfkj.fitpro.service.TelinkOtaUpgradeService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="xfkj.fitpro.service.TelinkOtaUpgradeService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.fanjun.keeplive.service.LocalService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fanjun.keeplive.service.LocalService" android:exported="true" />
+    [UNPROTECTED SERVICE] com.fanjun.keeplive.service.HideForegroundService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fanjun.keeplive.service.HideForegroundService" android:exported="true" />
+    [UNPROTECTED SERVICE] com.fanjun.keeplive.service.RemoteService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.fanjun.keeplive.service.RemoteService" android:exported="true" android:process=":remote" />
+    [UNPROTECTED SERVICE] com.onmicro.omtoolbox.dfu.DfuService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.onmicro.omtoolbox.dfu.DfuService" android:exported="true" />
+    [UNPROTECTED SERVICE] com.onmicro.omtoolbox.service.BleService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.onmicro.omtoolbox.service.BleService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.beken.beken_ota.ble.BluetoothLeService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.beken.beken_ota.ble.BluetoothLeService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.realsil.ota.function.RtkUpdateService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.realsil.ota.function.RtkUpdateService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] yqy.yichip.yc_lib_ota_3_gen.wristband._3GenBandOtaService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="yqy.yichip.yc_lib_ota_3_gen.wristband._3GenBandOtaService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] yqy.yichip.yc_lib_ota_3_gen.wristband_1121E._3GenEBandOtaService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="yqy.yichip.yc_lib_ota_3_gen.wristband_1121E._3GenEBandOtaService" android:enabled="true" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000" />
+        </service>
+    [UNPROTECTED RECEIVER] com.fanjun.keeplive.receiver.NotificationClickReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.fanjun.keeplive.receiver.NotificationClickReceiver" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.realsil.ota.function.RtkOtaReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.realsil.ota.function.RtkOtaReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="rtk_ACTION_START_OTA" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (5):
+      [ACTIVITY] xfkj.fitpro.activity.MenusActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] xfkj.fitpro.activity.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.facebook.CustomTabActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [SERVICE] xfkj.fitpro.service.NotifyService
+        Bound only by system via signature permission: android.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+      [RECEIVER] xfkj.fitpro.receiver.LanguageChangeReceiver
+        Receives only system-protected broadcast(s): android.intent.action.LOCALE_CHANGED

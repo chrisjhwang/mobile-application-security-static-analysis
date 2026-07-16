@@ -1,0 +1,114 @@
+================================================================================
+APP    : AC Remote Control_2.1_Apkpure
+FILE   : AC Remote Control_2.1_Apkpure.apk
+DATE   : 2026-04-27 14:47:38
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.RECEIVE_BOOT_COMPLETED
+  Dangerous permissions found with INTERNET (2):
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 3 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+  Used permissions (5) — call-site evidence for manual review:
+    + android.permission.CHANGE_WIFI_STATE
+        @ Landroidx/core/content/UnusedAppRestrictionsBackportServiceConnection; -> disconnectFromService
+        @ Lcom/google/android/gms/common/api/GoogleApiClient; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroidx/core/content/ContextCompat; -> startForegroundService
+        @ Landroidx/work/impl/foreground/ForegroundProcessor; -> startForeground
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> a
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 10 component(s) exported without meaningful protection (of 60 total). 1 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.SaveRemoteActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.SaveRemoteActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteACActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteACActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteTVActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteTVActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteDVDActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteDVDActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemotePROJActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemotePROJActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteCAMERActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteCAMERActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteAVActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteAVActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.RemoteSTBActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.ac.remote.control.air.conditioner.temperature.activity.RemoteSTBActivity" android:exported="true" android:screenOrientation="1" />
+    [UNPROTECTED ACTIVITY] com.example.app.ads.helper.activity.FullScreenNativeAdDialogActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.example.app.ads.helper.activity.FullScreenNativeAdDialogActivity" android:exported="true" android:screenOrientation="1" android:configChanges="0x000004A0" android:windowSoftInputMode="0x00000033" android:hardwareAccelerated="true" android:largeHeap="true" />
+    [UNPROTECTED RECEIVER] com.ac.remote.control.air.conditioner.temperature.receiver.AlarmReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.ac.remote.control.air.conditioner.temperature.receiver.AlarmReceiver" android:enabled="true" android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.NOTIFY" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (1):
+      [ACTIVITY] com.ac.remote.control.air.conditioner.temperature.activity.SplashActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW

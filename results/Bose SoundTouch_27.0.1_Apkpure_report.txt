@@ -1,0 +1,123 @@
+================================================================================
+APP    : Bose SoundTouch_27.0.1_Apkpure
+FILE   : Bose SoundTouch_27.0.1_Apkpure.apk
+DATE   : 2026-04-27 16:38:33
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 5 normal permission(s) and 2 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (5):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.CHANGE_WIFI_MULTICAST_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+  Dangerous permissions found with INTERNET (2):
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 7 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.CHANGE_WIFI_MULTICAST_STATE
+    - android.permission.CHANGE_WIFI_STATE
+    - android.permission.FOREGROUND_SERVICE
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (1) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/internal/connection/RouteException; -> <init>
+        @ Lokhttp3/internal/connection/RouteException; -> a
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 5 component(s) exported without meaningful protection (of 21 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED SERVICE] com.bose.soundtouch.nuremberg.WearActionListenerService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bose.soundtouch.nuremberg.WearActionListenerService" android:enabled="true" android:exported="true" android:process=":dcs">
+          <intent-filter>
+            <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+            <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+            <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED" />
+            <action android:name="com.google.android.gms.wearable.CHANNEL_EVENT" />
+            <data android:scheme="wear" android:host="*" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.bose.soundtouch.nuremberg.WearDeviceUpdateReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bose.soundtouch.nuremberg.WearDeviceUpdateReceiver" android:process=":dcs">
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.UPDATE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.ART_UPDATE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.DISCONNECTED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.bose.soundtouch.nuremberg.AlbumArtUpdateReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bose.soundtouch.nuremberg.AlbumArtUpdateReceiver" android:process=":dcs">
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.UPDATE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.bose.soundtouch.nuremberg.GabboDataReceiver
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bose.soundtouch.nuremberg.GabboDataReceiver" android:process=":dcs">
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.DATA_SELECTED_DEVICE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.DATA_FEATURE_LIST" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.ENABLE_NOTIFICATION" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.HANDLE_AUTHSERVER_CHANGE" />
+          </intent-filter>
+          <intent-filter>
+            <action android:name="com.bose.soundtouch.HANDLE_LOGLEVEL_CHANGE" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.bose.soundtouch.android.main.CGabboMainActivity$ReceiveDeepLink
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bose.soundtouch.android.main.CGabboMainActivity$ReceiveDeepLink" android:enabled="true">
+          <intent-filter>
+            <action android:name="handle.deeplink" />
+          </intent-filter>
+        </receiver>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.bose.soundtouch.android.main.CGabboMainActivity
+        Has expected public intent action(s): android.intent.action.MAIN
+      [ACTIVITY] com.bose.soundtouch.android.main.ParseDeepLinkActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.bose.soundtouch.nuremberg.NetworkChangeReceiver
+        Receives only system-protected broadcast(s): android.net.conn.CONNECTIVITY_CHANGE

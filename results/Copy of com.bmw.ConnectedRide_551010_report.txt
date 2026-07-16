@@ -1,0 +1,227 @@
+================================================================================
+APP    : Copy of com.bmw.ConnectedRide_551010
+FILE   : Copy of com.bmw.ConnectedRide_551010.apk
+DATE   : 2026-04-27 23:29:38
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 14 normal permission(s) and 14 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (14):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.ACCESS_WIFI_STATE
+    android.permission.BLUETOOTH
+    android.permission.BLUETOOTH_ADMIN
+    android.permission.CHANGE_NETWORK_STATE
+    android.permission.CHANGE_WIFI_STATE
+    android.permission.FOREGROUND_SERVICE
+    android.permission.FOREGROUND_SERVICE_CAMERA
+    android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+    android.permission.FOREGROUND_SERVICE_DATA_SYNC
+    android.permission.POST_NOTIFICATIONS
+    android.permission.RECEIVE_BOOT_COMPLETED
+    android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    android.permission.SYSTEM_ALERT_WINDOW
+  Dangerous permissions found with INTERNET (14):
+    android.permission.ACCESS_BACKGROUND_LOCATION  [HARD RESTRICTED]
+    android.permission.ACCESS_COARSE_LOCATION
+    android.permission.ACCESS_FINE_LOCATION
+    android.permission.ACCESS_MEDIA_LOCATION
+    android.permission.BLUETOOTH_ADVERTISE
+    android.permission.BLUETOOTH_CONNECT
+        @ LIceInternal/q; -> connect
+        @ Li/i; -> connect
+    android.permission.BLUETOOTH_SCAN
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> <init>
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> create
+    android.permission.CAMERA
+    android.permission.NEARBY_WIFI_DEVICES
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> <init>
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> create
+    android.permission.READ_CONTACTS
+    android.permission.READ_EXTERNAL_STORAGE
+    android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+    android.permission.READ_PHONE_STATE
+    android.permission.WRITE_EXTERNAL_STORAGE
+  Risk level: HIGH
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 20 of 29 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_BACKGROUND_LOCATION
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_MEDIA_LOCATION
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADVERTISE
+    - android.permission.CAMERA
+    - android.permission.CHANGE_NETWORK_STATE
+    - android.permission.FOREGROUND_SERVICE_CAMERA
+    - android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+    - android.permission.FOREGROUND_SERVICE_DATA_SYNC
+    - android.permission.READ_CONTACTS
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.READ_PHONE_STATE
+    - android.permission.RECEIVE_BOOT_COMPLETED
+    - android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+    - android.permission.SYSTEM_ALERT_WINDOW
+    - android.permission.WRITE_EXTERNAL_STORAGE
+  Used permissions (9) — call-site evidence for manual review:
+    + android.permission.BLUETOOTH_ADMIN
+        @ LIceMX/c0; -> enableMetricsView
+        @ LIceMX/m; -> end_enableMetricsView
+    + android.permission.BLUETOOTH_CONNECT
+        @ LIceInternal/q; -> connect
+        @ Li/i; -> connect
+    + android.permission.BLUETOOTH_SCAN
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> <init>
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> create
+    + android.permission.CHANGE_WIFI_STATE
+        @ Li/i; -> disconnect
+        @ Ll/g; -> disconnect
+    + android.permission.FOREGROUND_SERVICE
+        @ Landroid/app/ServiceStartNotAllowedException; -> <clinit>
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.NEARBY_WIFI_DEVICES
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> <init>
+        @ Lcom/bmw/connride/lib/bledataexchange/BleSender$startScanner$2; -> create
+    + android.permission.POST_NOTIFICATIONS
+        @ LConnectedRide/d8; -> _notify
+        @ Landroidx/appcompat/view/menu/e$a; -> notifyDataSetChanged
+    + android.permission.READ_MEDIA_IMAGES
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <clinit>
+        @ Lcom/squareup/picasso/MediaStoreRequestHandler$PicassoKind; -> <init>
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 14 component(s) exported without meaningful protection (of 99 total). 2 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] androidx.compose.ui.tooling.PreviewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="androidx.compose.ui.tooling.PreviewActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F150402" android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F150402" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED ACTIVITY] androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F150401" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" android:exported="true">
+          <intent-filter android:priority="-100">
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    [UNPROTECTED SERVICE] com.bmw.connride.lin.service.LinService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bmw.connride.lin.service.LinService" android:exported="true" android:foregroundServiceType="0x00000010" />
+    [UNPROTECTED SERVICE] com.tomtom.positioning.player.Player
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.tomtom.positioning.player.Player" android:exported="true" />
+    [UNPROTECTED SERVICE] com.google.android.play.core.assetpacks.AssetPackExtractionService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService" android:enabled="false" android:exported="true">
+          <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="20100" />
+        </service>
+    [UNPROTECTED SERVICE] com.bosch.myspin.serverimpl.service.MySpinService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bosch.myspin.serverimpl.service.MySpinService" android:enabled="true" android:exported="true" android:process=":sdkservice" android:stopWithTask="true" android:foregroundServiceType="0x00000010">
+          <meta-data android:name="isSdkVersion>220" android:value="true" />
+          <intent-filter>
+            <action android:name="com.bosch.myspin.ACTION_BIND_VEHICLEDATA_REGISTRATION" />
+            <action android:name="com.bosch.myspin.ACTION_BIND_VEHICLEDATA_REGISTRATION_V13X" />
+            <action android:name="com.bosch.myspin.ACTION_BIND_ELISTENER_REGISTRATION" />
+            <action android:name="com.bosch.myspin.ACTION_BIND_NAVIGATION_INTERFACE" />
+            <action android:name="com.bosch.myspin.ACTION_BIND_VOICECONTROL_INTERFACE" />
+            <action android:name="com.bosch.myspin.ACTION_BIND_MYSPIN_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED SERVICE] com.bosch.myspin.serverimpl.service.romajikeyboard.RomajiDecoderService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.bosch.myspin.serverimpl.service.romajikeyboard.RomajiDecoderService" android:enabled="true" android:exported="true" android:process=":RomajiDecoderService">
+          <meta-data android:name="isSdkVersion>220" android:value="true" />
+          <intent-filter>
+            <action android:name="com.bosch.myspin.ACTION_BIND_MYSPIN_ROMAJIKEYBOARD_SERVICE" />
+          </intent-filter>
+        </service>
+    [UNPROTECTED RECEIVER] com.bmw.connride.service.IccConnectionEventReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bmw.connride.service.IccConnectionEventReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED" />
+            <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED RECEIVER] com.bmw.connride.service.batteryguard.BatteryGuardReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bmw.connride.service.batteryguard.BatteryGuardReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] com.bmw.connride.service.nextservice.NextServiceReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="com.bmw.connride.service.nextservice.NextServiceReceiver" android:enabled="true" android:exported="true" />
+    [UNPROTECTED RECEIVER] no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <receiver android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver" android:exported="true">
+          <intent-filter>
+            <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND" />
+          </intent-filter>
+        </receiver>
+    [UNPROTECTED PROVIDER] com.bosch.myspin.serverimpl.service.MySpinServiceStateProvider
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <provider android:name="com.bosch.myspin.serverimpl.service.MySpinServiceStateProvider" android:exported="true" android:process=":sdkservice" android:authorities="com.bmw.ConnectedRide.service.state" />
+    Safe-by-design exports (2):
+      [ACTIVITY] com.bmw.connride.ui.LaunchActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.SEND, android.intent.action.VIEW
+      [ACTIVITY] androidx.fragment.app.testing.FragmentScenario$EmptyFragmentActivity
+        Has expected public intent action(s): android.intent.action.MAIN

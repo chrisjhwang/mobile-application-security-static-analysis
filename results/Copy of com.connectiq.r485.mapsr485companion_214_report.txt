@@ -1,0 +1,86 @@
+================================================================================
+APP    : Copy of com.connectiq.r485.mapsr485companion_214
+FILE   : Copy of com.connectiq.r485.mapsr485companion_214.apk
+DATE   : 2026-04-28 03:53:53
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 1 normal permission(s) and 6 dangerous permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (1):
+    android.permission.ACCESS_NETWORK_STATE
+  Dangerous permissions found with INTERNET (6):
+    android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/zzcca; -> requestLocationUpdates
+    android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    android.permission.READ_CALENDAR
+    android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat; -> query
+    android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+  Risk level: MEDIUM
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 2 of 8 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.READ_CALENDAR
+  Used permissions (6) — call-site evidence for manual review:
+    + android.permission.ACCESS_COARSE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/internal/zzcca; -> requestLocationUpdates
+    + android.permission.ACCESS_FINE_LOCATION
+        @ Lcom/google/android/gms/location/FusedLocationProviderApi; -> requestLocationUpdates
+        @ Lcom/google/android/gms/location/LocationServices; -> getFusedLocationProviderClient
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> certificatePinner
+    + android.permission.READ_CONTACTS
+        @ Landroidx/core/content/ContentResolverCompat; -> <init>
+        @ Landroidx/core/content/ContentResolverCompat; -> query
+    + android.permission.READ_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+    + android.permission.WRITE_EXTERNAL_STORAGE
+        @ Landroidx/core/content/ContextCompat; -> getExternalFilesDirs
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 component(s) exported without meaningful protection (of 29 total). 5 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.connectiq.r485.mapsr485companion.ShortcutActivity
+      export : implicit (intent-filter, no exported attr — defaults true on Android < 12)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:label="Shortcut to app or route" android:icon="@7F0E0029" android:name="com.connectiq.r485.mapsr485companion.ShortcutActivity">
+          <intent-filter android:icon="@7F0E0029">
+            <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+        </activity>
+    Safe-by-design exports (5):
+      [ACTIVITY] com.connectiq.r485.mapsr485companion.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.connectiq.r485.mapsr485companion.IntentActivity
+        Has expected public intent action(s): android.intent.action.SEND
+      [ACTIVITY] com.connectiq.r485.mapsr485companion.MainActivityRouteMaker2
+        Has expected public intent action(s): android.intent.action.VIEW
+      [RECEIVER] com.connectiq.r485.mapsr485companion.SimpleWidgetProvider
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE
+      [RECEIVER] com.connectiq.r485.mapsr485companion.SimpleWidgetProviderRoute
+        Receives only system-protected broadcast(s): android.appwidget.action.APPWIDGET_UPDATE

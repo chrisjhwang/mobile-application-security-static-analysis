@@ -1,0 +1,171 @@
+================================================================================
+APP    : com.app.soivyfi_135
+FILE   : com.app.soivyfi_135.apk
+DATE   : 2026-04-27 19:49:30
+RQs run: RQ4, RQ5, RQ7
+================================================================================
+
+--------------------------------------------------------------------------------
+[RQ4] RQ4 — Internet + PII Permissions
+--------------------------------------------------------------------------------
+  Notes  : INTERNET combined with 2 normal permission(s).
+  Internet  : YES
+  Normal permissions found with INTERNET (2):
+    android.permission.ACCESS_NETWORK_STATE
+    android.permission.POST_NOTIFICATIONS
+  Dangerous permissions found with INTERNET (0):
+    (none)
+  Risk level: LOW
+  Benchmark — HIGH   : dangerous permissions present + at least one is hard restricted
+               MEDIUM : dangerous permissions present, none hard restricted
+               LOW    : only normal permissions alongside INTERNET
+               NONE   : INTERNET absent or no categorized permissions found
+
+--------------------------------------------------------------------------------
+[RQ5] RQ5 — Unused Permissions
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 1 of 3 checkable permission(s) appear unused. Note: dynamic dispatch may cause false positives — manual review advised.
+    - android.permission.ACCESS_NETWORK_STATE
+  Used permissions (2) — call-site evidence for manual review:
+    + android.permission.INTERNET
+        @ Lokhttp3/Address; -> <init>
+        @ Lokhttp3/Address; -> -deprecated_certificatePinner
+    + android.permission.POST_NOTIFICATIONS
+        @ Landroid/support/customtabs/trusted/ITrustedWebActivityService; -> notifyNotificationWithChannel
+        @ Landroid/support/v4/app/INotificationSideChannel; -> notify
+
+--------------------------------------------------------------------------------
+[RQ7] RQ7 — Unprotected Exported Activities
+--------------------------------------------------------------------------------
+  Status : VULNERABLE
+  Notes  : 23 component(s) exported without meaningful protection (of 43 total). 3 safe-by-design export(s) excluded from count.
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.unity.UnityHandlerActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:theme="@7F140284" android:name="com.app.soivyfi.unity.UnityHandlerActivity" android:exported="true" android:process=":unityplayer" android:launchMode="2" android:screenOrientation="1" android:configChanges="0x40003FFF" android:hardwareAccelerated="false" android:resizeableActivity="false">
+          <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+          <meta-data android:name="android.notch_support" android:value="true" />
+        </activity>
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.signin.SignInActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.signin.SignInActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.signin.LoginWithEmailActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.signin.LoginWithEmailActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.signin.LoginWithGoogleActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.signin.LoginWithGoogleActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.signin.LoginWithMobileActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.signin.LoginWithMobileActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.HomeActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.HomeActivity" android:exported="true" android:launchMode="1" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.GroupActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.GroupActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.GroupMembersActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.GroupMembersActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.EachGroupActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.EachGroupActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.NotificationActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.NotificationActivity" android:exported="true" android:configChanges="0x00000480" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.UserProfileActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.UserProfileActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.EditProfileActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.EditProfileActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.ProfileActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.ProfileActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.AddGroupActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.AddGroupActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.CategoryDetailActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.CategoryDetailActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.ManageCoinsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.ManageCoinsActivity" android:exported="true" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.post_question.AskQuestionActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.post_question.AskQuestionActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000012" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.SettingsActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.SettingsActivity" android:exported="true" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.WebViewActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.WebViewActivity" android:exported="true" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.InterestActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.InterestActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.AppSurveyActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.AppSurveyActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED ACTIVITY] com.app.soivyfi.ui.activities.UserAccountDeleteActivity
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <activity android:name="com.app.soivyfi.ui.activities.UserAccountDeleteActivity" android:exported="true" android:configChanges="0x00000020" android:windowSoftInputMode="0x00000022" />
+    [UNPROTECTED SERVICE] com.app.soivyfi.global.MyFirebaseMessagingService
+      export : explicit (android:exported=true)
+      reason : Exported without a meaningful permission guard.
+      manifest snippet:
+        <service android:name="com.app.soivyfi.global.MyFirebaseMessagingService" android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
+    Safe-by-design exports (3):
+      [ACTIVITY] com.app.soivyfi.ui.activities.MainActivity
+        Has expected public intent action(s): android.intent.action.MAIN, android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.GenericIdpActivity
+        Has expected public intent action(s): android.intent.action.VIEW
+      [ACTIVITY] com.google.firebase.auth.internal.RecaptchaActivity
+        Has expected public intent action(s): android.intent.action.VIEW
