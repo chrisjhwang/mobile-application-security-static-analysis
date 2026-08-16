@@ -184,7 +184,20 @@ def analyze() -> None:
 @app.command()
 def dashboard() -> None:
     """Launch the interactive Streamlit dashboard."""
-    _not_yet("Phase 6")
+    import subprocess
+    import sys
+
+    dashboard_path = Path(__file__).parent / "dashboard.py"
+    try:
+        subprocess.run([sys.executable, "-m", "streamlit", "run", str(dashboard_path)], check=True)
+    except FileNotFoundError as exc:
+        typer.secho(
+            "streamlit isn't installed. Install it with:  pip install -e '.[dash]'",
+            fg=typer.colors.RED, err=True,
+        )
+        raise typer.Exit(code=1) from exc
+    except subprocess.CalledProcessError as exc:
+        raise typer.Exit(code=exc.returncode) from exc
 
 
 if __name__ == "__main__":  # pragma: no cover
