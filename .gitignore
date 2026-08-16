@@ -19,3 +19,6 @@ apks/
 
 # macOS
 .DS_Store
+
+# Local planning doc — not part of the shipped repo
+PLAN.md
