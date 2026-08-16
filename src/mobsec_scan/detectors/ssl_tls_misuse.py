@@ -745,6 +745,74 @@ def _analyze_apk(_apk_path, _include_source=False):
     )
 
 
+def _summarize_finding(_kind, _finding):
+    return {
+        "class": _translate_class_name(_finding["class"].get_name()),
+        "risk": _finding["risk"],
+        "naive": _finding["naive"],
+        "detection_reason": _get_detection_reason({"kind": _kind, "finding": _finding}),
+        "naive_note": _get_naive_note({"kind": _kind, "finding": _finding}),
+        "references": _get_reference_lines(_finding),
+    }
+
+
+def check(apk, dex_list, dx=None):
+    """``check()``-contract wrapper around the module's existing internals.
+
+    Returns:
+        found                    : bool
+        risk_level               : 'high' | 'low' | 'none'
+        trustmanager             : list of dicts — custom TrustManager findings
+        customhostnameverifier   : list of dicts — custom HostnameVerifier findings
+        notes                    : str
+    """
+    if dx is None:
+        return {
+            "found": False, "risk_level": "none",
+            "trustmanager": [], "customhostnameverifier": [],
+            "notes": "No analysis object (dx) supplied.",
+        }
+
+    if "android.permission.INTERNET" not in apk.get_permissions():
+        return {
+            "found": False, "risk_level": "none",
+            "trustmanager": [], "customhostnameverifier": [],
+            "notes": "INTERNET permission not requested; SSL misuse analysis skipped.",
+        }
+
+    result = _check_all(dx)
+    trustmanager = [_summarize_finding("trustmanager", f) for f in result["trustmanager"]]
+    hostnameverifier = [
+        _summarize_finding("customhostnameverifier", f)
+        for f in result["customhostnameverifier"]
+    ]
+
+    found = bool(trustmanager or hostnameverifier)
+    if not found:
+        risk_level = "none"
+    elif _has_high_risk_findings(result["trustmanager"]) or _has_high_risk_findings(
+        result["customhostnameverifier"]
+    ):
+        risk_level = "high"
+    else:
+        risk_level = "low"
+
+    notes = (
+        f"{len(trustmanager)} TrustManager, {len(hostnameverifier)} HostnameVerifier "
+        f"finding(s); risk={risk_level.upper()}."
+        if found
+        else "No custom TrustManager/HostnameVerifier findings."
+    )
+
+    return {
+        "found": found,
+        "risk_level": risk_level,
+        "trustmanager": trustmanager,
+        "customhostnameverifier": hostnameverifier,
+        "notes": notes,
+    }
+
+
 def _analyze_apk_to_text(_apk_path, _include_source=False):
     _buffer = StringIO()
 

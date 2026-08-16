@@ -104,7 +104,17 @@ def scan(
     apk: Path = typer.Argument(..., exists=True, help="Path to a single .apk file."),
 ) -> None:
     """Run every enabled detector against one APK and print a unified report."""
-    _not_yet("Phase 2")
+    from . import pipeline
+
+    cfg = get_config()
+    try:
+        result = pipeline.analyze_apk(apk, cfg)
+    except ModuleNotFoundError as exc:
+        typer.secho(str(exc), fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(pipeline.format_report(apk.stem, apk.name, result, cfg))
+    if result.error:
+        raise typer.Exit(code=1)
 
 
 @app.command()
@@ -113,7 +123,16 @@ def batch(
     limit: Optional[int] = typer.Option(None, "--limit", help="Only process the first N APKs."),
 ) -> None:
     """Resumable batch run: per-app reports, summary.csv and flagged.txt."""
-    _not_yet("Phase 2")
+    from . import pipeline
+
+    cfg = get_config()
+    try:
+        results = pipeline.run_batch(cfg, apks_dir=apks_dir, limit=limit)
+    except ModuleNotFoundError as exc:
+        typer.secho(str(exc), fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+    if not results:
+        raise typer.Exit(code=1)
 
 
 @app.command("build-db")
