@@ -152,7 +152,18 @@ def triage(
     dry_run: bool = typer.Option(False, "--dry-run", help="Show prompts without calling the API."),
 ) -> None:
     """Send un-triaged findings to Gemini and record TP/FP verdicts."""
-    _not_yet("Phase 4")
+    from . import triage as triage_mod
+
+    cfg = get_config()
+    try:
+        summary = triage_mod.run_triage(cfg, limit=limit, dry_run=dry_run)
+    except RuntimeError as exc:
+        typer.secho(str(exc), fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+    if not dry_run:
+        typer.echo(
+            f"Pending: {summary['pending']}  Triaged: {summary['triaged']}  Failed: {summary['failed']}"
+        )
 
 
 @app.command()

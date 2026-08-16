@@ -23,12 +23,12 @@ dependencies = [
 
 [project.optional-dependencies]
 scan = ["androguard>=3.3.5"]
-triage = ["google-generativeai>=0.8"]
+triage = ["google-genai>=1.0"]
 dash = ["streamlit>=1.35"]
 dev = ["pytest>=8.0", "ruff>=0.6"]
 all = [
     "androguard>=3.3.5",
-    "google-generativeai>=0.8",
+    "google-genai>=1.0",
     "streamlit>=1.35",
     "pytest>=8.0",
     "ruff>=0.6",

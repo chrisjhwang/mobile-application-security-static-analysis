@@ -28,7 +28,7 @@ detectors:
     label: "RQ7 — Unprotected Exported Activities"
 
 triage:
-  model: gemini-2.0-flash
+  model: gemini-flash-latest
   # Findings-per-request and pacing, to stay inside free-tier rate limits.
   batch_size: 1
   max_retries: 4
