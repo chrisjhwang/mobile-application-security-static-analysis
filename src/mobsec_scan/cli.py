@@ -169,7 +169,16 @@ def triage(
 @app.command()
 def analyze() -> None:
     """Compute statistics, render charts and write ANALYSIS.md."""
-    _not_yet("Phase 5")
+    from . import analysis
+
+    cfg = get_config()
+    try:
+        outputs = analysis.run_analysis(cfg)
+    except RuntimeError as exc:
+        typer.secho(str(exc), fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1) from exc
+    for label, path in outputs.items():
+        typer.echo(f"  {label:<22} {path}")
 
 
 @app.command()
