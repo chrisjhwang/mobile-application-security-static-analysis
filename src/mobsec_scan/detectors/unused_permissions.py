@@ -9,7 +9,6 @@ Run standalone on one APK:
 import sys
 from pathlib import Path
 
-
 # Maps each permission to API patterns that confirm it is being used
 PERMISSION_API_MAP = {
     # ── Internet ──────────────────────────────────────────────────────────────

@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 
-from androguard.misc import AnalyzeAPK
-from androguard.decompiler.decompile import DvClass
-
 import argparse
 import base64
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 from pathlib import Path
 
+from androguard.decompiler.decompile import DvClass
+from androguard.misc import AnalyzeAPK
 
 TRUST_MANAGER_SIGNATURES = [
     {

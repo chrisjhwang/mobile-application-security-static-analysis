@@ -366,7 +366,7 @@ if __name__ == "__main__":
 
     print(f"\n[RQ7] EXPORTED COMPONENTS — {apk_path.name}")
     print(f"Status : {'VULNERABLE' if result['found'] else 'CLEAN'}")
-    print(f"Totals : " + "  ".join(f"{t}={result['totals'].get(t, 0)}" for t in _COMPONENT_TAGS))
+    print("Totals : " + "  ".join(f"{t}={result['totals'].get(t, 0)}" for t in _COMPONENT_TAGS))
     print(f"Notes  : {result['notes']}")
 
     if result["vulnerable"]:

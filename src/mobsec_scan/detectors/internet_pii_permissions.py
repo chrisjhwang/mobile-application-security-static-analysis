@@ -14,6 +14,8 @@ from pathlib import Path
 try:
     from .unused_permissions import (
         PERMISSION_API_MAP as _PERM_API_MAP,
+    )
+    from .unused_permissions import (
         _find_evidence as _find_ev,
     )
     _CODE_SCAN_AVAILABLE = True

@@ -128,6 +128,7 @@ def _section_lines(key: str, r: dict | None) -> list[str]:
                     lines.append(f"        @ {loc}")
         else:
             lines.append("    (none)")
+        lines.append(f"  Risk level: {r.get('risk_level', 'none').upper()}")
     elif key == "rq5":
         evidence = r.get("evidence", {})
         for p in r.get("unused_permissions", []):
