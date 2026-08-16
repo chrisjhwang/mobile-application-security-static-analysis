@@ -1,0 +1,21 @@
+# Secrets
+.env
+
+# Virtualenv
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Course-licensed APK corpus — not redistributable
+apks/
+
+# macOS
+.DS_Store

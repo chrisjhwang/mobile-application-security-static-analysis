@@ -10,11 +10,12 @@ import sys
 from pathlib import Path
 
 # Optional: reuse unused_permissions.py's API map and evidence finder for
-# code-location lookup. Both scripts live in the same directory so this
-# import works in all modes.
+# code-location lookup. Both detectors live in the same package.
 try:
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from unused_permissions import PERMISSION_API_MAP as _PERM_API_MAP, _find_evidence as _find_ev
+    from .unused_permissions import (
+        PERMISSION_API_MAP as _PERM_API_MAP,
+        _find_evidence as _find_ev,
+    )
     _CODE_SCAN_AVAILABLE = True
 except Exception:
     _CODE_SCAN_AVAILABLE = False
@@ -190,7 +191,8 @@ def check(apk, dex_list, dx=None):
 # ── Standalone mode ───────────────────────────────────────────────────────────
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python internet_pii_permissions.py <path/to/app.apk>")
+        print("Usage: python -m mobsec_scan.detectors.internet_pii_permissions <path/to/app.apk>")
+        print("   or: mobsec scan <path/to/app.apk>")
         sys.exit(1)
     from androguard.misc import AnalyzeAPK
     apk_path = Path(sys.argv[1])

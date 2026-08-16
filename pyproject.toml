@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mobsec-scan"
+version = "0.1.0"
+description = "Static analysis of Android APKs for mobile security compliance findings, with AI-assisted triage and reporting."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Christine Hwang" }, { name = "Skibinski" }]
+
+# Core deps are deliberately light: everything except the APK decompilation
+# itself (build-db / analyze / dashboard / tests) runs without androguard.
+dependencies = [
+    "typer>=0.12",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+scan = ["androguard>=3.3.5"]
+triage = ["google-generativeai>=0.8"]
+dash = ["streamlit>=1.35"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+all = [
+    "androguard>=3.3.5",
+    "google-generativeai>=0.8",
+    "streamlit>=1.35",
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+mobsec = "mobsec_scan.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# The detector modules are ported research code; their long constant tables and
+# leading-underscore helpers are intentional.
+ignore = ["E501"]

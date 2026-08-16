@@ -1,0 +1,47 @@
+# mobsec configuration.
+#
+# This file replaces the hand-edited ACTIVE_RQS / RQ_LABELS dicts that used to
+# live at the top of run_batch_analysis.py. To turn a check on or off, flip its
+# `enabled` flag here — no code change required.
+
+paths:
+  apks_dir: apks
+  results_dir: results
+  database: sql_practice/compliance_findings.db
+  analysis_dir: results/analysis
+
+# Each detector key maps to a module in mobsec_scan.detectors (see that
+# package's DETECTOR_MODULES map). `label` is what shows up in reports, CSV
+# headers and the flagged summary.
+detectors:
+  rq1_2:
+    enabled: false
+    label: "RQ1/RQ2 — SSL/TLS Misuse (TrustManager & HostnameVerifier)"
+  rq4:
+    enabled: true
+    label: "RQ4 — Internet + PII Permissions"
+  rq5:
+    enabled: true
+    label: "RQ5 — Unused Permissions"
+  rq7:
+    enabled: true
+    label: "RQ7 — Unprotected Exported Activities"
+
+triage:
+  model: gemini-2.0-flash
+  # Findings-per-request and pacing, to stay inside free-tier rate limits.
+  batch_size: 1
+  max_retries: 4
+  retry_backoff_seconds: 5
+  prompt: |
+    You are a mobile application security analyst reviewing the output of an
+    automated static analysis tool. Given the finding below, decide whether it
+    is a TRUE POSITIVE (a genuine security or compliance concern for this app)
+    or a FALSE POSITIVE (the tool flagged behavior that is expected, benign, or
+    an artifact of the detection heuristic).
+
+    Respond with strict JSON and nothing else:
+    {"verdict": "TP" | "FP", "confidence": 0.0-1.0, "rationale": "<one or two sentences>"}
+
+logging:
+  level: INFO
