@@ -149,7 +149,8 @@ def _section_lines(key: str, r: dict | None) -> list[str]:
         if safe:
             lines.append(f"    Safe-by-design exports ({len(safe)}):")
             for c in safe:
-                lines.append(f"      [{c['type'].upper()}] {c['name']} — {c['safe_reason']}")
+                lines.append(f"      [{c['type'].upper()}] {c['name']}")
+                lines.append(f"        {c['safe_reason']}")
 
     return lines
 

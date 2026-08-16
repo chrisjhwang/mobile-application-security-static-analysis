@@ -138,7 +138,12 @@ def batch(
 @app.command("build-db")
 def build_db() -> None:
     """Parse the plaintext reports in results/ into the SQLite database."""
-    _not_yet("Phase 3")
+    from . import db
+
+    cfg = get_config()
+    summary = db.build_database(cfg.results_dir, cfg.database)
+    for label, count in summary.items():
+        typer.echo(f"  {label:<26} {count}")
 
 
 @app.command()
